@@ -38,9 +38,9 @@ Fino alla configurazione del database, `/api/health` restituisce
 `database: "not_configured"`. Dalla Fase 2 il controllo dovrà eseguire una query
 leggera con timeout e restituire uno stato degradato in caso di errore.
 
-## ADR-006 — Deploy non eseguito nella Fase 0
+## ADR-006 — Deploy inizialmente rimandato
 
-**Stato:** approvata
+**Stato:** superata da ADR-008
 
 La Fase 0 prepara e documenta il deploy Hostinger, ma non modifica DNS, dominio,
 hPanel o ambiente di produzione. Il deploy effettivo appartiene alla Fase 8.
@@ -54,3 +54,13 @@ domínio `.it` não estiver adquirido, com DNS e HTTPS ativos,
 `https://macchinamilano.com` continuará sendo o endereço canônico de produção.
 Depois da virada aprovada, o `.it` assumirá como canonical e os domínios `.com`
 deverão redirecionar para ele, preservando caminho e query string.
+
+## ADR-008 — Baseline statico sul sito Hostinger esistente
+
+**Stato:** approvata e applicata
+
+Il dominio era già provisionato come sito PHP/HTML con SSL e CDN. La pagina
+pubblica della Fase 0 viene quindi esportata con `pnpm build:static` e
+sincronizzata via SSH nello stesso `public_html`, dopo un backup recuperabile.
+GitHub resta la sorgente canonica. Prima di pubblicare funzionalità dinamiche,
+il dominio verrà migrato alla Web App Node.js gestita dalla Hostinger.

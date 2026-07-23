@@ -38,6 +38,15 @@ Per eseguire l'intera pipeline locale:
 pnpm check
 ```
 
+Per generare il baseline statico destinato al sito Hostinger esistente:
+
+```bash
+pnpm build:static
+```
+
+L'artefatto viene scritto in `out/`. La procedura, il backup e il futuro
+passaggio alla Web App Node sono descritti in `docs/HOSTINGER-DEPLOY.md`.
+
 ## Configurazione
 
 Le variabili usate nella Fase 0 sono validate in `lib/env.ts`. Le variabili
