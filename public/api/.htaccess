@@ -1,0 +1,4 @@
+<Files "health">
+  ForceType application/json
+  Header set Cache-Control "no-store"
+</Files>
