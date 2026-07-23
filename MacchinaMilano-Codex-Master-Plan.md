@@ -13,9 +13,9 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.2  
+**Versão do documento:** 1.3
 **Data de referência:** 23 de julho de 2026  
-**Status de execução:** Fase 0 concluída e validada localmente
+**Status de execução:** Fase 0 concluída, validada e publicada em produção
 
 ---
 
@@ -1840,9 +1840,27 @@ aceite.
 
 # 34. Deploy na Hostinger
 
-## 34.1 Método principal
+## 34.1 Estratégia por estágio
 
-Usar o recurso de deploy de aplicação Node.js/Web App da Hostinger.
+### Baseline público da Fase 0
+
+O domínio já está provisionado na Hostinger como site PHP/HTML. Enquanto a
+aplicação pública for totalmente estática, usar:
+
+```text
+GitHub como fonte canônica
+pnpm build:static
+deploy do diretório out/ por SSH para public_html
+backup recuperável antes de cada sincronização
+```
+
+Esse caminho reutiliza o site, o SSL e a CDN existentes e evita criar uma
+segunda propriedade para o mesmo domínio.
+
+### Aplicação dinâmica
+
+Antes de banco, autenticação, painel ou catálogo dinâmico entrarem em produção,
+migrar o domínio para o recurso de aplicação Node.js/Web App da Hostinger.
 
 Preferência:
 
@@ -1864,10 +1882,16 @@ pnpm install --frozen-lockfile
 Build da Fase 0:
 
 ```bash
+pnpm build:static
+```
+
+Build da aplicação dinâmica:
+
+```bash
 pnpm build
 ```
 
-Depois da introdução do Prisma, gerar o client antes do build. Executar
+Depois da introdução do Prisma, gerar o client antes do build dinâmico. Executar
 `pnpm prisma migrate deploy` como uma etapa controlada e única de release, nunca
 em processos de build paralelos. Se a Hostinger não oferecer um release hook, a
 Fase 2 deverá documentar e testar o procedimento operacional equivalente antes
@@ -1915,7 +1939,9 @@ FTP pode ser usado apenas para:
 - diagnóstico;
 - emergência.
 
-Não usar FTP como processo principal de deploy.
+Não usar FTP como processo principal de deploy. O baseline estático usa SSH com
+sincronização reproduzível e backup; a aplicação dinâmica usará o deploy
+GitHub/Web App gerenciado.
 
 Não enviar:
 
@@ -2257,7 +2283,7 @@ O MVP estará pronto quando:
 
 ---
 
-# 42. Revisão 1.2 e estado da implementação
+# 42. Revisão 1.3 e estado da implementação
 
 ## 42.1 Resultado da auditoria inicial
 
@@ -2278,6 +2304,10 @@ Correções incorporadas nesta revisão:
 8. gates de infraestrutura adicionados antes das fases dependentes.
 9. lockup oficial `.it` aprovado e preservado sem alterações;
 10. `.com` mantido como canonical de produção até a ativação futura do `.it`.
+11. site Hostinger existente reutilizado para o baseline estático da Fase 0;
+12. deploy reproduzível com `pnpm build:static`, SSH, backup e rollback;
+13. HTTPS e redirect permanente de `www` para o domínio canônico validados;
+14. migração para Web App Node adiada até a primeira funcionalidade dinâmica.
 
 ## 42.2 Fase 0 — concluída
 
@@ -2300,6 +2330,10 @@ Entregas implementadas:
 - README;
 - documentação de deploy Hostinger;
 - registro de decisões arquiteturais.
+- build estático condicional para a hospedagem existente;
+- baseline de produção publicado em `https://macchinamilano.com`;
+- redirect `www` para o domínio canônico;
+- backup recuperável da página padrão substituída.
 
 Validações concluídas com Node.js 24.18.0:
 
@@ -2310,10 +2344,11 @@ pnpm typecheck    → aprovado
 pnpm test         → 1 teste aprovado
 pnpm build        → aprovado
 smoke test        → home e /api/health aprovados
+produção          → home, JSON health, HTTPS e redirect www aprovados
 ```
 
-Não foram implementados banco, autenticação, catálogo, scraping, jobs, painel
-ou deploy, em conformidade com o limite da Fase 0.
+Não foram implementados banco, autenticação, catálogo, scraping, jobs ou painel,
+em conformidade com o limite funcional da Fase 0.
 
 ## 42.3 Gates obrigatórios antes das próximas fases
 
@@ -2365,6 +2400,8 @@ domínio, mas migrations continuam específicas do provider SQL.
 ### Gate F — antes da Fase 8
 
 - confirmar aquisição, DNS e HTTPS de `macchinamilano.it`;
+- migrar o domínio da hospedagem estática para a Web App Node antes da primeira
+  funcionalidade dinâmica em produção;
 - confirmar comandos suportados no deploy Node.js da Hostinger;
 - configurar produção e staging separadamente;
 - validar domínio canônico, redirect de `www`, HTTPS e headers;
