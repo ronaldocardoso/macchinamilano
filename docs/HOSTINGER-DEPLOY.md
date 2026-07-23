@@ -59,6 +59,7 @@ Non caricare `.env`, segreti, `node_modules`, log o backup nel repository.
 - limite reale di durata e payload delle richieste;
 - invio SMTP;
 - redirect permanente da `www` al dominio canonico;
+- migração futura do canonical e redirects após a ativação do domínio `.it`;
 - strategia di rollback e restore.
 
 Questi punti devono essere confermati nell'hPanel prima della Fase 2 o della

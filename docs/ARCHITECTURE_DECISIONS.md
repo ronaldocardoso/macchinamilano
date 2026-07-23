@@ -44,3 +44,13 @@ leggera con timeout e restituire uno stato degradato in caso di errore.
 
 La Fase 0 prepara e documenta il deploy Hostinger, ma non modifica DNS, dominio,
 hPanel o ambiente di produzione. Il deploy effettivo appartiene alla Fase 8.
+
+## ADR-007 — Marca `.it` e migração futura do domínio
+
+**Stato:** approvata, rollout pendente
+
+A marca oficial com extensão `.it` será preservada sem alterações. Enquanto o
+domínio `.it` não estiver adquirido, com DNS e HTTPS ativos,
+`https://macchinamilano.com` continuará sendo o endereço canônico de produção.
+Depois da virada aprovada, o `.it` assumirá como canonical e os domínios `.com`
+deverão redirecionar para ele, preservando caminho e query string.

@@ -1,8 +1,10 @@
 # Macchina Milano — Master Plan para Implementação no Codex
 
 **Projeto:** Macchina Milano  
-**Domínio principal:** `https://macchinamilano.com`  
-**Domínio com WWW:** `https://www.macchinamilano.com`  
+**Domínio principal atual:** `https://macchinamilano.com`  
+**Domínio atual com WWW:** `https://www.macchinamilano.com`  
+**Domínio futuro aprovado:** `https://macchinamilano.it`  
+**Status do domínio `.it`:** aquisição e configuração pendentes  
 **IP atual:** `89.117.169.239`  
 **Provedor:** Hostinger  
 **Servidor:** `server989`  
@@ -11,7 +13,7 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.1  
+**Versão do documento:** 1.2  
 **Data de referência:** 23 de julho de 2026  
 **Status de execução:** Fase 0 concluída e validada localmente
 
@@ -80,11 +82,14 @@ A solução deve priorizar:
 ## 3.1 Informações do ambiente
 
 ```text
-URL principal:
+URL canônica atual:
 https://macchinamilano.com
 
-URL com WWW:
+URL atual com WWW:
 https://www.macchinamilano.com
+
+URL canônica futura, após aquisição, DNS e HTTPS:
+https://macchinamilano.it
 
 IP:
 89.117.169.239
@@ -638,7 +643,7 @@ EUR
 
 ## 10.1 Domínio canônico
 
-Usar:
+Usar em produção enquanto o domínio `.it` não estiver ativo:
 
 ```text
 https://macchinamilano.com
@@ -657,6 +662,14 @@ https://macchinamilano.com/*
 ```
 
 Preservar path e query string.
+
+Após confirmar que `macchinamilano.it` está registrado, com DNS e HTTPS
+funcionando, alterar o canonical para `.it` e redirecionar todas as variantes
+`.com` e `www` para:
+
+```text
+https://macchinamilano.it/*
+```
 
 ## 10.2 DNS informado
 
@@ -715,15 +728,12 @@ public/brand/
 
 Não carregar `.ai` no navegador.
 
-## 11.1 Atenção ao domínio
+## 11.1 Extensão oficial da marca
 
-Caso o logo contenha `.it`, não alterar a tipografia manualmente.
-
-Até existir uma versão oficial `.com`:
-
-- usar “Macchina Milano” sem extensão;
-- preservar o arquivo original;
-- registrar a criação da versão `.com` como tarefa de branding.
+O logo oficial contém `.it` e deverá ser preservado sem alterações. Não criar
+uma versão `.com` da marca. Enquanto o domínio `.it` não estiver adquirido e
+configurado, a aplicação será publicada em `macchinamilano.com` usando o lockup
+oficial `.it`. A extensão da marca representa a direção futura já aprovada.
 
 ---
 
@@ -2247,7 +2257,7 @@ O MVP estará pronto quando:
 
 ---
 
-# 42. Revisão 1.1 e estado da implementação
+# 42. Revisão 1.2 e estado da implementação
 
 ## 42.1 Resultado da auditoria inicial
 
@@ -2266,6 +2276,8 @@ Correções incorporadas nesta revisão:
 6. responsabilidade de recuperação de senha esclarecida;
 7. scripts de backup condicionados às capacidades reais da hospedagem;
 8. gates de infraestrutura adicionados antes das fases dependentes.
+9. lockup oficial `.it` aprovado e preservado sem alterações;
+10. `.com` mantido como canonical de produção até a ativação futura do `.it`.
 
 ## 42.2 Fase 0 — concluída
 
@@ -2308,8 +2320,8 @@ ou deploy, em conformidade com o limite da Fase 0.
 ### Gate A — antes da Fase 1
 
 - aprovar direção visual, tipografia e paleta extraída do logo;
-- confirmar se a marca pública usa apenas “Macchina Milano” ou inclui domínio;
-- aprovar o uso dos arquivos de marca convertidos;
+- usar a marca oficial completa com `.it`;
+- preservar os arquivos de marca sem redesenhar a extensão;
 - definir fonte e licença das imagens editoriais e automotivas.
 
 ### Gate B — antes da Fase 2
@@ -2352,6 +2364,7 @@ domínio, mas migrations continuam específicas do provider SQL.
 
 ### Gate F — antes da Fase 8
 
+- confirmar aquisição, DNS e HTTPS de `macchinamilano.it`;
 - confirmar comandos suportados no deploy Node.js da Hostinger;
 - configurar produção e staging separadamente;
 - validar domínio canônico, redirect de `www`, HTTPS e headers;
@@ -2365,6 +2378,7 @@ As seguintes escolhas não devem ser inferidas pelo código:
 
 | Tema             | Decisão necessária                             | Prazo           |
 | ---------------- | ---------------------------------------------- | --------------- |
+| Domínio `.it`    | compra, DNS, HTTPS e data de virada            | antes da Fase 8 |
 | Banco            | MySQL, MariaDB ou PostgreSQL e versão          | antes da Fase 2 |
 | Login            | magic link, OAuth ou credenciais               | antes da Fase 2 |
 | E-mail           | provedor SMTP/transacional                     | antes da Fase 2 |
