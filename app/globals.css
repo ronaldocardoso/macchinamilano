@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --brand-red: #b72025;
+  --brand-blue: #111a82;
+  --ink-950: #0d0f12;
+  --ink-800: #24272c;
+  --stone-100: #f3f3f1;
+  --paper: #ffffff;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--ink-950);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgb(183 32 37 / 18%), transparent 32rem),
+    linear-gradient(145deg, #111318 0%, var(--ink-950) 52%, #090a0c 100%);
+  color: var(--paper);
+  font-family:
+    Arial,
+    Helvetica Neue,
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--brand-red);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 4px;
+}
