@@ -16,16 +16,16 @@
 
 html {
   min-width: 320px;
-  background: var(--ink-950);
+  background: var(--brand-red);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 18% 0%, rgb(184 17 4 / 28%), transparent 34rem),
-    radial-gradient(circle at 92% 82%, rgb(1 14 128 / 20%), transparent 30rem),
-    linear-gradient(145deg, #111318 0%, var(--ink-950) 52%, #090a0c 100%);
+    radial-gradient(circle at 88% 75%, rgb(1 14 128 / 22%), transparent 34rem),
+    linear-gradient(115deg, rgb(78 4 0 / 58%), transparent 48%),
+    var(--brand-red);
   color: var(--paper);
   font-family:
     Arial,
@@ -45,6 +45,6 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--paper);
+  outline: 2px solid var(--brand-blue);
   outline-offset: 4px;
 }
