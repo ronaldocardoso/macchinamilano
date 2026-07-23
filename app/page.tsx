@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-[90rem] flex-col px-6 py-8 sm:px-10 lg:px-16">
-      <header className="flex items-center justify-between border-b border-white/15 pb-6">
+      <header className="relative flex items-center justify-between border-b border-white/15 pb-6">
         <Image
           src="/brand/logo-horizontal-white.png"
           alt="Macchina Milano"
@@ -12,22 +12,34 @@ export default function Home() {
           className="h-auto w-44 sm:w-56"
           priority
         />
-        <span className="rounded-full border border-white/20 px-3 py-1.5 text-[0.65rem] font-semibold tracking-[0.18em] text-white/70 uppercase">
+        <span className="rounded-full border border-[var(--brand-red)] bg-[var(--brand-red)] px-3 py-1.5 text-[0.65rem] font-semibold tracking-[0.18em] text-white uppercase shadow-[0_0_2rem_rgb(184_17_4_/_0.24)]">
           Prossimamente
         </span>
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-px left-0 h-px w-24 bg-[var(--brand-red)] sm:w-36"
+        />
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-px left-24 h-px w-8 bg-[var(--brand-blue)] sm:left-36 sm:w-12"
+        />
       </header>
 
       <section className="flex flex-1 items-center py-16 sm:py-24">
         <div className="max-w-4xl">
-          <p className="mb-6 flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-white/60 uppercase">
+          <p className="mb-6 flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-white/68 uppercase">
             <span
               aria-hidden="true"
               className="h-px w-10 bg-[var(--brand-red)]"
             />
+            <span
+              aria-hidden="true"
+              className="-ml-2 size-1.5 rounded-full bg-[var(--brand-blue)]"
+            />
             Il marketplace italiano delle auto eccezionali
           </p>
           <h1 className="max-w-3xl text-5xl leading-[0.96] font-semibold tracking-[-0.055em] text-balance sm:text-7xl lg:text-[6.5rem]">
-            Auto straordinarie.
+            <span className="text-[var(--brand-red)]">Auto</span> straordinarie.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-white/66 sm:text-xl">
             Selezionate per chi non cerca un&apos;auto qualunque. Stiamo
@@ -38,7 +50,13 @@ export default function Home() {
       </section>
 
       <footer className="flex flex-col gap-3 border-t border-white/15 pt-6 text-xs tracking-[0.12em] text-white/45 uppercase sm:flex-row sm:items-center sm:justify-between">
-        <p>Milano · Italia</p>
+        <p className="flex items-center gap-2">
+          <span
+            aria-hidden="true"
+            className="size-1.5 rounded-full bg-[var(--brand-red)]"
+          />
+          Milano · Italia
+        </p>
         <p>Esperienza in preparazione</p>
       </footer>
     </main>

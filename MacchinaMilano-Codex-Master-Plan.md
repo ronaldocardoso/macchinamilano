@@ -1533,11 +1533,13 @@ Evitar:
 
 ## 27.2 Tokens iniciais
 
-Ajustar depois de extrair a paleta oficial do logo.
+A paleta institucional foi aprovada em 23 de julho de 2026. O vermelho Milano é
+a cor principal de ação e destaque; o azul Inter atua como cor institucional de
+apoio.
 
 ```css
---brand-red: #c5160d;
---brand-blue: #111a82;
+--brand-red: #b81104;
+--brand-blue: #010e80;
 --ink-950: #0d0f12;
 --ink-800: #24272c;
 --stone-100: #f3f3f1;
@@ -2354,7 +2356,9 @@ em conformidade com o limite funcional da Fase 0.
 
 ### Gate A — antes da Fase 1
 
-- aprovar direção visual, tipografia e paleta extraída do logo;
+- direção visual premium e paleta aprovadas: vermelho Milano `#B81104` como
+  principal e azul Inter `#010E80` como apoio;
+- aprovar a tipografia definitiva antes da expansão do design system;
 - usar a marca oficial completa com `.it`;
 - preservar os arquivos de marca sem redesenhar a extensão;
 - definir fonte e licença das imagens editoriais e automotivas.
