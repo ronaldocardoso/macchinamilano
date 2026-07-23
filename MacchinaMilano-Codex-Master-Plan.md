@@ -1522,6 +1522,10 @@ A experiência deve transmitir:
 - tecnologia;
 - confiança.
 
+Direção visual aprovada para o lançamento: presença dominante do vermelho
+Milano no fundo, composição expressiva, alto contraste em branco e uso
+estratégico do azul Inter como contraponto.
+
 Evitar:
 
 - aparência de template;
