@@ -6,7 +6,7 @@ import "./globals.css";
 
 const title = "Macchina Milano";
 const description =
-  "Auto esclusive da tutta Italia. Il nuovo portale italiano dedicato ai veicoli premium.";
+  "Auto esclusive da Milano e dalla regione. Il nuovo portale dedicato ai veicoli premium.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.APP_URL),

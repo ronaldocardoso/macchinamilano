@@ -743,7 +743,7 @@ oficial `.it`. A extensão da marca representa a direção futura já aprovada.
 
 Sugestão:
 
-> **Macchina Milano — Auto esclusive da tutta Italia**
+> **Macchina Milano — Auto esclusive da Milano e dalla regione**
 
 Alternativa:
 
