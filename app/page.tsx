@@ -1,91 +1,276 @@
-import Image from "next/image";
+import Link from "next/link";
+
+import { ArrowIcon, CarIcon, CheckIcon } from "@/components/icons";
+import { SearchPanel } from "@/components/search-panel";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { VehicleCard } from "@/components/vehicle-card";
+import { brands, categories, vehicles } from "@/lib/vehicles";
+
+const featured = vehicles.filter((vehicle) => vehicle.featured);
+const newArrivals = vehicles.filter((vehicle) => vehicle.newArrival);
 
 export default function Home() {
   return (
-    <main className="relative isolate mx-auto flex min-h-screen w-full max-w-[90rem] flex-col overflow-hidden px-6 py-8 sm:px-10 lg:px-16">
-      <header className="relative flex items-center justify-between border-b border-white/30 pb-6">
-        <Image
-          src="/brand/logo-horizontal-white.png"
-          alt="Macchina Milano"
-          width={294}
-          height={52}
-          className="h-auto w-44 sm:w-56"
-          priority
-        />
-        <span className="rounded-full border border-white/20 bg-[var(--brand-blue)] px-3 py-1.5 text-[0.65rem] font-semibold tracking-[0.18em] text-white uppercase shadow-[0_0_2rem_rgb(1_14_128_/_0.28)]">
-          Prossimamente
-        </span>
-        <span
-          aria-hidden="true"
-          className="absolute -bottom-px left-0 h-px w-24 bg-white sm:w-36"
-        />
-        <span
-          aria-hidden="true"
-          className="absolute -bottom-px left-24 h-px w-8 bg-[var(--brand-blue)] sm:left-36 sm:w-12"
-        />
-      </header>
+    <>
+      <SiteHeader />
+      <main>
+        <section className="home-hero">
+          <div className="home-hero__grid container">
+            <div className="home-hero__copy">
+              <p className="eyebrow eyebrow--light">
+                Il nuovo indirizzo dell&apos;automobile d&apos;eccezione
+              </p>
+              <h1>
+                Auto
+                <br />
+                <span>straordinarie.</span>
+              </h1>
+              <p className="home-hero__lead">
+                Selezionate per chi non cerca un&apos;auto qualunque. Veicoli
+                premium da Milano e dalla regione.
+              </p>
+              <div className="home-hero__actions">
+                <Link className="button button--white" href="/veicoli">
+                  Scopri le auto <ArrowIcon />
+                </Link>
+                <Link className="hero-text-link" href="#manifesto">
+                  Conosci Macchina Milano
+                </Link>
+              </div>
+            </div>
+            <div className="home-hero__portrait">
+              <div className="portrait-orbit" aria-hidden="true" />
+              <div
+                aria-label="Una donna sorridente rappresenta l'esperienza Macchina Milano"
+                className="portrait-video"
+                role="img"
+              >
+                <video autoPlay loop muted playsInline preload="metadata">
+                  <source
+                    src="/media/smiling-woman-hero.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <span aria-hidden="true" />
+              </div>
+              <div className="portrait-note">
+                <strong>Concierge</strong>
+                <span>Una ricerca su misura, con un tocco umano.</span>
+              </div>
+            </div>
+          </div>
+          <div className="home-hero__rail">
+            <span>Milano</span>
+            <span>Monza</span>
+            <span>Como</span>
+            <span>Bergamo</span>
+            <span>Varese</span>
+          </div>
+        </section>
 
-      <section className="grid flex-1 items-center gap-12 py-14 sm:py-20 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)] lg:gap-10">
-        <div className="max-w-4xl">
-          <p className="mb-6 flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-white/75 uppercase">
-            <span aria-hidden="true" className="h-px w-10 bg-white" />
-            <span
-              aria-hidden="true"
-              className="-ml-2 size-1.5 rounded-full bg-[var(--brand-blue)]"
-            />
-            Il marketplace italiano delle auto eccezionali
-          </p>
-          <h1 className="max-w-3xl text-5xl leading-[0.96] font-semibold tracking-[-0.055em] text-balance sm:text-7xl lg:text-[5rem] xl:text-[5.8rem]">
-            Auto
-            <br />
-            <span className="relative inline-block">
-              straordinarie.
-              <span
-                aria-hidden="true"
-                className="absolute right-0 -bottom-3 h-2 w-2/5 bg-[var(--brand-blue)] sm:h-3"
-              />
-            </span>
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
-            Selezionate per chi non cerca un&apos;auto qualunque. Stiamo
-            costruendo una nuova destinazione per scoprire veicoli premium da
-            Milano e dalla regione.
-          </p>
+        <div className="search-panel-wrap container">
+          <SearchPanel />
         </div>
 
-        <div
-          aria-label="Donna sorridente"
-          className="relative aspect-square w-full max-w-[28rem] justify-self-center overflow-hidden rounded-full border-[0.65rem] border-[var(--brand-blue)] bg-[var(--brand-blue)] shadow-[0_2.5rem_6rem_rgb(78_4_0_/_0.38)] sm:max-w-[32rem] lg:max-w-[36rem] lg:justify-self-end"
-          role="img"
-        >
-          <video
-            aria-hidden="true"
-            autoPlay
-            className="h-full w-full object-cover [object-position:center_38%]"
-            loop
-            muted
-            playsInline
-            preload="metadata"
-          >
-            <source src="/media/smiling-woman-hero.mp4" type="video/mp4" />
-          </video>
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgb(184_17_4_/_0.16),transparent_55%)]"
-          />
-        </div>
-      </section>
+        <section className="section section--intro" id="manifesto">
+          <div className="intro-grid container">
+            <p className="section-index">01 / La selezione</p>
+            <div>
+              <p className="eyebrow">Curata, non infinita</p>
+              <h2 className="display-title">
+                Meno rumore.
+                <br />
+                Più automobili memorabili.
+              </h2>
+            </div>
+            <p className="section-copy">
+              Un portale pensato per scoprire con chiarezza le auto più
+              interessanti di Milano e della regione. Ricerca immediata,
+              informazioni essenziali e contatto diretto.
+            </p>
+          </div>
+        </section>
 
-      <footer className="flex flex-col gap-3 border-t border-white/30 pt-6 text-xs tracking-[0.12em] text-white/65 uppercase sm:flex-row sm:items-center sm:justify-between">
-        <p className="flex items-center gap-2">
-          <span
-            aria-hidden="true"
-            className="size-1.5 rounded-full bg-[var(--brand-blue)]"
-          />
-          Milano · Italia
-        </p>
-        <p>Esperienza in preparazione</p>
-      </footer>
-    </main>
+        <section className="section section--muted" id="selezioni">
+          <div className="container">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Scelte per te</p>
+                <h2>In evidenza</h2>
+              </div>
+              <Link className="text-link" href="/veicoli">
+                Vedi tutti i veicoli <ArrowIcon />
+              </Link>
+            </div>
+            <div className="vehicle-grid">
+              {featured.map((vehicle) => (
+                <VehicleCard key={vehicle.slug} vehicle={vehicle} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section brand-section" id="marche">
+          <div className="container">
+            <div className="section-heading section-heading--bordered">
+              <div>
+                <p className="eyebrow">Icone e performance</p>
+                <h2>Esplora per marca</h2>
+              </div>
+              <p>
+                Una selezione trasversale, dalle gran turismo alle supercar.
+              </p>
+            </div>
+            <div className="brand-grid">
+              {brands.map((brand, index) => (
+                <Link href="/veicoli" key={brand}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{brand}</strong>
+                  <ArrowIcon />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="editorial-banner">
+          <div className="editorial-banner__grid container">
+            <div className="editorial-banner__visual" aria-hidden="true">
+              <span className="editorial-banner__road" />
+              <CarIcon />
+              <span className="editorial-banner__word">MILANO</span>
+            </div>
+            <div className="editorial-banner__copy">
+              <p className="eyebrow eyebrow--light">The Milano Drive</p>
+              <h2>La città è soltanto il punto di partenza.</h2>
+              <p>
+                Scopri itinerari, persone e automobili che raccontano un nuovo
+                modo di vivere la passione.
+              </p>
+              <Link className="button button--white" href="#magazine">
+                Entra nel magazine <ArrowIcon />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="section category-section">
+          <div className="container">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Trova il tuo carattere</p>
+                <h2>Esplora per categoria</h2>
+              </div>
+            </div>
+            <div className="category-grid">
+              {categories.map((category, index) => (
+                <Link href="/veicoli" key={category}>
+                  <span className="category-grid__number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <CarIcon />
+                  <strong>{category}</strong>
+                  <ArrowIcon className="category-grid__arrow" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section section--dark">
+          <div className="container">
+            <div className="section-heading section-heading--dark">
+              <div>
+                <p className="eyebrow eyebrow--light">Appena arrivati</p>
+                <h2>Nuovi ingressi</h2>
+              </div>
+              <Link className="text-link text-link--light" href="/veicoli">
+                Scopri tutto <ArrowIcon />
+              </Link>
+            </div>
+            <div className="vehicle-grid vehicle-grid--dark">
+              {newArrivals.map((vehicle) => (
+                <VehicleCard key={vehicle.slug} vehicle={vehicle} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section concierge-section">
+          <div className="concierge-grid container">
+            <div>
+              <p className="eyebrow">Concierge Macchina Milano</p>
+              <h2 className="display-title">
+                Non trovi l&apos;auto che cerchi?
+              </h2>
+              <p className="section-copy">
+                Raccontaci cosa desideri. La nostra esperienza è progettata per
+                trasformare una ricerca complessa in una selezione semplice.
+              </p>
+              <Link className="button button--red" href="#contatti">
+                Inizia la ricerca <ArrowIcon />
+              </Link>
+            </div>
+            <div className="concierge-card">
+              <p>Il metodo</p>
+              {[
+                "Ascoltiamo ciò che stai cercando",
+                "Selezioniamo le proposte rilevanti",
+                "Ti mettiamo in contatto diretto",
+              ].map((item, index) => (
+                <div key={item}>
+                  <span>{index + 1}</span>
+                  <strong>{item}</strong>
+                  <CheckIcon />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section magazine-section" id="magazine">
+          <div className="container">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Storie in movimento</p>
+                <h2>Dal magazine</h2>
+              </div>
+              <Link className="text-link" href="#magazine">
+                Tutte le storie <ArrowIcon />
+              </Link>
+            </div>
+            <div className="story-grid">
+              <article className="story-card story-card--red">
+                <span>Design</span>
+                <h3>
+                  La linea italiana che trasforma un&apos;auto in un&apos;icona.
+                </h3>
+                <Link href="#magazine">
+                  Leggi la storia <ArrowIcon />
+                </Link>
+              </article>
+              <article className="story-card story-card--blue">
+                <span>Itinerari</span>
+                <h3>Da Milano al lago: una strada da guidare senza fretta.</h3>
+                <Link href="#magazine">
+                  Scopri l&apos;itinerario <ArrowIcon />
+                </Link>
+              </article>
+              <article className="story-card story-card--paper">
+                <span>Collezionismo</span>
+                <h3>
+                  Quali dettagli definiscono davvero un esemplare speciale?
+                </h3>
+                <Link href="#magazine">
+                  Approfondisci <ArrowIcon />
+                </Link>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
