@@ -13,9 +13,9 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.3
-**Data de referência:** 23 de julho de 2026  
-**Status de execução:** Fase 0 concluída, validada e publicada em produção
+**Versão do documento:** 1.4
+**Data de referência:** 25 de julho de 2026
+**Status de execução:** Fase 1 concluída e protótipo público estático validado
 
 ---
 
@@ -2445,3 +2445,105 @@ Cada fase deve:
 4. executar `pnpm check`;
 5. atualizar este documento com estado, pendências e evidências;
 6. não avançar automaticamente para a fase seguinte.
+
+---
+
+# 43. Revisão 1.4 — direção visual e protótipo público
+
+## 43.1 Referência funcional aprovada
+
+Em 25 de julho de 2026 foram fornecidas referências para três experiências:
+
+1. página inicial de um portal automotivo;
+2. catálogo com filtros laterais;
+3. página de detalhe do veículo.
+
+As referências orientam apenas arquitetura de informação, hierarquia e funções.
+A implementação Macchina Milano é original e não reutiliza anúncios, código,
+HTML, CSS, fotografias ou identidade visual de terceiros.
+
+## 43.2 Direção visual aplicada
+
+A experiência pública passa a usar:
+
+- vermelho Milano `#B81104` como cor dominante;
+- azul Inter `#010E80` como contraponto institucional;
+- superfícies claras para leitura e comparação;
+- tipografia de sistema para evitar dependência de fonte externa nesta etapa;
+- composição editorial contemporânea;
+- cards amplos e hierarquia reduzida;
+- bordas e sombras discretas;
+- movimento limitado a transições leves;
+- vídeo circular já aprovado no hero;
+- logo oficial `.it` e favicon oficial preservados.
+
+O posicionamento geográfico público permanece:
+
+```text
+da Milano e dalla regione
+```
+
+Não usar “da tutta Italia” na comunicação de lançamento.
+
+## 43.3 Escopo implementado
+
+A Fase 1 está concluída com:
+
+- tokens visuais;
+- header responsivo;
+- navegação desktop e mobile;
+- footer;
+- botões, links, badges e campos;
+- busca principal;
+- cards de veículo;
+- ilustrações vetoriais próprias para veículos demonstrativos;
+- grids de marca e categoria;
+- favicon e assets da marca;
+- estados de foco;
+- suporte a `prefers-reduced-motion`;
+- layouts responsivos de 320 px em diante.
+
+Para validar a fundação visual no contexto real, foram implementados protótipos
+estáticos das seguintes rotas:
+
+```text
+/
+/veicoli
+/veicoli/[slug]
+```
+
+Essas páginas usam doze veículos fictícios e perfis de concessionária
+demonstrativos. Elas não representam a implementação da Fase 3 ou da Fase 4:
+não há banco, filtros persistidos, cadastro, autenticação, favoritos, envio de
+lead ou inventário real.
+
+## 43.4 Decisões para a próxima fase
+
+Antes da Fase 2 continuam obrigatórias as decisões do Gate B:
+
+- motor e versão do banco no hPanel;
+- método de login;
+- provedor de e-mail;
+- política de sessão e recuperação;
+- estratégia testada de migrations e rollback.
+
+Antes de substituir as ilustrações demonstrativas por fotografias:
+
+- confirmar a origem autorizada do feed;
+- confirmar direitos de exibição e armazenamento;
+- definir placeholder e política de imagem ausente;
+- escolher armazenamento remoto, local persistente ou object storage.
+
+## 43.5 Evidências de validação
+
+```text
+ESLint                    → aprovado
+TypeScript strict         → aprovado
+Vitest                    → aprovado
+Next.js static export     → aprovado
+18 páginas estáticas      → geradas
+Home desktop/mobile       → validada
+Catálogo desktop/mobile   → validado
+Detalhe desktop/mobile    → validado
+Overflow horizontal       → ausente em 390 px e 1280 px
+```

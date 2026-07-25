@@ -64,3 +64,30 @@ pubblica della Fase 0 viene quindi esportata con `pnpm build:static` e
 sincronizzata via SSH nello stesso `public_html`, dopo un backup recuperabile.
 GitHub resta la sorgente canonica. Prima di pubblicare funzionalità dinamiche,
 il dominio verrà migrato alla Web App Node.js gestita dalla Hostinger.
+
+## ADR-009 — Prototipo pubblico statico con dati dimostrativi
+
+**Stato:** approvata e applicata
+
+La fondazione visuale viene validata attraverso home, catalogo e dettaglio
+statici. I dodici veicoli, i concessionari e le relative specifiche sono
+interamente fittizi. Questo consente di verificare gerarchia, responsive design
+e navigazione senza anticipare database, autenticazione o importazione.
+
+## ADR-010 — Illustrazioni veicolo native
+
+**Stato:** temporanea
+
+Fino alla conferma delle fonti autorizzate e della strategia di storage, le
+schede usano illustrazioni SVG originali generate dall'applicazione. Non vengono
+copiate fotografie degli annunci di riferimento. Le illustrazioni saranno
+sostituite dall'integrazione media della Fase 3.
+
+## ADR-011 — Rotte italiane del prototipo
+
+**Stato:** approvata per il prototipo
+
+Le rotte statiche iniziali sono `/veicoli` e `/veicoli/[slug]`. Prima
+dell'introduzione del catalogo dinamico, la Fase 3 dovrà confermare se mantenere
+questo schema o migrare alle rotte `/auto` e `/veicolo/[slug]` previste dal
+piano originale, includendo redirect permanenti per evitare URL duplicati.

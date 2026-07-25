@@ -1,8 +1,9 @@
 # Macchina Milano
 
-Portal italiano di veicoli premium. Il progetto è attualmente nella **Fase 0:
-audit e bootstrap**; catalogo, database, autenticazione e importazioni
-appartengono alle fasi successive.
+Portale italiano di veicoli premium. La **Fase 1: fondazione visuale** è
+conclusa e viene validata con un prototipo pubblico statico. Database,
+autenticazione, importazioni e inventario reale appartengono alle fasi
+successive.
 
 ## Requisiti
 
@@ -21,6 +22,16 @@ pnpm dev
 
 Aprire `http://localhost:3000`. Il controllo di salute è disponibile in
 `http://localhost:3000/api/health`.
+
+Rotte del prototipo:
+
+```text
+/
+/veicoli
+/veicoli/ferrari-roma-spider
+```
+
+I veicoli e i concessionari mostrati sono contenuti dimostrativi fittizi.
 
 ## Verifiche
 
@@ -49,7 +60,7 @@ passaggio alla Web App Node sono descritti in `docs/HOSTINGER-DEPLOY.md`.
 
 ## Configurazione
 
-Le variabili usate nella Fase 0 sono validate in `lib/env.ts`. Le variabili
+Le variabili attualmente usate sono validate in `lib/env.ts`. Le variabili
 delle fasi future sono già documentate in `.env.example`, ma diventeranno
 obbligatorie soltanto quando le relative funzionalità saranno implementate.
 
