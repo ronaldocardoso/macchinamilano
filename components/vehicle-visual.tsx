@@ -3,13 +3,15 @@ import type { Vehicle } from "@/lib/vehicles";
 type VehicleVisualProps = {
   vehicle: Vehicle;
   compact?: boolean;
+  imageUrl?: string;
 };
 
 export function VehicleVisual({
   vehicle,
   compact = false,
+  imageUrl: selectedImageUrl,
 }: VehicleVisualProps) {
-  const imageUrl = vehicle.imageUrls?.[0];
+  const imageUrl = selectedImageUrl ?? vehicle.imageUrls?.[0];
 
   if (imageUrl) {
     return (

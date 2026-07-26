@@ -32,6 +32,18 @@ export const rawVehicleCandidateSchema = z.object({
     name: z.string().trim().min(1),
     vatNumber: optionalText,
     phone: optionalText,
+    phoneUri: optionalText,
+    logoUrl: httpUrl.optional(),
+    profileUrl: httpUrl.optional(),
+    phones: z
+      .array(
+        z.object({
+          type: optionalText,
+          formatted: optionalText,
+          callTo: optionalText,
+        }),
+      )
+      .default([]),
     email: z.email().optional(),
     website: httpUrl.optional(),
     address: z.object({
@@ -47,11 +59,12 @@ export const rawVehicleCandidateSchema = z.object({
     model: z.string().trim().min(1),
     version: optionalText,
     priceEuro: z.number().finite().nonnegative(),
-    year: z.number().int().min(1886).max(2100),
-    mileageKm: z.number().int().nonnegative(),
+    year: z.number().int().min(1886).max(2100).optional(),
+    mileageKm: z.number().int().nonnegative().optional(),
     fuel: z.string().trim().min(1),
     transmission: optionalText,
     bodyType: optionalText,
+    condition: optionalText,
     powerCv: z.number().int().positive().optional(),
     powerKw: z.number().int().positive().optional(),
     exteriorColor: optionalText,
@@ -101,6 +114,14 @@ export type NormalizedDealer = {
   name: string;
   vatNumber?: string;
   phone?: string;
+  phoneUri?: string;
+  logoUrl?: string;
+  profileUrl?: string;
+  phones: {
+    type?: string;
+    formatted?: string;
+    callTo?: string;
+  }[];
   email?: string;
   website?: string;
   street?: string;
@@ -122,11 +143,12 @@ export type NormalizedVehicle = {
   model: string;
   version?: string;
   priceEuro: number;
-  year: number;
-  mileageKm: number;
+  year?: number;
+  mileageKm?: number;
   fuel: string;
   transmission?: string;
   bodyType?: string;
+  condition?: string;
   powerCv?: number;
   powerKw?: number;
   exteriorColor?: string;
@@ -257,7 +279,11 @@ function normalizeDealer(candidate: RawVehicleCandidate): NormalizedDealer {
     externalId: seller.externalId,
     name: seller.name,
     vatNumber: normalizeVatNumber(seller.vatNumber),
-    phone: digitsOnly(seller.phone),
+    phone: seller.phone,
+    phoneUri: seller.phoneUri,
+    logoUrl: seller.logoUrl,
+    profileUrl: seller.profileUrl,
+    phones: seller.phones,
     email: seller.email?.toLocaleLowerCase("it-IT"),
     website: seller.website,
     street: seller.address.street,
@@ -265,6 +291,43 @@ function normalizeDealer(candidate: RawVehicleCandidate): NormalizedDealer {
     city: seller.address.city,
     province: seller.address.province,
     country: seller.address.country.toUpperCase(),
+  };
+}
+
+function mergeDealers(
+  current: NormalizedDealer | undefined,
+  incoming: NormalizedDealer,
+): NormalizedDealer {
+  if (!current) {
+    return incoming;
+  }
+
+  const phones = [...current.phones, ...incoming.phones];
+  const phoneKeys = new Set<string>();
+
+  return {
+    ...incoming,
+    externalId: current.externalId ?? incoming.externalId,
+    vatNumber: current.vatNumber ?? incoming.vatNumber,
+    phone: current.phone ?? incoming.phone,
+    phoneUri: current.phoneUri ?? incoming.phoneUri,
+    logoUrl: current.logoUrl ?? incoming.logoUrl,
+    profileUrl: current.profileUrl ?? incoming.profileUrl,
+    phones: phones.filter((phone) => {
+      const key = phone.callTo ?? phone.formatted ?? JSON.stringify(phone);
+
+      if (phoneKeys.has(key)) {
+        return false;
+      }
+
+      phoneKeys.add(key);
+      return true;
+    }),
+    email: current.email ?? incoming.email,
+    website: current.website ?? incoming.website,
+    street: current.street ?? incoming.street,
+    postalCode: current.postalCode ?? incoming.postalCode,
+    province: current.province ?? incoming.province,
   };
 }
 
@@ -324,7 +387,7 @@ function normalizeVehicle(
   const sourceIdentity = `${candidate.source}:${candidate.listingId}`;
   const shortIdentity = hash(sourceIdentity).slice(0, 12);
   const slug = `${slugify(
-    `${candidate.vehicle.brand}-${candidate.vehicle.model}-${candidate.vehicle.year}`,
+    `${candidate.vehicle.brand}-${candidate.vehicle.model}-${candidate.vehicle.year ?? "nuovo"}`,
   )}-${shortIdentity.slice(0, 7)}`;
   const content = {
     dealerId: dealer.id,
@@ -349,6 +412,7 @@ function normalizeVehicle(
     fuel: candidate.vehicle.fuel,
     transmission: candidate.vehicle.transmission,
     bodyType: candidate.vehicle.bodyType,
+    condition: candidate.vehicle.condition,
     powerCv: candidate.vehicle.powerCv,
     powerKw: candidate.vehicle.powerKw,
     exteriorColor: candidate.vehicle.exteriorColor,
@@ -477,7 +541,7 @@ export function processVehicleImport(
     }
 
     const dealer = normalizeDealer(candidate);
-    dealers.set(dealer.id, dealer);
+    dealers.set(dealer.id, mergeDealers(dealers.get(dealer.id), dealer));
     vehicles.push(normalizeVehicle(candidate, dealer, distanceKm));
   });
 

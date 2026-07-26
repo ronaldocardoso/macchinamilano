@@ -19,6 +19,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "import:vehicles": "node --experimental-strip-types scripts/import-vehicles.ts",
+    "import:autoscout24": "pnpm import:vehicles --adapter piloterr-autoscout24",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build"

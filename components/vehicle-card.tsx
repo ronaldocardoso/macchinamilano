@@ -44,8 +44,12 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         </div>
         <p className="vehicle-card__version">{vehicle.version}</p>
         <div className="vehicle-card__specs">
-          <span>{vehicle.year}</span>
-          <span>{formatMileage(vehicle.mileage)}</span>
+          <span>{vehicle.year ?? "Nuovo"}</span>
+          <span>
+            {vehicle.mileage === undefined
+              ? "— km"
+              : formatMileage(vehicle.mileage)}
+          </span>
           <span>{vehicle.fuel}</span>
         </div>
         <div className="vehicle-card__footer">
