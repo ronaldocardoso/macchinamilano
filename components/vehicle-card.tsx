@@ -24,7 +24,18 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         href={`/veicoli/${vehicle.slug}`}
       >
         <VehicleVisual compact vehicle={vehicle} />
-        {label && <span className="vehicle-card__tag">{label}</span>}
+        {label && (
+          <span
+            className={[
+              "vehicle-card__tag",
+              label === "Elettrico" ? "vehicle-card__tag--electric" : undefined,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            {label}
+          </span>
+        )}
       </Link>
       <div className="vehicle-card__body">
         <div className="vehicle-card__heading">
