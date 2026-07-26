@@ -1578,6 +1578,30 @@ a {
   margin-top: 4rem;
 }
 
+@font-face {
+  font-family: "Motors Vehicle Icons";
+  src: url("/fonts/vehicle-detail/motors-icons.woff") format("woff");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "STM Vehicle Icons";
+  src: url("/fonts/vehicle-detail/stm-icon.woff") format("woff");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "STM Service Icons";
+  src: url("/fonts/vehicle-detail/stm-service-default.woff") format("woff");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
 .spec-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1599,8 +1623,82 @@ a {
 }
 
 .spec-grid dt {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   color: var(--ink-600);
   font-size: 0.75rem;
+}
+
+.spec-icon {
+  width: 1.15rem;
+  flex: 0 0 1.15rem;
+  color: var(--brand-red);
+  font-size: 1.05rem;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.motors-icons-star,
+.motors-icons-calendar,
+.motors-icons-add-car,
+.motors-icons-seats {
+  font-family: "Motors Vehicle Icons";
+}
+
+.stm-icon-road,
+.stm-icon-fuel,
+.stm-icon-transmission-fill,
+.stm-icon-engine-fill {
+  font-family: "STM Vehicle Icons";
+}
+
+.stm-service-icon-body-type,
+.stm-service-icon-pin {
+  font-family: "STM Service Icons";
+}
+
+.motors-icons-star::before {
+  content: "\e915";
+}
+
+.motors-icons-calendar::before {
+  content: "\e925";
+}
+
+.motors-icons-add-car::before {
+  content: "\e948";
+}
+
+.motors-icons-seats::before {
+  content: "\e95a";
+}
+
+.stm-icon-road::before {
+  content: "\e80f";
+}
+
+.stm-icon-fuel::before {
+  content: "\e80e";
+}
+
+.stm-icon-transmission-fill::before {
+  content: "\e925";
+}
+
+.stm-icon-engine-fill::before {
+  content: "\e927";
+}
+
+.stm-service-icon-body-type::before {
+  content: "\e913";
+}
+
+.stm-service-icon-pin::before {
+  content: "\e914";
 }
 
 .spec-grid dd {

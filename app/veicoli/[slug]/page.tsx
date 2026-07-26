@@ -61,27 +61,63 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
     .slice(0, 3);
 
   const specs = [
-    [
-      "Condizione",
-      vehicle.condition ??
+    {
+      icon: "motors-icons-star",
+      label: "Condizione",
+      value:
+        vehicle.condition ??
         (vehicle.mileage !== undefined && vehicle.mileage < 1000
           ? "Nuovo"
           : "Usato"),
-    ],
-    ["Anno", vehicle.year ? String(vehicle.year) : "Nuovo"],
-    [
-      "Chilometraggio",
-      vehicle.mileage === undefined
-        ? "Non indicato"
-        : formatMileage(vehicle.mileage),
-    ],
-    ["Alimentazione", vehicle.fuel],
-    ["Cambio", vehicle.transmission],
-    ["Potenza", vehicle.power],
-    ["Carrozzeria", vehicle.bodyType],
-    ["Colore esterno", vehicle.exteriorColor],
-    ["Interni", vehicle.interiorColor],
-    ["Località", vehicle.location],
+    },
+    {
+      icon: "motors-icons-calendar",
+      label: "Anno",
+      value: vehicle.year ? String(vehicle.year) : "Nuovo",
+    },
+    {
+      icon: "stm-icon-road",
+      label: "Chilometraggio",
+      value:
+        vehicle.mileage === undefined
+          ? "Non indicato"
+          : formatMileage(vehicle.mileage),
+    },
+    {
+      icon: "stm-icon-fuel",
+      label: "Alimentazione",
+      value: vehicle.fuel,
+    },
+    {
+      icon: "stm-icon-transmission-fill",
+      label: "Cambio",
+      value: vehicle.transmission,
+    },
+    {
+      icon: "stm-icon-engine-fill",
+      label: "Potenza",
+      value: vehicle.power,
+    },
+    {
+      icon: "stm-service-icon-body-type",
+      label: "Carrozzeria",
+      value: vehicle.bodyType,
+    },
+    {
+      icon: "motors-icons-add-car",
+      label: "Colore esterno",
+      value: vehicle.exteriorColor,
+    },
+    {
+      icon: "motors-icons-seats",
+      label: "Interni",
+      value: vehicle.interiorColor,
+    },
+    {
+      icon: "stm-service-icon-pin",
+      label: "Località",
+      value: vehicle.location,
+    },
   ];
 
   return (
@@ -148,10 +184,16 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                   </div>
                 </div>
                 <dl className="spec-grid">
-                  {specs.map(([label, value]) => (
-                    <div key={label}>
-                      <dt>{label}</dt>
-                      <dd>{value}</dd>
+                  {specs.map((spec) => (
+                    <div key={spec.label}>
+                      <dt>
+                        <i
+                          aria-hidden="true"
+                          className={`spec-icon ${spec.icon}`}
+                        />
+                        {spec.label}
+                      </dt>
+                      <dd>{spec.value}</dd>
                     </div>
                   ))}
                 </dl>
