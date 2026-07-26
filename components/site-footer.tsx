@@ -58,12 +58,64 @@ export function SiteFooter() {
         </form>
       </div>
       <div className="site-footer__bottom container">
-        <BrandMark light />
-        <p>
-          Anteprima con contenuti dimostrativi. Verifica sempre disponibilità,
-          prezzo e condizioni con il concessionario.
-        </p>
-        <span>© 2026</span>
+        <div className="site-footer__identity">
+          <BrandMark light />
+          <span>© 2026</span>
+        </div>
+        <section className="site-footer__legal" aria-labelledby="legal-title">
+          <h2 id="legal-title">Avviso legale</h2>
+          <p>
+            Macchina Milano opera esclusivamente come portale di pubblicazione e
+            aggregazione di annunci di veicoli e non partecipa, in alcun caso,
+            alle trattative, ai pagamenti, ai finanziamenti, alle permute, alle
+            garanzie, alle consegne o a qualsiasi altra transazione effettuata
+            tra acquirenti e venditori.
+          </p>
+          <p>
+            Tutte le informazioni, le immagini, le specifiche tecniche, gli
+            optional, i prezzi, le condizioni commerciali e gli altri dati
+            contenuti negli annunci sono di esclusiva responsabilità dei
+            rivenditori, delle concessionarie, dei commercianti o degli
+            inserzionisti responsabili dell’offerta dei veicoli.
+          </p>
+          <p>
+            Macchina Milano non garantisce l’esattezza, la veridicità,
+            l’aggiornamento, la disponibilità o la completezza delle
+            informazioni pubblicate e non può essere ritenuta responsabile per
+            eventuali errori, omissioni, discrepanze nei dati, variazioni di
+            prezzo, indisponibilità dei veicoli, informazioni non aggiornate o
+            per qualsiasi danno diretto o indiretto derivante dall’utilizzo
+            delle informazioni contenute nel presente portale.
+          </p>
+          <p>
+            Gli utenti sono tenuti a verificare direttamente con l’inserzionista
+            tutte le informazioni relative al veicolo, alla sua provenienza,
+            alla documentazione, alle condizioni commerciali e alla
+            disponibilità, prima di avviare qualsiasi trattativa o concludere
+            qualsiasi operazione.
+          </p>
+          <p>
+            Parte dei dati, delle immagini e delle informazioni visualizzati nel
+            presente portale può provenire da contenuti resi pubblicamente
+            disponibili da rivenditori, concessionarie, commercianti e altre
+            piattaforme del settore automobilistico. Tali contenuti sono
+            utilizzati esclusivamente a fini informativi e di pubblicazione
+            degli annunci.
+          </p>
+          <p>
+            Macchina Milano non intrattiene alcun rapporto societario,
+            commerciale, di agenzia o di rappresentanza con le aziende, i
+            marchi, i rivenditori, le concessionarie o gli inserzionisti
+            presenti sul portale, salvo ove espressamente indicato.
+          </p>
+          <p>
+            Utilizzando il presente portale, l’utente dichiara di essere
+            consapevole che Macchina Milano opera esclusivamente come mezzo di
+            pubblicazione e diffusione di annunci e che non può essere ritenuta
+            responsabile per le conseguenze derivanti dai rapporti commerciali
+            instaurati tra soggetti terzi.
+          </p>
+        </section>
       </div>
     </footer>
   );
