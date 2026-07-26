@@ -18,58 +18,30 @@ export default function Home() {
         <section className="home-hero">
           <div className="home-hero__grid container">
             <div className="home-hero__copy">
-              <p className="eyebrow eyebrow--light">
-                Il nuovo indirizzo dell&apos;automobile d&apos;eccezione
-              </p>
+              <p className="eyebrow">Auto premium da Milano e dalla regione</p>
               <h1>
-                Auto
+                <span>Trova</span> la tua
                 <br />
-                <span>straordinarie.</span>
+                auto straordinaria.
               </h1>
               <p className="home-hero__lead">
-                Selezionate per chi non cerca un&apos;auto qualunque. Veicoli
-                premium da Milano e dalla regione.
+                Una selezione esclusiva, pensata per chi non cerca un&apos;auto
+                qualunque.
               </p>
               <div className="home-hero__actions">
-                <Link className="button button--white" href="/veicoli">
-                  Scopri le auto <ArrowIcon />
+                <Link className="button button--red" href="/veicoli">
+                  Esplora i veicoli <ArrowIcon />
                 </Link>
                 <Link className="hero-text-link" href="#manifesto">
                   Conosci Macchina Milano
                 </Link>
               </div>
             </div>
-            <div className="home-hero__portrait">
-              <div className="portrait-orbit" aria-hidden="true" />
-              <div
-                aria-label="Una donna sorridente rappresenta l'esperienza Macchina Milano"
-                className="portrait-video"
-                role="img"
-              >
-                <video autoPlay loop muted playsInline preload="metadata">
-                  <source
-                    src="/media/smiling-woman-hero.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-                <span aria-hidden="true" />
-              </div>
-              <div className="portrait-note">
-                <strong>Concierge</strong>
-                <span>Una ricerca su misura, con un tocco umano.</span>
-              </div>
-            </div>
-          </div>
-          <div className="home-hero__rail">
-            <span>Milano</span>
-            <span>Monza</span>
-            <span>Como</span>
-            <span>Bergamo</span>
-            <span>Varese</span>
           </div>
         </section>
 
         <div className="search-panel-wrap container">
+          <p className="search-panel-title">Auto a Milano e nella regione</p>
           <SearchPanel />
         </div>
 

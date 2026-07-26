@@ -91,3 +91,13 @@ Le rotte statiche iniziali sono `/veicoli` e `/veicoli/[slug]`. Prima
 dell'introduzione del catalogo dinamico, la Fase 3 dovrà confermare se mantenere
 questo schema o migrare alle rotte `/auto` e `/veicolo/[slug]` previste dal
 piano originale, includendo redirect permanenti per evitare URL duplicati.
+
+## ADR-012 — Hero fotografico compatto
+
+**Stato:** approvata e applicata
+
+La home usa l'immagine fornita `bg-macchina-milano` come sfondo del hero. Il
+PNG originale rimane la fonte di design, mentre il sito serve una derivata WebP
+ottimizzata. Il hero desktop è limitato a circa 480 px e il pannello di ricerca
+si sovrappone al bordo inferiore, avvicinando veicoli, messaggio e ricerca nella
+prima schermata.
