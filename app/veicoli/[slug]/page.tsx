@@ -245,6 +245,9 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                   slug: vehicle.slug,
                 }}
               />
+              <p className="dealer-panel__note">
+                Cita Macchina Milano quando contatti il concessionario.
+              </p>
               <div className="dealer-panel__contact">
                 <MapPinIcon />
                 <div>
@@ -271,9 +274,6 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
               <a className="button button--blue" href="#richiesta">
                 Richiedi informazioni <ArrowIcon />
               </a>
-              <p className="dealer-panel__note">
-                Cita Macchina Milano quando contatti il concessionario.
-              </p>
             </aside>
           </div>
         </section>

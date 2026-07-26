@@ -31,7 +31,6 @@ export function SiteFooter() {
           <div>
             <h3>Assistenza</h3>
             <Link href="/#contatti">Come funziona</Link>
-            <Link href="/#contatti">Concierge</Link>
             <Link href="/#contatti">Privacy</Link>
             <Link href="/#contatti">Termini</Link>
           </div>
@@ -60,7 +59,9 @@ export function SiteFooter() {
       <div className="site-footer__bottom container">
         <div className="site-footer__identity">
           <BrandMark light />
-          <span>© 2026</span>
+          <span>
+            Copyright © 2026 Macchina Milano. Tutti i diritti riservati.
+          </span>
         </div>
         <section className="site-footer__legal" aria-labelledby="legal-title">
           <h2 id="legal-title">Avviso legale</h2>

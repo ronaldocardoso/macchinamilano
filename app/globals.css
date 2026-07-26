@@ -1988,9 +1988,13 @@ a {
 
 .dealer-panel__note {
   margin: 1rem 0 0;
-  color: var(--ink-600);
-  font-size: 0.64rem;
-  line-height: 1.5;
+  padding: 0.85rem 1rem;
+  border-radius: 0.45rem;
+  background: var(--brand-red);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 750;
+  line-height: 1.35;
   text-align: center;
 }
 
