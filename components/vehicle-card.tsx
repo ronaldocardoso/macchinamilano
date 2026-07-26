@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ArrowIcon, HeartIcon, MapPinIcon } from "@/components/icons";
+import { HeartIcon, MapPinIcon } from "@/components/icons";
 import { VehicleVisual } from "@/components/vehicle-visual";
 import { formatMileage, formatPrice, type Vehicle } from "@/lib/vehicles";
 
@@ -50,9 +50,6 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
               <MapPinIcon /> {vehicle.location}
             </span>
           </div>
-          <Link aria-label="Apri il veicolo" href={`/veicoli/${vehicle.slug}`}>
-            <ArrowIcon />
-          </Link>
         </div>
       </div>
     </article>

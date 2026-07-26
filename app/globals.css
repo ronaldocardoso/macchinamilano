@@ -866,7 +866,7 @@ a {
   padding-block: 0.85rem;
   border-block: 1px solid var(--stone-100);
   color: var(--ink-600);
-  font-size: 0.67rem;
+  font-size: 0.75rem;
 }
 
 .vehicle-card__specs span:not(:last-child)::after {
@@ -906,20 +906,6 @@ a {
 
 .vehicle-card__footer span svg {
   width: 0.75rem;
-}
-
-.vehicle-card__footer > a {
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--ink-950);
-  color: white;
-}
-
-.vehicle-card__footer > a svg {
-  width: 1rem;
 }
 
 .vehicle-grid--dark .vehicle-card {
