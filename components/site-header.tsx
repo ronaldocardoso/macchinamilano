@@ -15,7 +15,10 @@ export function SiteHeader() {
           <Link href="/#contatti">Contatti</Link>
         </nav>
         <div className="site-header__actions">
-          <Link className="button button--blue desktop-only" href="/#contatti">
+          <Link
+            className="button button--red site-header__publish desktop-only"
+            href="/#contatti"
+          >
             <CarIcon />
             Pubblica un veicolo
           </Link>

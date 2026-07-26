@@ -164,6 +164,17 @@ a {
   gap: 0.65rem;
 }
 
+.site-header__publish {
+  min-height: 2.5rem;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.68rem;
+}
+
+.site-header__publish svg {
+  width: 1rem;
+}
+
 .icon-button,
 .save-button {
   display: inline-grid;
