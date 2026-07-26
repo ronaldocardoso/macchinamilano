@@ -13,7 +13,7 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.5
+**Versão do documento:** 1.6
 **Data de referência:** 26 de julho de 2026
 **Status de execução:** Fase 1 concluída e protótipo público estático validado
 
@@ -2576,7 +2576,7 @@ mais de 90% sem alterar a composição visual.
 Desktop 1280 px
 header                     → 89 px
 hero                       → 480 px
-busca sobreposta           → 80 px
+busca sobreposta           → aproximadamente 108 px
 overflow horizontal        → ausente
 
 Mobile 390 px
@@ -2585,3 +2585,31 @@ três veículos no recorte   → visíveis
 busca em coluna única      → validada
 overflow horizontal        → ausente
 ```
+
+---
+
+# 45. Revisão 1.6 — hero limpo e busca glass
+
+## 45.1 Simplificação do hero
+
+O hero passa a exibir somente:
+
+- eyebrow geográfico;
+- título principal;
+- fotografia de fundo.
+
+Foram removidos do hero o texto descritivo e os dois CTAs. O degradê branco foi
+reduzido para revelar melhor a Maserati azul no lado esquerdo, preservando
+contraste suficiente para o título.
+
+## 45.2 Busca glass
+
+O conjunto de busca sobe para uma sobreposição de aproximadamente 108 px no
+desktop e recebe:
+
+- fundo branco translúcido;
+- `backdrop-filter` com blur e saturação leves;
+- borda branca semitransparente;
+- brilho interno discreto;
+- sombra externa controlada;
+- fallback legível quando o navegador não suporta blur.
