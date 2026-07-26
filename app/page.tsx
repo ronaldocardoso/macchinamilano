@@ -157,7 +157,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section concierge-section">
+        <section className="section concierge-section" id="servizio">
           <div className="concierge-grid container">
             <div>
               <p className="eyebrow">Concierge Macchina Milano</p>

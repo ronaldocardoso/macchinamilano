@@ -103,6 +103,7 @@ a {
 }
 
 .site-header__inner {
+  position: relative;
   display: flex;
   min-height: 5.5rem;
   align-items: center;
@@ -122,14 +123,16 @@ a {
 }
 
 .desktop-nav {
+  position: absolute;
+  left: 50%;
   display: flex;
   align-items: center;
   gap: clamp(1.5rem, 3vw, 2.8rem);
-  margin-left: auto;
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  transform: translateX(-50%);
 }
 
 .desktop-nav a {
@@ -294,7 +297,7 @@ a {
   padding: 0.9rem 1rem;
   border-bottom: 1px solid var(--stone-100);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
