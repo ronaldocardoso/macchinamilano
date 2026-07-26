@@ -8,19 +8,17 @@ type BrandVehicleShowcaseProps = {
   brand: string;
   filterValue: string;
   vehicles: Vehicle[];
-  variant?: "default" | "muted";
 };
 
 export function BrandVehicleShowcase({
   brand,
   filterValue,
   vehicles,
-  variant = "default",
 }: BrandVehicleShowcaseProps) {
   return (
     <section
       aria-labelledby={`${filterValue}-milano-title`}
-      className={`section brand-showcase brand-showcase--${variant}`}
+      className="section brand-showcase"
     >
       <div className="container">
         <header className="brand-showcase__header">
