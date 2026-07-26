@@ -13,7 +13,7 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.6
+**Versão do documento:** 1.7
 **Data de referência:** 26 de julho de 2026
 **Status de execução:** Fase 1 concluída e protótipo público estático validado
 
@@ -2613,3 +2613,35 @@ desktop e recebe:
 - brilho interno discreto;
 - sombra externa controlada;
 - fallback legível quando o navegador não suporta blur.
+
+---
+
+# 46. Revisão 1.7 — exploração por marca e carroceria
+
+## 46.1 Diretório visual abaixo da busca
+
+A home recebe um diretório visual imediatamente abaixo do box de busca, com
+dois grupos:
+
+- oito marcas: Audi, BMW, Mercedes-Benz, Jaguar, Porsche, Ferrari,
+  Rolls-Royce e McLaren;
+- oito carrocerias: SUV, Berlina, Station wagon, City car, Monovolume, Coupé,
+  Cabrio e Furgoni e van.
+
+Os ativos fornecidos são servidos localmente pelo projeto. O layout apresenta
+quatro itens por linha em cada grupo no desktop e duas opções por linha no
+mobile.
+
+## 46.2 Links e filtros
+
+Cada opção aponta para `/veicoli` com uma query semântica:
+
+```text
+Marca         → /veicoli?marca=porsche
+Carrozzeria   → /veicoli?carrozzeria=suv
+```
+
+Como a publicação atual usa export estático, o catálogo interpreta essas
+queries no cliente e filtra os dados demonstrativos sem exigir um servidor
+Node.js. Quando não há estoque para uma opção, o portal exibe um estado vazio
+em italiano com caminhos para a seleção completa e para contato.
