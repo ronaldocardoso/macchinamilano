@@ -4,12 +4,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { DealerMap } from "@/components/dealer-map";
+import { DealerContacts } from "@/components/dealer-contacts";
 import {
   ArrowIcon,
   CheckIcon,
   HeartIcon,
   MapPinIcon,
-  PhoneIcon,
 } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -191,37 +191,18 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
               <span className="verified">
                 <CheckIcon /> Dati del concessionario dall&apos;annuncio
               </span>
-              {(vehicle.dealerPhones?.length || vehicle.dealerPhone) && (
-                <div className="dealer-panel__contact">
-                  <PhoneIcon />
-                  <div>
-                    <span>Telefono</span>
-                    {(vehicle.dealerPhones?.length
-                      ? vehicle.dealerPhones
-                      : [
-                          {
-                            formatted: vehicle.dealerPhone,
-                            callTo: vehicle.dealerPhoneUri,
-                          },
-                        ]
-                    ).map((phone, index) => (
-                      <a
-                        href={
-                          phone.callTo
-                            ? `tel:${phone.callTo}`
-                            : phone.formatted
-                              ? `tel:${phone.formatted}`
-                              : undefined
-                        }
-                        key={`${phone.formatted}-${index}`}
-                      >
-                        {phone.formatted}
-                        {phone.type ? ` · ${phone.type}` : ""}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <DealerContacts
+                dealer={vehicle.dealer}
+                dealerId={vehicle.dealerId}
+                fallbackPhone={vehicle.dealerPhone}
+                fallbackPhoneUri={vehicle.dealerPhoneUri}
+                phones={vehicle.dealerPhones}
+                vehicle={{
+                  brand: vehicle.brand,
+                  model: vehicle.model,
+                  slug: vehicle.slug,
+                }}
+              />
               <div className="dealer-panel__contact">
                 <MapPinIcon />
                 <div>
