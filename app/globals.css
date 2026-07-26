@@ -354,7 +354,7 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(17.5% + 35px);
+  width: calc(17.5% + 40px);
   height: 1px;
   content: "";
   background: var(--brand-red);
