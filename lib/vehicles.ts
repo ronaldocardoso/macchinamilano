@@ -35,6 +35,12 @@ export type Vehicle = {
     type?: string;
     formatted?: string;
     callTo?: string;
+    e164?: string;
+    validationStatus?: "valid" | "invalid";
+    validationReason?: "missing" | "country" | "length" | "prefix";
+    whatsappStatus?: "declared" | "verified" | "invalid" | "unknown";
+    whatsappWaId?: string;
+    whatsappCheckedAt?: string;
   }[];
   dealerEmail?: string;
   dealerWebsite?: string;
@@ -709,6 +715,12 @@ type ImportedDealer = {
     type?: string;
     formatted?: string;
     callTo?: string;
+    e164?: string;
+    validationStatus?: "valid" | "invalid";
+    validationReason?: "missing" | "country" | "length" | "prefix";
+    whatsappStatus?: "declared" | "verified" | "invalid" | "unknown";
+    whatsappWaId?: string;
+    whatsappCheckedAt?: string;
   }[];
   email?: string;
   website?: string;

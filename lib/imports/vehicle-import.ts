@@ -2,6 +2,13 @@ import { createHash } from "node:crypto";
 
 import { z } from "zod";
 
+import {
+  resolveWhatsAppStatus,
+  validateItalianPhone,
+  whatsappVerificationStatuses,
+  type WhatsAppVerificationStatus,
+} from "../phone-validation.ts";
+
 const optionalText = z.preprocess(
   (value) =>
     typeof value === "string" && value.trim() === "" ? undefined : value,
@@ -41,6 +48,9 @@ export const rawVehicleCandidateSchema = z.object({
           type: optionalText,
           formatted: optionalText,
           callTo: optionalText,
+          whatsappStatus: z.enum(whatsappVerificationStatuses).optional(),
+          whatsappWaId: optionalText,
+          whatsappCheckedAt: z.iso.datetime().optional(),
         }),
       )
       .default([]),
@@ -121,6 +131,12 @@ export type NormalizedDealer = {
     type?: string;
     formatted?: string;
     callTo?: string;
+    e164?: string;
+    validationStatus: "valid" | "invalid";
+    validationReason?: "missing" | "country" | "length" | "prefix";
+    whatsappStatus?: WhatsAppVerificationStatus;
+    whatsappWaId?: string;
+    whatsappCheckedAt?: string;
   }[];
   email?: string;
   website?: string;
@@ -194,6 +210,12 @@ export type VehicleImportReport = {
     rejected: number;
     dealers: number;
   };
+  contactSummary: {
+    phones: number;
+    valid: number;
+    invalid: number;
+    whatsapp: Record<WhatsAppVerificationStatus, number>;
+  };
   dealers: NormalizedDealer[];
   vehicles: NormalizedVehicle[];
   rejections: ImportRejection[];
@@ -219,6 +241,52 @@ function normalizeKey(value?: string) {
 
 function digitsOnly(value?: string) {
   return value?.replace(/\D/g, "") || undefined;
+}
+
+function normalizeDealerPhones(
+  phones: RawVehicleCandidate["seller"]["phones"],
+): NormalizedDealer["phones"] {
+  const phoneKeys = new Set<string>();
+
+  return phones
+    .map((phone) => {
+      const validation = validateItalianPhone(phone.callTo ?? phone.formatted);
+      const declaredAsWhatsApp = normalizeKey(phone.type) === "whatsapp";
+      const whatsappStatus = resolveWhatsAppStatus({
+        declaredAsWhatsApp,
+        requestedStatus: phone.whatsappStatus,
+        validation,
+      });
+
+      return {
+        type: phone.type,
+        formatted: phone.formatted,
+        callTo:
+          phone.callTo ??
+          (validation.isValid && validation.e164
+            ? `+${validation.e164}`
+            : undefined),
+        e164: validation.e164,
+        validationStatus: validation.isValid ? "valid" : "invalid",
+        validationReason: validation.reason,
+        whatsappStatus,
+        whatsappWaId: phone.whatsappWaId,
+        whatsappCheckedAt: phone.whatsappCheckedAt,
+      } satisfies NormalizedDealer["phones"][number];
+    })
+    .filter((phone) => {
+      const key = [
+        phone.e164 ?? phone.formatted ?? phone.callTo ?? "missing",
+        normalizeKey(phone.type) ?? "phone",
+      ].join(":");
+
+      if (phoneKeys.has(key)) {
+        return false;
+      }
+
+      phoneKeys.add(key);
+      return true;
+    });
 }
 
 function normalizeVatNumber(value?: string) {
@@ -283,7 +351,7 @@ function normalizeDealer(candidate: RawVehicleCandidate): NormalizedDealer {
     phoneUri: seller.phoneUri,
     logoUrl: seller.logoUrl,
     profileUrl: seller.profileUrl,
-    phones: seller.phones,
+    phones: normalizeDealerPhones(seller.phones),
     email: seller.email?.toLocaleLowerCase("it-IT"),
     website: seller.website,
     street: seller.address.street,
@@ -314,7 +382,10 @@ function mergeDealers(
     logoUrl: current.logoUrl ?? incoming.logoUrl,
     profileUrl: current.profileUrl ?? incoming.profileUrl,
     phones: phones.filter((phone) => {
-      const key = phone.callTo ?? phone.formatted ?? JSON.stringify(phone);
+      const key = [
+        phone.e164 ?? phone.formatted ?? phone.callTo ?? JSON.stringify(phone),
+        normalizeKey(phone.type) ?? "phone",
+      ].join(":");
 
       if (phoneKeys.has(key)) {
         return false;
@@ -328,6 +399,32 @@ function mergeDealers(
     street: current.street ?? incoming.street,
     postalCode: current.postalCode ?? incoming.postalCode,
     province: current.province ?? incoming.province,
+  };
+}
+
+function summarizeDealerContacts(
+  dealers: NormalizedDealer[],
+): VehicleImportReport["contactSummary"] {
+  const phones = dealers.flatMap((dealer) => dealer.phones);
+  const whatsapp = {
+    declared: 0,
+    verified: 0,
+    invalid: 0,
+    unknown: 0,
+  } satisfies Record<WhatsAppVerificationStatus, number>;
+
+  phones.forEach((phone) => {
+    if (phone.whatsappStatus) {
+      whatsapp[phone.whatsappStatus] += 1;
+    }
+  });
+
+  return {
+    phones: phones.length,
+    valid: phones.filter((phone) => phone.validationStatus === "valid").length,
+    invalid: phones.filter((phone) => phone.validationStatus === "invalid")
+      .length,
+    whatsapp,
   };
 }
 
@@ -550,6 +647,9 @@ export function processVehicleImport(
     records: records.length,
     listingIds: vehicles.map((vehicle) => vehicle.sourceListingId),
   };
+  const normalizedDealers = [...dealers.values()].sort((a, b) =>
+    a.name.localeCompare(b.name, "it"),
+  );
 
   return {
     schemaVersion: 1,
@@ -563,9 +663,8 @@ export function processVehicleImport(
       rejected: rejections.length,
       dealers: dealers.size,
     },
-    dealers: [...dealers.values()].sort((a, b) =>
-      a.name.localeCompare(b.name, "it"),
-    ),
+    contactSummary: summarizeDealerContacts(normalizedDealers),
+    dealers: normalizedDealers,
     vehicles,
     rejections,
   };

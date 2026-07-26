@@ -1,4 +1,8 @@
 import type { RawVehicleCandidate } from "./vehicle-import";
+import {
+  whatsappVerificationStatuses,
+  type WhatsAppVerificationStatus,
+} from "../phone-validation.ts";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -16,6 +20,14 @@ function record(value: unknown): UnknownRecord {
 
 function text(value: unknown) {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function whatsappStatus(
+  value: unknown,
+): WhatsAppVerificationStatus | undefined {
+  const status = text(value)?.toLocaleLowerCase("it-IT");
+
+  return whatsappVerificationStatuses.find((candidate) => candidate === status);
 }
 
 function number(value: unknown) {
@@ -130,11 +142,19 @@ function adaptResult(
       profileUrl: absoluteAutoScoutUrl(sellerLinks.info_page),
       phones: phones.map((phoneValue) => {
         const phone = record(phoneValue);
+        const type = text(phone.phone_type);
+        const declaredAsWhatsApp =
+          type?.toLocaleLowerCase("it-IT") === "whatsapp";
+        const verifiedStatus = whatsappStatus(phone.whatsapp_status);
 
         return {
-          type: text(phone.phone_type),
+          type,
           formatted: text(phone.formatted_number),
           callTo: text(phone.call_to),
+          whatsappStatus:
+            verifiedStatus ?? (declaredAsWhatsApp ? "declared" : undefined),
+          whatsappWaId: text(phone.whatsapp_wa_id) ?? text(phone.wa_id),
+          whatsappCheckedAt: text(phone.whatsapp_checked_at),
         };
       }),
       address: {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-26T21:45:23.655Z",
-  "sourceRunId": "imp_446d01787268d2263bfb",
+  "generatedAt": "2026-07-26T23:32:37.661Z",
+  "sourceRunId": "imp_31589b09b8b325d1c6cb",
   "dealers": [
     {
       "id": "dlr_e73782f2bf4b1911b4ed",
@@ -15,16 +15,24 @@
         {
           "type": "Office",
           "formatted": "+39 02 - 36574430",
-          "callTo": "+390236574430"
+          "callTo": "+390236574430",
+          "e164": "390236574430",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 380 - 2844080",
-          "callTo": "+393802844080"
+          "callTo": "+393802844080",
+          "e164": "393802844080",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 380 - 2844080"
+          "formatted": "+39 380 - 2844080",
+          "callTo": "+393802844080",
+          "e164": "393802844080",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Sibilla Aleramo, 1",
@@ -44,16 +52,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300920",
-          "callTo": "+390399300920"
+          "callTo": "+390399300920",
+          "e164": "390399300920",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 99251768",
-          "callTo": "+390299251768"
+          "callTo": "+390299251768",
+          "e164": "390299251768",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 392 - 0066788"
+          "formatted": "+39 392 - 0066788",
+          "callTo": "+393920066788",
+          "e164": "393920066788",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via XXV Aprile, 59",
@@ -73,16 +89,24 @@
         {
           "type": "Office",
           "formatted": "+39 021 - 24126969",
-          "callTo": "+3902124126969"
+          "callTo": "+3902124126969",
+          "e164": "3902124126969",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 89959754",
-          "callTo": "+390289959754"
+          "callTo": "+390289959754",
+          "e164": "390289959754",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 347 - 5692734"
+          "formatted": "+39 347 - 5692734",
+          "callTo": "+393475692734",
+          "e164": "393475692734",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Luciano Manara, 17",
@@ -102,11 +126,17 @@
         {
           "type": "Office",
           "formatted": "+39 02 - 57419112",
-          "callTo": "+390257419112"
+          "callTo": "+390257419112",
+          "e164": "390257419112",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 02 - 57419112"
+          "formatted": "+39 02 - 57419112",
+          "callTo": "+390257419112",
+          "e164": "390257419112",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Achilli Motors Srl Via Giacomo Antonini n°31",
@@ -125,12 +155,16 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0561332",
-          "callTo": "+390230561332"
+          "callTo": "+390230561332",
+          "e164": "390230561332",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 334 - 9495892",
-          "callTo": "+393349495892"
+          "callTo": "+393349495892",
+          "e164": "393349495892",
+          "validationStatus": "valid"
         }
       ],
       "street": "Via Civitali Matteo, 75",
@@ -150,11 +184,17 @@
         {
           "type": "Mobile",
           "formatted": "+39 389 - 4931860",
-          "callTo": "+393894931860"
+          "callTo": "+393894931860",
+          "e164": "393894931860",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 389 - 4931860"
+          "formatted": "+39 389 - 4931860",
+          "callTo": "+393894931860",
+          "e164": "393894931860",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Roncaglia, 14",
@@ -174,16 +214,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452091",
-          "callTo": "+390230452091"
+          "callTo": "+390230452091",
+          "e164": "390230452091",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 2406894",
-          "callTo": "+39022406894"
+          "callTo": "+39022406894",
+          "e164": "39022406894",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 02 - 82920001"
+          "formatted": "+39 02 - 82920001",
+          "callTo": "+390282920001",
+          "e164": "390282920001",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Viale F.lli Casiraghi, 196",
@@ -203,16 +251,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300963",
-          "callTo": "+390399300963"
+          "callTo": "+390399300963",
+          "e164": "390399300963",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 0392 - 720128",
-          "callTo": "+390392720128"
+          "callTo": "+390392720128",
+          "e164": "390392720128",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 335 - 6213913"
+          "formatted": "+39 335 - 6213913",
+          "callTo": "+393356213913",
+          "e164": "393356213913",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Viale Lombardia, 161/163",
@@ -232,11 +288,17 @@
         {
           "type": "Mobile",
           "formatted": "+39 334 - 1701038",
-          "callTo": "+393341701038"
+          "callTo": "+393341701038",
+          "e164": "393341701038",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 334 - 1701038"
+          "formatted": "+39 334 - 1701038",
+          "callTo": "+393341701038",
+          "e164": "393341701038",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via G. Miglioli, 18",
@@ -256,16 +318,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452608",
-          "callTo": "+390230452608"
+          "callTo": "+390230452608",
+          "e164": "390230452608",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 90030132",
-          "callTo": "+390290030132"
+          "callTo": "+390290030132",
+          "e164": "390290030132",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 333 - 4971128"
+          "formatted": "+39 333 - 4971128",
+          "callTo": "+393334971128",
+          "e164": "393334971128",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Strada Statale dei Giovi",
@@ -285,7 +355,9 @@
         {
           "type": "Mobile",
           "formatted": "+39 333 - 6326090",
-          "callTo": "+393336326090"
+          "callTo": "+393336326090",
+          "e164": "393336326090",
+          "validationStatus": "valid"
         }
       ],
       "street": "Via Luigi Cadorna,2",
@@ -305,16 +377,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300927",
-          "callTo": "+390399300927"
+          "callTo": "+390399300927",
+          "e164": "390399300927",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 039 - 2460055",
-          "callTo": "+390392460055"
+          "callTo": "+390392460055",
+          "e164": "390392460055",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 345 - 8896248"
+          "formatted": "+39 345 - 8896248",
+          "callTo": "+393458896248",
+          "e164": "393458896248",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via G. Borgazzi, 8",
@@ -334,16 +414,24 @@
         {
           "type": "Office",
           "formatted": "+39 036 - 21600221",
-          "callTo": "+3903621600221"
+          "callTo": "+3903621600221",
+          "e164": "3903621600221",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 392 - 6769369",
-          "callTo": "+393926769369"
+          "callTo": "+393926769369",
+          "e164": "393926769369",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 380 - 7765218"
+          "formatted": "+39 380 - 7765218",
+          "callTo": "+393807765218",
+          "e164": "393807765218",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "via Domenico Padovan, 35",
@@ -363,12 +451,16 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0560642",
-          "callTo": "+390230560642"
+          "callTo": "+390230560642",
+          "e164": "390230560642",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 351 - 3619999",
-          "callTo": "+393513619999"
+          "callTo": "+393513619999",
+          "e164": "393513619999",
+          "validationStatus": "valid"
         }
       ],
       "street": "Via Brughetti, 24",
@@ -388,16 +480,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452323",
-          "callTo": "+390230452323"
+          "callTo": "+390230452323",
+          "e164": "390230452323",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 345431",
-          "callTo": "+3902345431"
+          "callTo": "+3902345431",
+          "e164": "3902345431",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 338 - 9308055"
+          "formatted": "+39 338 - 9308055",
+          "callTo": "+393389308055",
+          "e164": "393389308055",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Grassi Giovanni Battista, 98",
@@ -417,17 +517,23 @@
         {
           "type": "Office",
           "formatted": "+39 021 - 24125289",
-          "callTo": "+3902124125289"
+          "callTo": "+3902124125289",
+          "e164": "3902124125289",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 80771979",
-          "callTo": "+390280771979"
+          "callTo": "+390280771979",
+          "e164": "390280771979",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 391 - 3992629",
-          "callTo": "+393913992629"
+          "callTo": "+393913992629",
+          "e164": "393913992629",
+          "validationStatus": "valid"
         }
       ],
       "street": "Via Milano, 45",
@@ -447,16 +553,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300937",
-          "callTo": "+390399300937"
+          "callTo": "+390399300937",
+          "e164": "390399300937",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 338 - 9300519",
-          "callTo": "+393389300519"
+          "callTo": "+393389300519",
+          "e164": "393389300519",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 335 - 6520385"
+          "formatted": "+39 335 - 6520385",
+          "callTo": "+393356520385",
+          "e164": "393356520385",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Azzone Visconti, 15",
@@ -476,16 +590,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452459",
-          "callTo": "+390230452459"
+          "callTo": "+390230452459",
+          "e164": "390230452459",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 49790951",
-          "callTo": "+390249790951"
+          "callTo": "+390249790951",
+          "e164": "390249790951",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 035 - 4596239"
+          "formatted": "+39 035 - 4596239",
+          "callTo": "+390354596239",
+          "e164": "390354596239",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Viale Renato Serra, 61",
@@ -505,12 +627,16 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0451757",
-          "callTo": "+390230451757"
+          "callTo": "+390230451757",
+          "e164": "390230451757",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 89746286",
-          "callTo": "+390289746286"
+          "callTo": "+390289746286",
+          "e164": "390289746286",
+          "validationStatus": "valid"
         }
       ],
       "street": "Via Petitti,8",
@@ -530,16 +656,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300358",
-          "callTo": "+390399300358"
+          "callTo": "+390399300358",
+          "e164": "390399300358",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 30250",
-          "callTo": "+390230250"
+          "callTo": "+390230250",
+          "e164": "390230250",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 388 - 1942498"
+          "formatted": "+39 388 - 1942498",
+          "callTo": "+393881942498",
+          "e164": "393881942498",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Viale Campania, 34",
@@ -559,17 +693,23 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452658",
-          "callTo": "+390230452658"
+          "callTo": "+390230452658",
+          "e164": "390230452658",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 54108385",
-          "callTo": "+390254108385"
+          "callTo": "+390254108385",
+          "e164": "390254108385",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 49799404",
-          "callTo": "+390249799404"
+          "callTo": "+390249799404",
+          "e164": "390249799404",
+          "validationStatus": "valid"
         }
       ],
       "street": "via lodovico muratori 27",
@@ -589,16 +729,24 @@
         {
           "type": "Office",
           "formatted": "+39 033 - 11940127",
-          "callTo": "+3903311940127"
+          "callTo": "+3903311940127",
+          "e164": "3903311940127",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 0331 - 1604660",
-          "callTo": "+3903311604660"
+          "callTo": "+3903311604660",
+          "e164": "3903311604660",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 327 - 1092393"
+          "formatted": "+39 327 - 1092393",
+          "callTo": "+393271092393",
+          "e164": "393271092393",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Cerro Maggiore, 49",
@@ -618,16 +766,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300904",
-          "callTo": "+390399300904"
+          "callTo": "+390399300904",
+          "e164": "390399300904",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 348 - 2633800",
-          "callTo": "+393482633800"
+          "callTo": "+393482633800",
+          "e164": "393482633800",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 335 - 1470772"
+          "formatted": "+39 335 - 1470772",
+          "callTo": "+393351470772",
+          "e164": "393351470772",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Borgazzi, 13",
@@ -647,12 +803,16 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452067",
-          "callTo": "+390230452067"
+          "callTo": "+390230452067",
+          "e164": "390230452067",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 9465742",
-          "callTo": "+39029465742"
+          "callTo": "+39029465742",
+          "e164": "39029465742",
+          "validationStatus": "valid"
         }
       ],
       "street": "Via C.M. Maggi, 70",
@@ -672,12 +832,16 @@
         {
           "type": "Office",
           "formatted": "+39 02 - 87215591",
-          "callTo": "+390287215591"
+          "callTo": "+390287215591",
+          "e164": "390287215591",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 340 - 4072780",
-          "callTo": "+393404072780"
+          "callTo": "+393404072780",
+          "e164": "393404072780",
+          "validationStatus": "valid"
         }
       ],
       "street": "PSV Automobili Via Ferraris, 25",
@@ -696,12 +860,16 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0560649",
-          "callTo": "+390230560649"
+          "callTo": "+390230560649",
+          "e164": "390230560649",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 388 - 1577806",
-          "callTo": "+393881577806"
+          "callTo": "+393881577806",
+          "e164": "393881577806",
+          "validationStatus": "valid"
         }
       ],
       "street": "Piazza Duomo, 20",
@@ -721,16 +889,24 @@
         {
           "type": "Office",
           "formatted": "+39 02 - 5770091",
-          "callTo": "+39025770091"
+          "callTo": "+39025770091",
+          "e164": "39025770091",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 34 - 58602348",
-          "callTo": "+393458602348"
+          "callTo": "+393458602348",
+          "e164": "393458602348",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 34 - 58602348"
+          "formatted": "+39 34 - 58602348",
+          "callTo": "+393458602348",
+          "e164": "393458602348",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Dei Missaglia, 89",
@@ -750,12 +926,16 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452625",
-          "callTo": "+390230452625"
+          "callTo": "+390230452625",
+          "e164": "390230452625",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 262831",
-          "callTo": "+3902262831"
+          "callTo": "+3902262831",
+          "e164": "3902262831",
+          "validationStatus": "valid"
         }
       ],
       "street": "Viale Edison, 126",
@@ -775,16 +955,24 @@
         {
           "type": "Office",
           "formatted": "+39 039 - 9300852",
-          "callTo": "+390399300852"
+          "callTo": "+390399300852",
+          "e164": "390399300852",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 039 - 6362276",
-          "callTo": "+390396362276"
+          "callTo": "+390396362276",
+          "e164": "390396362276",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 331 - 6806097"
+          "formatted": "+39 331 - 6806097",
+          "callTo": "+393316806097",
+          "e164": "393316806097",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Brenta, 48",
@@ -804,16 +992,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452200",
-          "callTo": "+390230452200"
+          "callTo": "+390230452200",
+          "e164": "390230452200",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 338 - 3514071",
-          "callTo": "+393383514071"
+          "callTo": "+393383514071",
+          "e164": "393383514071",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 333 - 9206750"
+          "formatted": "+39 333 - 9206750",
+          "callTo": "+393339206750",
+          "e164": "393339206750",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Viale Rimembranze di Greco, 10",
@@ -832,16 +1028,24 @@
         {
           "type": "Office",
           "formatted": "+39 02 - 87250449",
-          "callTo": "+390287250449"
+          "callTo": "+390287250449",
+          "e164": "390287250449",
+          "validationStatus": "valid"
         },
         {
           "type": "Mobile",
           "formatted": "+39 392 - 7841452",
-          "callTo": "+393927841452"
+          "callTo": "+393927841452",
+          "e164": "393927841452",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 392 - 7841452"
+          "formatted": "+39 392 - 7841452",
+          "callTo": "+393927841452",
+          "e164": "393927841452",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Gadames 50",
@@ -861,16 +1065,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0560452",
-          "callTo": "+390230560452"
+          "callTo": "+390230560452",
+          "e164": "390230560452",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 25568901",
-          "callTo": "+390225568901"
+          "callTo": "+390225568901",
+          "e164": "390225568901",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 334 - 9594907"
+          "formatted": "+39 334 - 9594907",
+          "callTo": "+393349594907",
+          "e164": "393349594907",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Giorgio Stephenson, 86,",
@@ -890,16 +1102,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452690",
-          "callTo": "+390230452690"
+          "callTo": "+390230452690",
+          "e164": "390230452690",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 2804431",
-          "callTo": "+39022804431"
+          "callTo": "+39022804431",
+          "e164": "39022804431",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 342 - 5214715"
+          "formatted": "+39 342 - 5214715",
+          "callTo": "+393425214715",
+          "e164": "393425214715",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Monfalcone, 19",
@@ -919,16 +1139,24 @@
         {
           "type": "Office",
           "formatted": "+39 023 - 0452733",
-          "callTo": "+390230452733"
+          "callTo": "+390230452733",
+          "e164": "390230452733",
+          "validationStatus": "valid"
         },
         {
           "type": "Office",
           "formatted": "+39 02 - 6599782",
-          "callTo": "+39026599782"
+          "callTo": "+39026599782",
+          "e164": "39026599782",
+          "validationStatus": "valid"
         },
         {
           "type": "Whatsapp",
-          "formatted": "+39 320 - 2992038"
+          "formatted": "+39 320 - 2992038",
+          "callTo": "+393202992038",
+          "e164": "393202992038",
+          "validationStatus": "valid",
+          "whatsappStatus": "declared"
         }
       ],
       "street": "Via Parini Giuseppe 3",

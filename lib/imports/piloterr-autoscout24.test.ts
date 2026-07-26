@@ -36,6 +36,11 @@ describe("Piloterr AutoScout24 adapter", () => {
                 formatted_number: "+39 02 - 1234567",
                 call_to: "+39021234567",
               },
+              {
+                phone_type: "Whatsapp",
+                formatted_number: "+39 380 - 2844080",
+                call_to: null,
+              },
             ],
           },
           vehicle: {
@@ -88,5 +93,18 @@ describe("Piloterr AutoScout24 adapter", () => {
       distanceKm: 4,
     });
     expect(report.vehicles[0].imageUrls[0]).toContain("/1280x960.webp");
+    expect(report.dealers[0].phones).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          e164: "393802844080",
+          validationStatus: "valid",
+          whatsappStatus: "declared",
+        }),
+      ]),
+    );
+    expect(report.contactSummary.whatsapp).toMatchObject({
+      declared: 1,
+      verified: 0,
+    });
   });
 });

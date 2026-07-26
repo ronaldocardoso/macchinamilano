@@ -7,6 +7,7 @@ import {
   getWhatsAppUrl,
   maskItalianPhone,
   normalizePhoneDigits,
+  prepareDealerContacts,
   type DealerPhone,
 } from "@/lib/dealer-contact";
 
@@ -62,14 +63,8 @@ export function DealerContacts({
             callTo: fallbackPhoneUri,
           },
         ];
-  const whatsapp = contacts.find(
-    (phone) => phone.type?.toLocaleLowerCase("it-IT") === "whatsapp",
-  );
+  const { standardPhones, whatsapp } = prepareDealerContacts(contacts);
   const whatsappUrl = whatsapp ? getWhatsAppUrl(whatsapp, vehicle) : undefined;
-  const standardPhones = contacts.filter(
-    (phone) =>
-      phone.formatted && phone.type?.toLocaleLowerCase("it-IT") !== "whatsapp",
-  );
 
   if (!standardPhones.length && !whatsappUrl) {
     return null;
@@ -124,7 +119,13 @@ export function DealerContacts({
                       </button>
                     </>
                   )}
-                  {phone.type && <small>{phone.type}</small>}
+                  {phone.type && (
+                    <small>
+                      {phone.type.toLocaleLowerCase("it-IT") === "whatsapp"
+                        ? "Telefono"
+                        : phone.type}
+                    </small>
+                  )}
                 </div>
               );
             })}

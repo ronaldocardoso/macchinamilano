@@ -1,7 +1,15 @@
+import type { WhatsAppVerificationStatus } from "./phone-validation";
+
 export type DealerPhone = {
   type?: string;
   formatted?: string;
   callTo?: string;
+  e164?: string;
+  validationStatus?: "valid" | "invalid";
+  validationReason?: "missing" | "country" | "length" | "prefix";
+  whatsappStatus?: WhatsAppVerificationStatus;
+  whatsappWaId?: string;
+  whatsappCheckedAt?: string;
 };
 
 type VehicleContactContext = {
@@ -49,6 +57,10 @@ export function getWhatsAppUrl(
   phone: DealerPhone,
   vehicle: VehicleContactContext,
 ) {
+  if (phone.whatsappStatus !== "verified") {
+    return undefined;
+  }
+
   const number = normalizePhoneDigits(phone.callTo ?? phone.formatted);
 
   if (!number) {
@@ -63,4 +75,38 @@ export function getWhatsAppUrl(
   ].join(" ");
 
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+}
+
+function isWhatsAppPhone(phone: DealerPhone) {
+  return (
+    phone.type?.toLocaleLowerCase("it-IT") === "whatsapp" ||
+    phone.whatsappStatus !== undefined
+  );
+}
+
+export function prepareDealerContacts(contacts: DealerPhone[]) {
+  const whatsapp = contacts.find(
+    (phone) =>
+      isWhatsAppPhone(phone) &&
+      phone.whatsappStatus === "verified" &&
+      phone.validationStatus !== "invalid",
+  );
+  const phoneNumbers = new Set<string>();
+  const standardPhones = contacts.filter((phone) => {
+    if (!phone.formatted) {
+      return false;
+    }
+
+    const key =
+      normalizePhoneDigits(phone.callTo ?? phone.formatted) || phone.formatted;
+
+    if (phoneNumbers.has(key)) {
+      return false;
+    }
+
+    phoneNumbers.add(key);
+    return true;
+  });
+
+  return { standardPhones, whatsapp };
 }

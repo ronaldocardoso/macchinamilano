@@ -121,6 +121,8 @@ process.stdout.write(
     `Accepted: ${report.summary.accepted}`,
     `Rejected: ${report.summary.rejected}`,
     `Dealers: ${report.summary.dealers}`,
+    `Phones: ${report.contactSummary.phones} (${report.contactSummary.valid} valid, ${report.contactSummary.invalid} invalid)`,
+    `WhatsApp: ${report.contactSummary.whatsapp.verified} verified, ${report.contactSummary.whatsapp.declared} declared, ${report.contactSummary.whatsapp.invalid} invalid, ${report.contactSummary.whatsapp.unknown} unknown`,
     `Report: ${outputPath}`,
     values["catalog-output"]
       ? `Catalog: ${resolve(values["catalog-output"])}`

@@ -5,6 +5,7 @@ import {
   getWhatsAppUrl,
   maskItalianPhone,
   normalizePhoneDigits,
+  prepareDealerContacts,
 } from "./dealer-contact";
 
 describe("dealer contact utilities", () => {
@@ -23,6 +24,8 @@ describe("dealer contact utilities", () => {
       {
         type: "Whatsapp",
         formatted: "+39 380 - 2844080",
+        validationStatus: "valid",
+        whatsappStatus: "verified",
       },
       {
         brand: "Lamborghini",
@@ -38,5 +41,64 @@ describe("dealer contact utilities", () => {
     expect(decodeURIComponent(url ?? "")).toContain(
       getVehiclePublicUrl("lamborghini-urus-2021-66e01dc"),
     );
+  });
+
+  it("does not create WhatsApp links for numbers only declared by the source", () => {
+    expect(
+      getWhatsAppUrl(
+        {
+          type: "Whatsapp",
+          formatted: "+39 380 - 2844080",
+          validationStatus: "valid",
+          whatsappStatus: "declared",
+        },
+        {
+          brand: "Lamborghini",
+          model: "Urus",
+          slug: "lamborghini-urus-2021-66e01dc",
+        },
+      ),
+    ).toBeUndefined();
+  });
+
+  it("keeps an unverified WhatsApp declaration as a regular phone", () => {
+    const contacts = prepareDealerContacts([
+      {
+        type: "Mobile",
+        formatted: "+39 380 - 2844080",
+        callTo: "+393802844080",
+        validationStatus: "valid",
+      },
+      {
+        type: "Whatsapp",
+        formatted: "+39 380 - 2844080",
+        callTo: "+393802844080",
+        validationStatus: "valid",
+        whatsappStatus: "declared",
+      },
+    ]);
+
+    expect(contacts.whatsapp).toBeUndefined();
+    expect(contacts.standardPhones).toHaveLength(1);
+    expect(contacts.standardPhones[0].type).toBe("Mobile");
+  });
+
+  it("keeps a verified WhatsApp contact available as phone and chat", () => {
+    const contacts = prepareDealerContacts([
+      {
+        type: "Office",
+        formatted: "+39 02 - 36574430",
+        validationStatus: "valid",
+      },
+      {
+        type: "Whatsapp",
+        formatted: "+39 380 - 2844080",
+        validationStatus: "valid",
+        whatsappStatus: "verified",
+      },
+    ]);
+
+    expect(contacts.standardPhones).toHaveLength(2);
+    expect(contacts.whatsapp?.formatted).toBe("+39 380 - 2844080");
   });
 });

@@ -87,6 +87,11 @@ describe("vehicle import pipeline", () => {
       rejected: 0,
       dealers: 1,
     });
+    expect(report.contactSummary).toMatchObject({
+      phones: 1,
+      valid: 1,
+      invalid: 0,
+    });
     expect(report.dealers[0]).toMatchObject({
       vatNumber: "IT01234567890",
       phone: "+39 02 1234 5678",
@@ -205,6 +210,30 @@ describe("vehicle import pipeline", () => {
       rejected: 1,
     });
     expect(report.rejections[0].code).toBe("INVALID_RECORD");
+  });
+
+  it("marks malformed WhatsApp declarations as invalid", () => {
+    const report = processVehicleImport([
+      candidate({
+        seller: {
+          ...candidate().seller,
+          phones: [
+            {
+              type: "Whatsapp",
+              formatted: "+39 123",
+              whatsappStatus: "declared",
+            },
+          ],
+        },
+      }),
+    ]);
+
+    expect(report.dealers[0].phones[0]).toMatchObject({
+      validationStatus: "invalid",
+      validationReason: "length",
+      whatsappStatus: "invalid",
+    });
+    expect(report.contactSummary.whatsapp.invalid).toBe(1);
   });
 
   it("normalizes the target scale of 900 vehicles and 700 dealers", () => {
