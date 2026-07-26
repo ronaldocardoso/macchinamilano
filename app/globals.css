@@ -1488,10 +1488,10 @@ a {
 
 .detail-title h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 6vw, 5.7rem);
+  font-size: clamp(2.35rem, 4.5vw, 4.4rem);
   font-weight: 680;
-  letter-spacing: -0.07em;
-  line-height: 0.92;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
 }
 
 .detail-title > div:first-child > span {
@@ -1881,10 +1881,10 @@ a {
 .description-section h2 {
   max-width: 48rem;
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3.7rem);
+  font-size: clamp(1.55rem, 2.5vw, 2.35rem);
   font-weight: 650;
-  letter-spacing: -0.055em;
-  line-height: 1;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
 }
 
 .description-section > p:not(.eyebrow) {
