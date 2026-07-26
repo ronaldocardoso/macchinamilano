@@ -16,9 +16,26 @@ export type Vehicle = {
   dealer: string;
   accent: string;
   scene: "studio" | "city" | "track" | "lake";
+  armored?: boolean;
   featured?: boolean;
   newArrival?: boolean;
 };
+
+export type VehicleLabel = "Blindato" | "Elettrico";
+
+export function getVehicleLabel(vehicle: Vehicle): VehicleLabel | undefined {
+  if (vehicle.armored) {
+    return "Blindato";
+  }
+
+  const fuel = vehicle.fuel.toLocaleLowerCase("it-IT");
+
+  if (fuel.startsWith("elettric") || fuel.startsWith("ibrid")) {
+    return "Elettrico";
+  }
+
+  return undefined;
+}
 
 export const vehicles: Vehicle[] = [
   {

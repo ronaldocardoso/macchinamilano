@@ -2,13 +2,20 @@ import Link from "next/link";
 
 import { HeartIcon, MapPinIcon } from "@/components/icons";
 import { VehicleVisual } from "@/components/vehicle-visual";
-import { formatMileage, formatPrice, type Vehicle } from "@/lib/vehicles";
+import {
+  formatMileage,
+  formatPrice,
+  getVehicleLabel,
+  type Vehicle,
+} from "@/lib/vehicles";
 
 type VehicleCardProps = {
   vehicle: Vehicle;
 };
 
 export function VehicleCard({ vehicle }: VehicleCardProps) {
+  const label = getVehicleLabel(vehicle);
+
   return (
     <article className="vehicle-card">
       <Link
@@ -17,11 +24,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         href={`/veicoli/${vehicle.slug}`}
       >
         <VehicleVisual compact vehicle={vehicle} />
-        {(vehicle.featured || vehicle.newArrival) && (
-          <span className="vehicle-card__tag">
-            {vehicle.featured ? "In evidenza" : "Nuovo arrivo"}
-          </span>
-        )}
+        {label && <span className="vehicle-card__tag">{label}</span>}
       </Link>
       <div className="vehicle-card__body">
         <div className="vehicle-card__heading">
