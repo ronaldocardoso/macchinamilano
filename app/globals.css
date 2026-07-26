@@ -563,6 +563,11 @@ a {
   mix-blend-mode: multiply;
 }
 
+#marche .explore-options__media img {
+  width: 80%;
+  height: 80%;
+}
+
 .explore-options strong {
   max-width: 8rem;
   font-size: 0.76rem;
