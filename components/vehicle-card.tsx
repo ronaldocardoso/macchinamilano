@@ -17,9 +17,11 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         href={`/veicoli/${vehicle.slug}`}
       >
         <VehicleVisual compact vehicle={vehicle} />
-        <span className="vehicle-card__tag">
-          {vehicle.featured ? "In evidenza" : "Nuovo arrivo"}
-        </span>
+        {(vehicle.featured || vehicle.newArrival) && (
+          <span className="vehicle-card__tag">
+            {vehicle.featured ? "In evidenza" : "Nuovo arrivo"}
+          </span>
+        )}
       </Link>
       <div className="vehicle-card__body">
         <div className="vehicle-card__heading">
