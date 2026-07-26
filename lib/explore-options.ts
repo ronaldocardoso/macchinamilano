@@ -66,6 +66,13 @@ const brandAliases: Record<string, string[]> = {
   ferrari: ["ferrari"],
   "rolls-royce": ["rolls royce"],
   mclaren: ["mclaren"],
+  lamborghini: ["lamborghini"],
+  maserati: ["maserati"],
+};
+
+const additionalFilterLabels: Record<string, string> = {
+  lamborghini: "Lamborghini",
+  maserati: "Maserati",
 };
 
 const bodyAliases: Record<string, string[]> = {
@@ -108,7 +115,8 @@ export function filterCatalogVehicles(
 
 export function getExploreFilterLabel(value?: string) {
   if (!value) return undefined;
-  return [...exploreBrands, ...bodyStyles].find(
-    (option) => option.value === value,
-  )?.label;
+  return (
+    [...exploreBrands, ...bodyStyles].find((option) => option.value === value)
+      ?.label ?? additionalFilterLabels[value]
+  );
 }

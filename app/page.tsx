@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BrandVehicleShowcase } from "@/components/brand-vehicle-showcase";
 import { ArrowIcon, CheckIcon } from "@/components/icons";
 import { ExploreDirectory } from "@/components/explore-directory";
 import { SearchPanel } from "@/components/search-panel";
@@ -10,6 +11,13 @@ import { vehicles } from "@/lib/vehicles";
 
 const featured = vehicles.filter((vehicle) => vehicle.featured);
 const newArrivals = vehicles.filter((vehicle) => vehicle.newArrival);
+const ferrariMilano = vehicles.filter((vehicle) => vehicle.brand === "Ferrari");
+const lamborghiniMilano = vehicles.filter(
+  (vehicle) => vehicle.brand === "Lamborghini",
+);
+const maseratiMilano = vehicles.filter(
+  (vehicle) => vehicle.brand === "Maserati",
+);
 
 export default function Home() {
   return (
@@ -54,6 +62,26 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <BrandVehicleShowcase
+          brand="Ferrari"
+          filterValue="ferrari"
+          title="Ferrari a Milano"
+          vehicles={ferrariMilano}
+        />
+        <BrandVehicleShowcase
+          brand="Lamborghini"
+          filterValue="lamborghini"
+          title="Lamborghini a Milano"
+          variant="muted"
+          vehicles={lamborghiniMilano}
+        />
+        <BrandVehicleShowcase
+          brand="Maserati"
+          filterValue="maserati"
+          title="Maserati a Milano"
+          vehicles={maseratiMilano}
+        />
 
         <section className="section section--dark">
           <div className="container">
