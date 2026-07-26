@@ -684,8 +684,6 @@ a {
   justify-content: space-between;
   gap: 2rem;
   margin-bottom: 2.5rem;
-  padding-top: 1.75rem;
-  border-top: 0.2rem solid var(--brand-red);
 }
 
 .brand-showcase__header h2 {
