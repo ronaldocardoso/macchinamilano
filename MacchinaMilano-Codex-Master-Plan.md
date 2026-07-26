@@ -13,8 +13,8 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.4
-**Data de referência:** 25 de julho de 2026
+**Versão do documento:** 1.5
+**Data de referência:** 26 de julho de 2026
 **Status de execução:** Fase 1 concluída e protótipo público estático validado
 
 ---
@@ -2474,7 +2474,7 @@ A experiência pública passa a usar:
 - cards amplos e hierarquia reduzida;
 - bordas e sombras discretas;
 - movimento limitado a transições leves;
-- vídeo circular já aprovado no hero;
+- imagem editorial de Milano e três veículos como fundo do hero;
 - logo oficial `.it` e favicon oficial preservados.
 
 O posicionamento geográfico público permanece:
@@ -2546,4 +2546,42 @@ Home desktop/mobile       → validada
 Catálogo desktop/mobile   → validado
 Detalhe desktop/mobile    → validado
 Overflow horizontal       → ausente em 390 px e 1280 px
+```
+
+---
+
+# 44. Revisão 1.5 — topo compacto e busca elevada
+
+## 44.1 Ajuste aprovado
+
+O topo da home passa a seguir uma hierarquia mais próxima da referência
+funcional aprovada:
+
+- header exclusivamente branco, sem faixa institucional superior;
+- hero reduzido para aproximadamente 480 px no desktop;
+- imagem `bg-macchina-milano` aplicada como fundo principal;
+- título compacto sobre a área clara da composição;
+- busca sobreposta em aproximadamente 80 px ao final do hero;
+- busca simplificada para marca e modelo;
+- CTA principal da busca em azul Inter;
+- recorte responsivo específico para desktop, tablet e celular.
+
+O arquivo original em PNG é preservado como fonte de design. Para produção, a
+aplicação usa uma versão WebP de aproximadamente 140 KB, reduzindo o peso em
+mais de 90% sem alterar a composição visual.
+
+## 44.2 Validação
+
+```text
+Desktop 1280 px
+header                     → 89 px
+hero                       → 480 px
+busca sobreposta           → 80 px
+overflow horizontal        → ausente
+
+Mobile 390 px
+menu mobile                → validado
+três veículos no recorte   → visíveis
+busca em coluna única      → validada
+overflow horizontal        → ausente
 ```
