@@ -44,7 +44,7 @@ export default function Home() {
 
         <ExploreDirectory />
 
-        <section className="section section--muted" id="selezioni">
+        <section className="section" id="selezioni">
           <div className="container">
             <div className="section-heading">
               <div>
@@ -71,7 +71,6 @@ export default function Home() {
         <BrandVehicleShowcase
           brand="Lamborghini"
           filterValue="lamborghini"
-          variant="muted"
           vehicles={lamborghiniMilano}
         />
         <BrandVehicleShowcase
