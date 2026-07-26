@@ -1735,6 +1735,113 @@ a {
   text-decoration: underline;
 }
 
+.dealer-contacts {
+  display: grid;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--stone-100);
+}
+
+.dealer-contacts__phones {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+}
+
+.dealer-contacts__phones > svg {
+  width: 1.2rem;
+  color: #35bf59;
+}
+
+.dealer-contacts__phones > div {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.dealer-contacts__phones > div > span {
+  color: var(--ink-600);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.dealer-phone {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.7rem;
+}
+
+.dealer-phone strong,
+.dealer-phone a {
+  color: var(--ink-900);
+  font-size: 0.88rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.dealer-phone a:hover {
+  color: var(--brand-blue);
+  text-decoration: underline;
+}
+
+.dealer-phone button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px dotted currentColor;
+  background: transparent;
+  color: var(--ink-600);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.7rem;
+}
+
+.dealer-phone button:hover {
+  color: var(--brand-red);
+}
+
+.dealer-phone small {
+  flex-basis: 100%;
+  color: var(--ink-600);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+}
+
+.dealer-whatsapp {
+  display: flex;
+  min-height: 4.1rem;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--stone-200);
+  border-radius: 0.55rem;
+  background: white;
+  box-shadow: 0 0.35rem 1rem rgb(17 18 22 / 8%);
+  color: #173c4a;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.dealer-whatsapp:hover {
+  border-color: #35bf59;
+  box-shadow: 0 0.55rem 1.4rem rgb(17 18 22 / 12%);
+  transform: translateY(-1px);
+}
+
+.dealer-whatsapp svg {
+  width: 2.65rem;
+  flex: 0 0 auto;
+  color: #35bf59;
+}
+
+.dealer-whatsapp strong {
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
 .dealer-map-wrap {
   display: grid;
   gap: 0.65rem;
