@@ -36,25 +36,6 @@ export default function Home() {
 
         <ExploreDirectory />
 
-        <section className="section section--intro" id="manifesto">
-          <div className="intro-grid container">
-            <p className="section-index">01 / La selezione</p>
-            <div>
-              <p className="eyebrow">Curata, non infinita</p>
-              <h2 className="display-title">
-                Meno rumore.
-                <br />
-                Più automobili memorabili.
-              </h2>
-            </div>
-            <p className="section-copy">
-              Un portale pensato per scoprire con chiarezza le auto più
-              interessanti di Milano e della regione. Ricerca immediata,
-              informazioni essenziali e contatto diretto.
-            </p>
-          </div>
-        </section>
-
         <section className="section section--muted" id="selezioni">
           <div className="container">
             <div className="section-heading">
