@@ -7,7 +7,6 @@ import type { Vehicle } from "@/lib/vehicles";
 type BrandVehicleShowcaseProps = {
   brand: string;
   filterValue: string;
-  title: string;
   vehicles: Vehicle[];
   variant?: "default" | "muted";
 };
@@ -15,7 +14,6 @@ type BrandVehicleShowcaseProps = {
 export function BrandVehicleShowcase({
   brand,
   filterValue,
-  title,
   vehicles,
   variant = "default",
 }: BrandVehicleShowcaseProps) {
@@ -28,7 +26,9 @@ export function BrandVehicleShowcase({
         <header className="brand-showcase__header">
           <div>
             <p className="eyebrow">Selezione del marchio</p>
-            <h2 id={`${filterValue}-milano-title`}>{title}</h2>
+            <h2 id={`${filterValue}-milano-title`}>
+              <span>{brand}</span> a Milano
+            </h2>
           </div>
           <Link
             className="text-link"
