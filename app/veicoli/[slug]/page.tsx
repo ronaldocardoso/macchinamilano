@@ -114,6 +114,7 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
       value: vehicle.location,
     },
   ];
+  const quickFacts = specs.slice(1, 6);
 
   return (
     <>
@@ -136,10 +137,26 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                   <h1>{vehicle.model}</h1>
                   <span>{vehicle.version}</span>
                 </div>
-                <div className="detail-price">
-                  <span>Prezzo</span>
-                  <strong>{formatPrice(vehicle.price)}</strong>
-                </div>
+              </div>
+
+              <div
+                aria-label="Dati principali del veicolo"
+                className="detail-quick-facts"
+              >
+                {quickFacts.map((fact) => (
+                  <div
+                    aria-label={`${fact.label}: ${fact.value}`}
+                    className="detail-quick-fact"
+                    key={fact.label}
+                    title={fact.label}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className={`spec-icon ${fact.icon}`}
+                    />
+                    <span>{fact.value}</span>
+                  </div>
+                ))}
               </div>
 
               <VehicleGallery vehicle={vehicle} />
@@ -188,60 +205,67 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
               </div>
             </div>
 
-            <aside className="dealer-panel">
-              <p className="eyebrow">Concessionario</p>
-              {vehicle.dealerLogoUrl && (
-                <img
-                  alt={`Logo ${vehicle.dealer}`}
-                  className="dealer-panel__logo"
-                  src={vehicle.dealerLogoUrl}
-                />
-              )}
-              <h2>{vehicle.dealer}</h2>
-              <span className="verified">
-                <CheckIcon /> Dati del concessionario dall&apos;annuncio
-              </span>
-              <DealerContacts
-                dealer={vehicle.dealer}
-                dealerId={vehicle.dealerId}
-                fallbackPhone={vehicle.dealerPhone}
-                fallbackPhoneUri={vehicle.dealerPhoneUri}
-                phones={vehicle.dealerPhones}
-                vehicle={{
-                  brand: vehicle.brand,
-                  model: vehicle.model,
-                  slug: vehicle.slug,
-                }}
-              />
-              <p className="dealer-panel__note">
-                Cita Macchina Milano quando contatti il concessionario.
-              </p>
-              <div className="dealer-panel__contact">
-                <MapPinIcon />
-                <div>
-                  <span>Sede</span>
-                  <strong>
-                    {[
-                      vehicle.dealerStreet,
-                      vehicle.dealerPostalCode,
-                      vehicle.location,
-                      vehicle.dealerProvince,
-                    ]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </strong>
-                </div>
+            <aside className="detail-sidebar">
+              <div className="detail-price-card">
+                <span>Prezzo</span>
+                <strong>{formatPrice(vehicle.price)}</strong>
               </div>
-              <DealerMap
-                city={vehicle.location}
-                dealer={vehicle.dealer}
-                postalCode={vehicle.dealerPostalCode}
-                province={vehicle.dealerProvince}
-                street={vehicle.dealerStreet}
-              />
-              <a className="button button--blue" href="#richiesta">
-                Richiedi informazioni <ArrowIcon />
-              </a>
+
+              <div className="dealer-panel">
+                <p className="eyebrow">Concessionario</p>
+                {vehicle.dealerLogoUrl && (
+                  <img
+                    alt={`Logo ${vehicle.dealer}`}
+                    className="dealer-panel__logo"
+                    src={vehicle.dealerLogoUrl}
+                  />
+                )}
+                <h2>{vehicle.dealer}</h2>
+                <span className="verified">
+                  <CheckIcon /> Dati del concessionario dall&apos;annuncio
+                </span>
+                <DealerContacts
+                  dealer={vehicle.dealer}
+                  dealerId={vehicle.dealerId}
+                  fallbackPhone={vehicle.dealerPhone}
+                  fallbackPhoneUri={vehicle.dealerPhoneUri}
+                  phones={vehicle.dealerPhones}
+                  vehicle={{
+                    brand: vehicle.brand,
+                    model: vehicle.model,
+                    slug: vehicle.slug,
+                  }}
+                />
+                <p className="dealer-panel__note">
+                  Cita Macchina Milano quando contatti il concessionario.
+                </p>
+                <div className="dealer-panel__contact">
+                  <MapPinIcon />
+                  <div>
+                    <span>Sede</span>
+                    <strong>
+                      {[
+                        vehicle.dealerStreet,
+                        vehicle.dealerPostalCode,
+                        vehicle.location,
+                        vehicle.dealerProvince,
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </strong>
+                  </div>
+                </div>
+                <DealerMap
+                  city={vehicle.location}
+                  dealer={vehicle.dealer}
+                  postalCode={vehicle.dealerPostalCode}
+                  province={vehicle.dealerProvince}
+                  street={vehicle.dealerStreet}
+                />
+                <a className="button button--red" href="#richiesta">
+                  Richiedi informazioni <ArrowIcon />
+                </a>
+              </div>
             </aside>
           </div>
         </section>
