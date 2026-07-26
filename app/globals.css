@@ -905,6 +905,7 @@ a {
 }
 
 .vehicle-card__footer strong {
+  color: var(--brand-blue);
   font-size: 1rem;
 }
 
