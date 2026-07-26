@@ -110,3 +110,13 @@ Il hero conserva soltanto eyebrow, titolo e immagine. Il pannello di ricerca
 usa una superficie bianca traslucida con blur leggero, bordo chiaro e ombra
 contenuta. L'effetto rimane leggibile anche senza supporto a
 `backdrop-filter`, grazie al colore di fallback semitrasparente.
+
+## ADR-014 — Filtri esplorazione compatibili con export statico
+
+**Stato:** approvata e applicata
+
+I collegamenti visuali per marca e carrozzeria usano query string leggibili
+(`marca` e `carrozzeria`). Durante la fase statica, un componente client legge
+questi parametri e filtra i dati dimostrativi già inclusi nel bundle. Questa
+scelta mantiene URL condivisibili e filtri realmente funzionanti senza
+anticipare la migrazione alla Web App Node.js o al database.

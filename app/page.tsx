@@ -1,11 +1,12 @@
 import Link from "next/link";
 
 import { ArrowIcon, CarIcon, CheckIcon } from "@/components/icons";
+import { ExploreDirectory } from "@/components/explore-directory";
 import { SearchPanel } from "@/components/search-panel";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { VehicleCard } from "@/components/vehicle-card";
-import { brands, categories, vehicles } from "@/lib/vehicles";
+import { vehicles } from "@/lib/vehicles";
 
 const featured = vehicles.filter((vehicle) => vehicle.featured);
 const newArrivals = vehicles.filter((vehicle) => vehicle.newArrival);
@@ -32,6 +33,8 @@ export default function Home() {
           <p className="search-panel-title">Auto a Milano e nella regione</p>
           <SearchPanel />
         </div>
+
+        <ExploreDirectory />
 
         <section className="section section--intro" id="manifesto">
           <div className="intro-grid container">
@@ -71,29 +74,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section brand-section" id="marche">
-          <div className="container">
-            <div className="section-heading section-heading--bordered">
-              <div>
-                <p className="eyebrow">Icone e performance</p>
-                <h2>Esplora per marca</h2>
-              </div>
-              <p>
-                Una selezione trasversale, dalle gran turismo alle supercar.
-              </p>
-            </div>
-            <div className="brand-grid">
-              {brands.map((brand, index) => (
-                <Link href="/veicoli" key={brand}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{brand}</strong>
-                  <ArrowIcon />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="editorial-banner">
           <div className="editorial-banner__grid container">
             <div className="editorial-banner__visual" aria-hidden="true">
@@ -111,29 +91,6 @@ export default function Home() {
               <Link className="button button--white" href="#magazine">
                 Entra nel magazine <ArrowIcon />
               </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="section category-section">
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Trova il tuo carattere</p>
-                <h2>Esplora per categoria</h2>
-              </div>
-            </div>
-            <div className="category-grid">
-              {categories.map((category, index) => (
-                <Link href="/veicoli" key={category}>
-                  <span className="category-grid__number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <CarIcon />
-                  <strong>{category}</strong>
-                  <ArrowIcon className="category-grid__arrow" />
-                </Link>
-              ))}
             </div>
           </div>
         </section>

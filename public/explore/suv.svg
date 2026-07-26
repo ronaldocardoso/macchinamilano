@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" role="img" aria-labelledby="title">
+  <title id="title">SUV</title>
+  <g fill="none" stroke="#33353a" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M45 115V91c0-10 8-18 18-18h35l29-32h107c13 0 25 6 33 16l24 30 25 8v20"/>
+    <path d="M45 115h32m49 0h105m49 0h36M118 73l20-23h46v23m10-23h35c10 0 20 5 26 13l8 10h-69V50Z"/>
+    <circle cx="101" cy="115" r="24"/>
+    <circle cx="256" cy="115" r="24"/>
+    <path d="M101 104v22m-11-11h22m144-11v22m-11-11h22"/>
+  </g>
+</svg>

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
-import { ArrowIcon, CarIcon, SearchIcon } from "@/components/icons";
+import { CarIcon, SearchIcon } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { VehicleCard } from "@/components/vehicle-card";
-import { brands, categories, vehicles } from "@/lib/vehicles";
+import { VehicleResults } from "@/components/vehicle-results";
+import { brands, categories } from "@/lib/vehicles";
 
 export const metadata: Metadata = {
   title: "Veicoli premium",
@@ -152,38 +153,15 @@ export default function VehiclesPage() {
               </button>
             </aside>
 
-            <div className="catalog-results">
-              <div className="catalog-toolbar">
-                <div>
-                  <p>
-                    <strong>12</strong> veicoli
-                  </p>
-                  <span>Contenuti dimostrativi</span>
+            <Suspense
+              fallback={
+                <div className="catalog-results catalog-results--loading">
+                  Caricamento della selezione…
                 </div>
-                <label>
-                  <span>Ordina per</span>
-                  <select defaultValue="featured">
-                    <option value="featured">In evidenza</option>
-                    <option value="recent">Più recenti</option>
-                    <option value="price-asc">Prezzo crescente</option>
-                    <option value="price-desc">Prezzo decrescente</option>
-                  </select>
-                </label>
-              </div>
-              <div className="vehicle-grid vehicle-grid--catalog">
-                {vehicles.map((vehicle) => (
-                  <VehicleCard key={vehicle.slug} vehicle={vehicle} />
-                ))}
-              </div>
-              <nav aria-label="Paginazione" className="pagination">
-                <span className="pagination__current">1</span>
-                <button type="button">2</button>
-                <button type="button">3</button>
-                <button aria-label="Pagina successiva" type="button">
-                  <ArrowIcon />
-                </button>
-              </nav>
-            </div>
+              }
+            >
+              <VehicleResults />
+            </Suspense>
           </div>
         </section>
       </main>
