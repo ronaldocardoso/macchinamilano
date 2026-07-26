@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { BrandVehicleShowcase } from "@/components/brand-vehicle-showcase";
-import { ArrowIcon, CheckIcon } from "@/components/icons";
+import { ArrowIcon } from "@/components/icons";
 import { ExploreDirectory } from "@/components/explore-directory";
 import { SearchPanel } from "@/components/search-panel";
 import { SiteFooter } from "@/components/site-footer";
@@ -97,38 +97,6 @@ export default function Home() {
             <div className="vehicle-grid vehicle-grid--dark">
               {newArrivals.map((vehicle) => (
                 <VehicleCard key={vehicle.slug} vehicle={vehicle} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section concierge-section" id="servizio">
-          <div className="concierge-grid container">
-            <div>
-              <p className="eyebrow">Concierge Macchina Milano</p>
-              <h2 className="display-title">
-                Non trovi l&apos;auto che cerchi?
-              </h2>
-              <p className="section-copy">
-                Raccontaci cosa desideri. La nostra esperienza è progettata per
-                trasformare una ricerca complessa in una selezione semplice.
-              </p>
-              <Link className="button button--red" href="#contatti">
-                Inizia la ricerca <ArrowIcon />
-              </Link>
-            </div>
-            <div className="concierge-card">
-              <p>Il metodo</p>
-              {[
-                "Ascoltiamo ciò che stai cercando",
-                "Selezioniamo le proposte rilevanti",
-                "Ti mettiamo in contatto diretto",
-              ].map((item, index) => (
-                <div key={item}>
-                  <span>{index + 1}</span>
-                  <strong>{item}</strong>
-                  <CheckIcon />
-                </div>
               ))}
             </div>
           </div>

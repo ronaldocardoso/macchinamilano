@@ -1040,62 +1040,6 @@ a {
   width: 1.2rem;
 }
 
-.concierge-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  align-items: center;
-  gap: clamp(3rem, 8vw, 8rem);
-}
-
-.concierge-grid .section-copy {
-  max-width: 38rem;
-  margin-block: 1.5rem 2rem;
-}
-
-.concierge-card {
-  padding: clamp(1.5rem, 4vw, 3rem);
-  border-radius: var(--radius-lg);
-  background: var(--brand-red);
-  color: white;
-  box-shadow: var(--shadow-lg);
-}
-
-.concierge-card > p {
-  margin: 0 0 2rem;
-  color: rgb(255 255 255 / 62%);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.concierge-card > div {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 1rem;
-  padding-block: 1.2rem;
-  border-top: 1px solid rgb(255 255 255 / 23%);
-}
-
-.concierge-card > div span {
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 55%);
-  border-radius: 50%;
-  font-size: 0.68rem;
-}
-
-.concierge-card > div strong {
-  font-size: 0.95rem;
-}
-
-.concierge-card > div svg {
-  width: 1.25rem;
-}
-
 .story-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr 0.85fr;
@@ -2289,11 +2233,6 @@ a {
 
   .category-grid a {
     min-height: 10rem;
-  }
-
-  .concierge-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
   }
 
   .story-grid {

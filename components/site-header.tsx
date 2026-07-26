@@ -10,7 +10,7 @@ export function SiteHeader() {
         <BrandMark />
         <nav aria-label="Navigazione principale" className="desktop-nav">
           <Link href="/veicoli">Veicoli</Link>
-          <Link href="/#servizio">Servizi</Link>
+          <Link href="/#contatti">Servizi</Link>
           <Link href="/#magazine">Magazine</Link>
           <Link href="/#contatti">Contatti</Link>
         </nav>
@@ -25,7 +25,7 @@ export function SiteHeader() {
             </summary>
             <nav aria-label="Navigazione mobile">
               <Link href="/veicoli">Veicoli</Link>
-              <Link href="/#servizio">Servizi</Link>
+              <Link href="/#contatti">Servizi</Link>
               <Link href="/#magazine">Magazine</Link>
               <Link href="/#contatti">Pubblica un veicolo</Link>
               <Link href="/#contatti">Contatti</Link>
