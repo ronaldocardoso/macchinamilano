@@ -843,6 +843,10 @@ a {
   background: var(--vehicle-accent);
 }
 
+.vehicle-visual--photo .vehicle-visual__line {
+  background: var(--brand-red);
+}
+
 .vehicle-card__body {
   padding: 1.15rem;
 }
