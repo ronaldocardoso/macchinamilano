@@ -26,7 +26,7 @@ export const exploreBrands: ExploreOption[] = [
 ];
 
 export const bodyStyles: ExploreOption[] = [
-  { label: "SUV", value: "suv", image: "/explore/suv.svg" },
+  { label: "SUV", value: "suv", image: "/explore/suv.png" },
   { label: "Berlina", value: "berlina", image: "/explore/berlina.png" },
   {
     label: "Station wagon",
