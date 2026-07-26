@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -42,7 +43,7 @@ export async function generateMetadata({
 
   return {
     title: `${vehicle.brand} ${vehicle.model}`,
-    description: `${vehicle.brand} ${vehicle.model} ${vehicle.version}, ${vehicle.year}, ${formatMileage(vehicle.mileage)}. Anteprima Macchina Milano.`,
+    description: `${vehicle.brand} ${vehicle.model} ${vehicle.version}, ${vehicle.year ?? "nuovo"}, ${vehicle.mileage === undefined ? "chilometraggio non indicato" : formatMileage(vehicle.mileage)}. Macchina Milano.`,
   };
 }
 
@@ -59,9 +60,20 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
     .slice(0, 3);
 
   const specs = [
-    ["Condizione", vehicle.mileage < 1000 ? "Nuovo" : "Usato selezionato"],
-    ["Anno", String(vehicle.year)],
-    ["Chilometraggio", formatMileage(vehicle.mileage)],
+    [
+      "Condizione",
+      vehicle.condition ??
+        (vehicle.mileage !== undefined && vehicle.mileage < 1000
+          ? "Nuovo"
+          : "Usato"),
+    ],
+    ["Anno", vehicle.year ? String(vehicle.year) : "Nuovo"],
+    [
+      "Chilometraggio",
+      vehicle.mileage === undefined
+        ? "Non indicato"
+        : formatMileage(vehicle.mileage),
+    ],
     ["Alimentazione", vehicle.fuel],
     ["Cambio", vehicle.transmission],
     ["Potenza", vehicle.power],
@@ -108,16 +120,22 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                   <HeartIcon />
                 </button>
                 <div className="gallery-thumbs">
-                  {[vehicle, vehicle, vehicle, vehicle].map((item, index) => (
-                    <button
-                      aria-label={`Vista ${index + 1}`}
-                      className={index === 0 ? "is-active" : ""}
-                      key={index}
-                      type="button"
-                    >
-                      <VehicleVisual compact vehicle={item} />
-                    </button>
-                  ))}
+                  {(vehicle.imageUrls?.slice(0, 4) ?? []).map(
+                    (imageUrl, index) => (
+                      <button
+                        aria-label={`Vista ${index + 1}`}
+                        className={index === 0 ? "is-active" : ""}
+                        key={imageUrl}
+                        type="button"
+                      >
+                        <VehicleVisual
+                          compact
+                          imageUrl={imageUrl}
+                          vehicle={vehicle}
+                        />
+                      </button>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -140,46 +158,83 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
 
               <div className="description-section">
                 <p className="eyebrow">Il veicolo</p>
-                <h2>Un esemplare dal carattere inconfondibile.</h2>
-                <p>
-                  Questa scheda è un&apos;anteprima dimostrativa della futura
-                  esperienza Macchina Milano. Informazioni, fotografie,
-                  disponibilità e condizioni commerciali saranno verificate
-                  direttamente con il concessionario prima della pubblicazione.
-                </p>
-                <div className="feature-list">
-                  {[
-                    "Configurazione selezionata",
-                    "Storico documentato",
-                    "Concessionario verificato",
-                    "Contatto diretto e trasparente",
-                  ].map((feature) => (
-                    <span key={feature}>
-                      <CheckIcon /> {feature}
-                    </span>
-                  ))}
-                </div>
+                <h2>{vehicle.version}</h2>
+                {vehicle.description && <p>{vehicle.description}</p>}
+                {vehicle.sourceUrl && (
+                  <p>
+                    Dati dell&apos;annuncio raccolti il{" "}
+                    {new Intl.DateTimeFormat("it-IT", {
+                      dateStyle: "long",
+                    }).format(
+                      vehicle.collectedAt
+                        ? new Date(vehicle.collectedAt)
+                        : new Date(),
+                    )}
+                    . Verifica disponibilità e condizioni direttamente con il
+                    concessionario.
+                  </p>
+                )}
               </div>
             </div>
 
             <aside className="dealer-panel">
               <p className="eyebrow">Concessionario</p>
+              {vehicle.dealerLogoUrl && (
+                <img
+                  alt={`Logo ${vehicle.dealer}`}
+                  className="dealer-panel__logo"
+                  src={vehicle.dealerLogoUrl}
+                />
+              )}
               <h2>{vehicle.dealer}</h2>
               <span className="verified">
-                <CheckIcon /> Profilo dimostrativo verificato
+                <CheckIcon /> Dati del concessionario dall&apos;annuncio
               </span>
-              <div className="dealer-panel__contact">
-                <PhoneIcon />
-                <div>
-                  <span>Telefono</span>
-                  <strong>+39 02 •••• ••••</strong>
+              {(vehicle.dealerPhones?.length || vehicle.dealerPhone) && (
+                <div className="dealer-panel__contact">
+                  <PhoneIcon />
+                  <div>
+                    <span>Telefono</span>
+                    {(vehicle.dealerPhones?.length
+                      ? vehicle.dealerPhones
+                      : [
+                          {
+                            formatted: vehicle.dealerPhone,
+                            callTo: vehicle.dealerPhoneUri,
+                          },
+                        ]
+                    ).map((phone, index) => (
+                      <a
+                        href={
+                          phone.callTo
+                            ? `tel:${phone.callTo}`
+                            : phone.formatted
+                              ? `tel:${phone.formatted}`
+                              : undefined
+                        }
+                        key={`${phone.formatted}-${index}`}
+                      >
+                        {phone.formatted}
+                        {phone.type ? ` · ${phone.type}` : ""}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="dealer-panel__contact">
                 <MapPinIcon />
                 <div>
                   <span>Sede</span>
-                  <strong>{vehicle.location}, Italia</strong>
+                  <strong>
+                    {[
+                      vehicle.dealerStreet,
+                      vehicle.dealerPostalCode,
+                      vehicle.location,
+                      vehicle.dealerProvince,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </strong>
                 </div>
               </div>
               <div className="dealer-map">
@@ -187,9 +242,30 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                 <MapPinIcon />
                 <strong>{vehicle.location}</strong>
               </div>
-              <a className="button button--blue" href="#richiesta">
-                Richiedi informazioni <ArrowIcon />
-              </a>
+              {vehicle.dealerProfileUrl ? (
+                <a
+                  className="button button--blue"
+                  href={vehicle.dealerProfileUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Profilo concessionario <ArrowIcon />
+                </a>
+              ) : (
+                <a className="button button--blue" href="#richiesta">
+                  Richiedi informazioni <ArrowIcon />
+                </a>
+              )}
+              {vehicle.sourceUrl && (
+                <a
+                  className="dealer-panel__source"
+                  href={vehicle.sourceUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Vedi l&apos;annuncio originale
+                </a>
+              )}
               <p className="dealer-panel__note">
                 Cita Macchina Milano quando contatti il concessionario.
               </p>

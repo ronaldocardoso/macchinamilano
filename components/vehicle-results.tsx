@@ -26,7 +26,11 @@ export function VehicleResults() {
   });
   const sortedVehicles = [...filteredVehicles].sort((first, second) => {
     if (order === "recent") {
-      return second.year - first.year || first.mileage - second.mileage;
+      return (
+        (second.year ?? 0) - (first.year ?? 0) ||
+        (first.mileage ?? Number.MAX_SAFE_INTEGER) -
+          (second.mileage ?? Number.MAX_SAFE_INTEGER)
+      );
     }
 
     if (order === "price-asc") {

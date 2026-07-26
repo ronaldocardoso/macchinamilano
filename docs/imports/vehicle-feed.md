@@ -3,10 +3,9 @@
 Questo pipeline importa lotti provenienti esclusivamente da feed, esportazioni o
 interfacce per cui Macchina Milano dispone di autorizzazione.
 
-Non esegue scraping del sito AutoScout24. Le condizioni pubblicate da
-AutoScout24 vietano la consultazione automatizzata tramite software, robot,
-spider o strumenti simili e vietano la riproduzione degli annunci senza
-autorizzazione scritta.
+Non esegue scraping diretto del sito AutoScout24. L'adapter
+`piloterr-autoscout24` trasforma un export ottenuto tramite l'API Piloterr
+nello stesso contratto normalizzato degli altri feed autorizzati.
 
 ## Primo lotto
 
@@ -46,6 +45,22 @@ pnpm import:vehicles \
   --catalog-output data/imported-catalog.json
 ```
 
+Per un export Piloterr AutoScout24 Search:
+
+```bash
+pnpm import:autoscout24 \
+  --input var/imports/piloterr/autoscout24-milano.raw.json \
+  --output var/imports/piloterr/autoscout24-milano.report.json \
+  --catalog-output data/imported-catalog.json \
+  --limit 100 \
+  --radius 25 \
+  --min-price 100000
+```
+
+L'export deve provenire dalla ricerca italiana con centro CAP `20121`, raggio
+`25 km`, `pricefrom=100001` e viene comunque ricontrollato dal pipeline per
+prezzo, distanza e tipo di venditore.
+
 Quando `data/imported-catalog.json` contiene veicoli, il sito utilizza il
 catalogo importato al posto dei dati dimostrativi. Per la pubblicazione attuale
 statica è necessario ricostruire il sito; nella futura versione Node.js lo
@@ -63,9 +78,9 @@ Il report contiene:
 - riepilogo quantitativo;
 - righe rifiutate con motivo verificabile.
 
-La directory `var/imports` è locale e ignorata da Git. Nessun lotto reale deve
-essere versionato senza una revisione dei dati, dei diritti sulle immagini e
-della presenza di dati personali.
+La directory `var/imports` è locale e ignorata da Git. Il file grezzo e il
+report non vengono versionati. Solo il catalogo normalizzato e revisionato può
+entrare in `data/imported-catalog.json`.
 
 ## Contratto del record
 
@@ -81,6 +96,16 @@ della presenza di dati personali.
     "name": "Nome concessionaria",
     "vatNumber": "IT01234567890",
     "phone": "+39 ...",
+    "phoneUri": "+3902...",
+    "logoUrl": "https://...",
+    "profileUrl": "https://...",
+    "phones": [
+      {
+        "type": "Office",
+        "formatted": "+39 02 ...",
+        "callTo": "+3902..."
+      }
+    ],
     "email": "info@example.it",
     "website": "https://example.it",
     "address": {
@@ -123,6 +148,10 @@ della presenza di dati personali.
 `distanceKm` è facoltativo quando sono presenti latitudine e longitudine. Se
 nessuno dei due metodi è disponibile, il record viene rifiutato perché non è
 possibile verificare il raggio.
+
+`year` e `mileageKm` possono essere omessi per veicoli nuovi quando la fonte
+mostra rispettivamente `- (Anno)` e `- km`. Il portale li rende come `Nuovo` e
+`— km`, senza introdurre valori stimati.
 
 ## Deduplicazione
 

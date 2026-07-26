@@ -13,9 +13,9 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.8
+**Versão do documento:** 1.9
 **Data de referência:** 26 de julho de 2026
-**Status de execução:** Fase 1 concluída; pipeline de importação autorizado implementado
+**Status de execução:** Fase 1 concluída; primeiro lote real de 100 veículos validado para publicação
 
 ---
 
@@ -2649,13 +2649,23 @@ em italiano com caminhos para a seleção completa e para contato.
 
 ---
 
-# 47. Revisão 1.8 — dados reais e importação em escala
+# 47. Revisão 1.9 — dados reais e importação em escala
 
 ## 47.1 Decisão de origem
 
-O projeto não dependerá de scraping direto da interface pública da
-AutoScout24. A análise realizada em 26 de julho de 2026 encontrou dois
-impedimentos:
+O projeto não executa scraping direto da interface pública da AutoScout24.
+A coleta do primeiro lote foi realizada pela API Piloterr
+`autoscout24-search`, usando uma pesquisa da AutoScout24.it e a sessão
+autenticada do titular do projeto.
+
+Em 26 de julho de 2026, o titular do projeto declarou expressamente possuir
+autorização da AutoScout24 para coleta automatizada, armazenamento e
+republicação comercial dos anúncios e fotografias no Macchina Milano. O
+contrato não foi incorporado ao repositório por conter dados sensíveis. Essa
+declaração é a base operacional do lote; a comprovação contratual permanece
+sob guarda da empresa.
+
+A análise técnica anterior encontrou dois riscos que continuam documentados:
 
 - o repositório `mauropelucchi/autoscout24` é um protótipo Java de 2019,
   construído sobre seletores e URLs antigos, MongoDB hard-coded e sem testes
@@ -2673,12 +2683,12 @@ web opcionais. Portanto, as fontes aceitas para produção são:
 4. cadastro manual ou importação administrativa;
 5. outro provedor com licença expressa de republicação.
 
-Qualquer novo scraper encontrado deve ser auditado, mas não altera a
-necessidade de autorização sobre os dados, textos e imagens.
+Qualquer nova fonte deve ser auditada e usada somente dentro da autorização
+aplicável aos dados, textos, imagens e informações comerciais.
 
 ## 47.2 Primeiro recorte operacional
 
-O primeiro lote real deverá conter no máximo 100 veículos e aplicar:
+O primeiro lote real contém 100 veículos e aplica:
 
 ```text
 Centro                    → Milano (45.4642, 9.1900)
@@ -2689,7 +2699,25 @@ Imagem                    → ao menos uma imagem autorizada
 Duplicidade de veículo    → source + listingId
 ```
 
-O lote só poderá ser publicado depois da revisão do relatório de importação.
+Resultado validado em 26 de julho de 2026:
+
+```text
+Recebidos                 → 100
+Aceitos                   → 100
+Rejeitados                → 0
+Concessionárias únicas    → 34
+Preço mínimo              → €102.500
+Preço máximo              → €6.900.000
+Maior distância           → 25 km
+Fotografias referenciadas → 1.913
+Lojas com telefone        → 34
+Lojas com endereço        → 34
+Lojas com logo na fonte   → 31
+```
+
+As três lojas sem logo permanecem sem imagem de marca; o portal não cria um
+logo artificial. Veículos novos sem ano ou quilometragem informados aparecem
+como `Nuovo` e `— km`.
 
 ## 47.3 Pipeline implementado
 
@@ -2698,6 +2726,8 @@ O repositório agora contém:
 ```text
 lib/imports/vehicle-import.ts
 lib/imports/vehicle-import.test.ts
+lib/imports/piloterr-autoscout24.ts
+lib/imports/piloterr-autoscout24.test.ts
 scripts/import-vehicles.ts
 fixtures/imports/authorized-feed.sample.json
 docs/imports/vehicle-feed.md
@@ -2707,7 +2737,7 @@ data/imported-catalog.json
 O fluxo é:
 
 ```text
-Feed autorizado
+Export autorizado Piloterr/AutoScout24.it
       ↓
 Validação estrutural com Zod
       ↓
@@ -2732,19 +2762,20 @@ pnpm import:vehicles \
   --output var/imports/lotto-001.json
 ```
 
-Somente após revisar o relatório:
+Para um export Piloterr/AutoScout24:
 
 ```bash
-pnpm import:vehicles \
-  --input /percorso/feed-autorizzato.json \
-  --output var/imports/lotto-001.json \
+pnpm import:autoscout24 \
+  --input var/imports/piloterr/autoscout24-milano.raw.json \
+  --output var/imports/piloterr/autoscout24-milano.report.json \
   --catalog-output data/imported-catalog.json
 ```
 
-O portal usa os dados demonstrativos enquanto o catálogo importado está vazio.
-Quando o catálogo contém veículos, usa os veículos e concessionárias
-normalizados, incluindo fotografias autorizadas, filtros derivados do estoque,
-ordenação e paginação de 24 veículos.
+O portal agora usa o catálogo real normalizado. Cada veículo mantém ID e URL
+da oferta, data de coleta, preço, dados técnicos disponíveis e fotografias em
+1280 × 960. Cada concessionária mantém ID externo, nome, telefones comerciais,
+endereço, perfil de origem e logo quando fornecido pela fonte. Os filtros são
+derivados do estoque e o catálogo oferece ordenação e paginação de 24 veículos.
 
 ## 47.4 Reconciliação de concessionárias
 
@@ -2759,17 +2790,19 @@ A identidade de uma loja é resolvida nesta ordem:
 Correspondência aproximada nunca faz merge automático. Casos duvidosos devem
 ir para revisão.
 
-## 47.5 Próximo gate para dados reais
+## 47.5 Gate do primeiro lote — concluído
 
-Antes do lote real de 100 veículos, obter ao menos um dos seguintes:
+O titular confirmou a autorização e o acesso técnico foi exercido pela API
+Piloterr. O lote passou por validação estrutural, filtros, deduplicação,
+inspeção de completude, testes automatizados e build estático.
 
-- autorização escrita da AutoScout24 para consulta e republicação;
-- acesso à interface técnica/serviço web contratado;
-- exportação licenciada;
-- feed direto e autorização de cada concessionária.
+Antes de automatizar atualizações recorrentes, registrar internamente:
 
-O contrato deve cobrir textos, preço, dados comerciais, fotografias, frequência
-de atualização e política de remoção.
+- frequência permitida de coleta;
+- política de remoção e expiração;
+- prazo de retenção;
+- regras para armazenamento ou hotlink de fotografias;
+- contato operacional para pedidos de correção.
 
 ## 47.6 Escala de 900 veículos e 700 concessionárias
 

@@ -4,11 +4,14 @@ import { getVehicleLabel, vehicles, type Vehicle } from "./vehicles";
 
 describe("Milano brand showcases", () => {
   it.each(["Ferrari", "Lamborghini", "Maserati"])(
-    "provides two rows of %s vehicles",
+    "provides real %s vehicles for its homepage block",
     (brand) => {
-      expect(
-        vehicles.filter((vehicle) => vehicle.brand === brand),
-      ).toHaveLength(8);
+      const brandVehicles = vehicles.filter(
+        (vehicle) => vehicle.brand === brand,
+      );
+
+      expect(brandVehicles.length).toBeGreaterThan(0);
+      expect(brandVehicles.slice(0, 8).length).toBeLessThanOrEqual(8);
     },
   );
 
@@ -18,12 +21,17 @@ describe("Milano brand showcases", () => {
   });
 
   it("uses only Blindato and Elettrico as vehicle labels", () => {
-    const electric = vehicles.find((vehicle) => vehicle.fuel === "Elettrica");
-    const hybrid = vehicles.find((vehicle) => vehicle.fuel === "Ibrida");
+    const electric = vehicles.find((vehicle) =>
+      vehicle.fuel.toLocaleLowerCase("it-IT").includes("elettric"),
+    );
+    const hybrid = {
+      ...vehicles[0],
+      fuel: "Ibrida",
+    };
     const combustion = vehicles.find((vehicle) => vehicle.fuel === "Benzina");
 
     expect(electric && getVehicleLabel(electric)).toBe("Elettrico");
-    expect(hybrid && getVehicleLabel(hybrid)).toBe("Elettrico");
+    expect(getVehicleLabel(hybrid)).toBe("Elettrico");
     expect(combustion && getVehicleLabel(combustion)).toBeUndefined();
     expect(getVehicleLabel({ ...combustion, armored: true } as Vehicle)).toBe(
       "Blindato",

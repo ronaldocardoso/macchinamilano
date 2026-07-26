@@ -6,12 +6,17 @@ import {
   processVehicleImport,
   type ImportPolicy,
 } from "../lib/imports/vehicle-import.ts";
+import {
+  adaptPiloterrAutoScout24Export,
+  type PiloterrAutoScout24Export,
+} from "../lib/imports/piloterr-autoscout24.ts";
 
 const { values } = parseArgs({
   options: {
     input: { type: "string", short: "i" },
     output: { type: "string", short: "o" },
     "catalog-output": { type: "string" },
+    adapter: { type: "string", default: "raw" },
     limit: { type: "string", default: "100" },
     radius: { type: "string", default: "25" },
     "min-price": { type: "string", default: "100000" },
@@ -45,6 +50,14 @@ function parseRecords(content: string, extension: string) {
   }
 
   const parsed = JSON.parse(content) as unknown;
+
+  if (values.adapter === "piloterr-autoscout24") {
+    if (typeof parsed !== "object" || parsed === null) {
+      throw new Error("Piloterr input must be a JSON object.");
+    }
+
+    return adaptPiloterrAutoScout24Export(parsed as PiloterrAutoScout24Export);
+  }
 
   if (Array.isArray(parsed)) {
     return parsed;

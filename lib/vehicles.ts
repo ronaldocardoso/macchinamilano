@@ -6,11 +6,12 @@ export type Vehicle = {
   model: string;
   version: string;
   price: number;
-  year: number;
-  mileage: number;
+  year?: number;
+  mileage?: number;
   fuel: string;
   transmission: string;
   bodyType: string;
+  condition?: string;
   exteriorColor: string;
   interiorColor: string;
   power: string;
@@ -25,11 +26,24 @@ export type Vehicle = {
   source?: string;
   sourceListingId?: string;
   sourceUrl?: string;
+  collectedAt?: string;
   distanceKm?: number;
   dealerId?: string;
   dealerPhone?: string;
+  dealerPhoneUri?: string;
+  dealerPhones?: {
+    type?: string;
+    formatted?: string;
+    callTo?: string;
+  }[];
   dealerEmail?: string;
   dealerWebsite?: string;
+  dealerLogoUrl?: string;
+  dealerProfileUrl?: string;
+  dealerStreet?: string;
+  dealerPostalCode?: string;
+  dealerProvince?: string;
+  description?: string;
 };
 
 export type VehicleLabel = "Blindato" | "Elettrico";
@@ -41,7 +55,7 @@ export function getVehicleLabel(vehicle: Vehicle): VehicleLabel | undefined {
 
   const fuel = vehicle.fuel.toLocaleLowerCase("it-IT");
 
-  if (fuel.startsWith("elettric") || fuel.startsWith("ibrid")) {
+  if (fuel.includes("elettric") || fuel.includes("ibrid")) {
     return "Elettrico";
   }
 
@@ -690,8 +704,20 @@ type ImportedDealer = {
   id: string;
   name: string;
   phone?: string;
+  phoneUri?: string;
+  phones?: {
+    type?: string;
+    formatted?: string;
+    callTo?: string;
+  }[];
   email?: string;
   website?: string;
+  logoUrl?: string;
+  profileUrl?: string;
+  street?: string;
+  postalCode?: string;
+  city: string;
+  province?: string;
 };
 
 type ImportedVehicle = {
@@ -701,11 +727,12 @@ type ImportedVehicle = {
   model: string;
   version?: string;
   priceEuro: number;
-  year: number;
-  mileageKm: number;
+  year?: number;
+  mileageKm?: number;
   fuel: string;
   transmission?: string;
   bodyType?: string;
+  condition?: string;
   powerCv?: number;
   powerKw?: number;
   exteriorColor?: string;
@@ -714,8 +741,10 @@ type ImportedVehicle = {
   source: string;
   sourceListingId: string;
   sourceUrl: string;
+  collectedAt: string;
   city: string;
   distanceKm: number;
+  description?: string;
 };
 
 const catalog = importedCatalog as {
@@ -725,7 +754,7 @@ const catalog = importedCatalog as {
 const importedDealers = new Map(
   catalog.dealers.map((dealer) => [dealer.id, dealer]),
 );
-const importedVehicles: Vehicle[] = catalog.vehicles.map((vehicle) => {
+const importedVehicles: Vehicle[] = catalog.vehicles.map((vehicle, index) => {
   const dealer = importedDealers.get(vehicle.dealerId);
 
   return {
@@ -739,6 +768,7 @@ const importedVehicles: Vehicle[] = catalog.vehicles.map((vehicle) => {
     fuel: vehicle.fuel,
     transmission: vehicle.transmission ?? "Non indicato",
     bodyType: vehicle.bodyType ?? "Non indicata",
+    condition: vehicle.condition,
     exteriorColor: vehicle.exteriorColor ?? "Non indicato",
     interiorColor: vehicle.interiorColor ?? "Non indicato",
     power: vehicle.powerCv
@@ -750,15 +780,26 @@ const importedVehicles: Vehicle[] = catalog.vehicles.map((vehicle) => {
     dealer: dealer?.name ?? "Concessionario",
     accent: "#b81104",
     scene: "studio",
+    featured: index < 8,
+    newArrival: index >= 8 && index < 16,
     imageUrls: vehicle.imageUrls,
     source: vehicle.source,
     sourceListingId: vehicle.sourceListingId,
     sourceUrl: vehicle.sourceUrl,
+    collectedAt: vehicle.collectedAt,
     distanceKm: vehicle.distanceKm,
     dealerId: vehicle.dealerId,
     dealerPhone: dealer?.phone,
+    dealerPhoneUri: dealer?.phoneUri,
+    dealerPhones: dealer?.phones,
     dealerEmail: dealer?.email,
     dealerWebsite: dealer?.website,
+    dealerLogoUrl: dealer?.logoUrl,
+    dealerProfileUrl: dealer?.profileUrl,
+    dealerStreet: dealer?.street,
+    dealerPostalCode: dealer?.postalCode,
+    dealerProvince: dealer?.province,
+    description: vehicle.description,
   };
 });
 

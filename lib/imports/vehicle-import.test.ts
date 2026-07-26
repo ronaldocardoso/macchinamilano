@@ -21,8 +21,17 @@ function candidate(
       name: "Milano Performance",
       vatNumber: "IT 01234567890",
       phone: "+39 02 1234 5678",
+      phoneUri: "+390212345678",
+      phones: [
+        {
+          type: "Office",
+          formatted: "+39 02 1234 5678",
+          callTo: "+390212345678",
+        },
+      ],
       email: "INFO@EXAMPLE.TEST",
       website: "https://www.example.test",
+      logoUrl: "https://images.example.test/dealer-logo.png",
       address: {
         street: "Via Milano 1",
         postalCode: "20121",
@@ -80,7 +89,8 @@ describe("vehicle import pipeline", () => {
     });
     expect(report.dealers[0]).toMatchObject({
       vatNumber: "IT01234567890",
-      phone: "390212345678",
+      phone: "+39 02 1234 5678",
+      phoneUri: "+390212345678",
       email: "info@example.test",
     });
     expect(report.vehicles[0]).toMatchObject({
@@ -142,6 +152,7 @@ describe("vehicle import pipeline", () => {
     const secondVehicle = candidate({
       listingId: "vehicle-002",
       sourceUrl: "https://feed.example.test/vehicle-002",
+      seller: { ...candidate().seller, logoUrl: undefined },
       vehicle: { ...candidate().vehicle, model: "SF90 Stradale" },
     });
     const report = processVehicleImport([first, duplicate, secondVehicle]);
@@ -152,6 +163,9 @@ describe("vehicle import pipeline", () => {
       dealers: 1,
     });
     expect(report.rejections[0].code).toBe("DUPLICATE_LISTING");
+    expect(report.dealers[0].logoUrl).toBe(
+      "https://images.example.test/dealer-logo.png",
+    );
   });
 
   it("applies the accepted-vehicle batch limit", () => {
