@@ -101,3 +101,12 @@ PNG originale rimane la fonte di design, mentre il sito serve una derivata WebP
 ottimizzata. Il hero desktop è limitato a circa 480 px e il pannello di ricerca
 si sovrappone al bordo inferiore, avvicinando veicoli, messaggio e ricerca nella
 prima schermata.
+
+## ADR-013 — Ricerca glass e hero essenziale
+
+**Stato:** approvata e applicata
+
+Il hero conserva soltanto eyebrow, titolo e immagine. Il pannello di ricerca
+usa una superficie bianca traslucida con blur leggero, bordo chiaro e ombra
+contenuta. L'effetto rimane leggibile anche senza supporto a
+`backdrop-filter`, grazie al colore di fallback semitrasparente.

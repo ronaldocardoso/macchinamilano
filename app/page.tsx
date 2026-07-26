@@ -24,18 +24,6 @@ export default function Home() {
                 <br />
                 auto straordinaria.
               </h1>
-              <p className="home-hero__lead">
-                Una selezione esclusiva, pensata per chi non cerca un&apos;auto
-                qualunque.
-              </p>
-              <div className="home-hero__actions">
-                <Link className="button button--red" href="/veicoli">
-                  Esplora i veicoli <ArrowIcon />
-                </Link>
-                <Link className="hero-text-link" href="#manifesto">
-                  Conosci Macchina Milano
-                </Link>
-              </div>
             </div>
           </div>
         </section>
