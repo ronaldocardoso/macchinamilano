@@ -245,30 +245,9 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                 province={vehicle.dealerProvince}
                 street={vehicle.dealerStreet}
               />
-              {vehicle.dealerProfileUrl ? (
-                <a
-                  className="button button--blue"
-                  href={vehicle.dealerProfileUrl}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Profilo concessionario <ArrowIcon />
-                </a>
-              ) : (
-                <a className="button button--blue" href="#richiesta">
-                  Richiedi informazioni <ArrowIcon />
-                </a>
-              )}
-              {vehicle.sourceUrl && (
-                <a
-                  className="dealer-panel__source"
-                  href={vehicle.sourceUrl}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Vedi l&apos;annuncio originale
-                </a>
-              )}
+              <a className="button button--blue" href="#richiesta">
+                Richiedi informazioni <ArrowIcon />
+              </a>
               <p className="dealer-panel__note">
                 Cita Macchina Milano quando contatti il concessionario.
               </p>

@@ -1777,17 +1777,6 @@ a {
   width: 100%;
 }
 
-.dealer-panel__source {
-  display: block;
-  margin-top: 0.85rem;
-  color: var(--brand-blue);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
-}
-
 .dealer-panel__note {
   margin: 1rem 0 0;
   color: var(--ink-600);
