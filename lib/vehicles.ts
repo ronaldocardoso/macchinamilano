@@ -1,3 +1,5 @@
+import importedCatalog from "../data/imported-catalog.json";
+
 export type Vehicle = {
   slug: string;
   brand: string;
@@ -19,6 +21,15 @@ export type Vehicle = {
   armored?: boolean;
   featured?: boolean;
   newArrival?: boolean;
+  imageUrls?: string[];
+  source?: string;
+  sourceListingId?: string;
+  sourceUrl?: string;
+  distanceKm?: number;
+  dealerId?: string;
+  dealerPhone?: string;
+  dealerEmail?: string;
+  dealerWebsite?: string;
 };
 
 export type VehicleLabel = "Blindato" | "Elettrico";
@@ -37,7 +48,7 @@ export function getVehicleLabel(vehicle: Vehicle): VehicleLabel | undefined {
   return undefined;
 }
 
-export const vehicles: Vehicle[] = [
+const demoVehicles: Vehicle[] = [
   {
     slug: "ferrari-roma-spider",
     brand: "Ferrari",
@@ -675,7 +686,86 @@ export const vehicles: Vehicle[] = [
   },
 ];
 
-export const brands = [
+type ImportedDealer = {
+  id: string;
+  name: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+};
+
+type ImportedVehicle = {
+  dealerId: string;
+  slug: string;
+  brand: string;
+  model: string;
+  version?: string;
+  priceEuro: number;
+  year: number;
+  mileageKm: number;
+  fuel: string;
+  transmission?: string;
+  bodyType?: string;
+  powerCv?: number;
+  powerKw?: number;
+  exteriorColor?: string;
+  interiorColor?: string;
+  imageUrls: string[];
+  source: string;
+  sourceListingId: string;
+  sourceUrl: string;
+  city: string;
+  distanceKm: number;
+};
+
+const catalog = importedCatalog as {
+  dealers: ImportedDealer[];
+  vehicles: ImportedVehicle[];
+};
+const importedDealers = new Map(
+  catalog.dealers.map((dealer) => [dealer.id, dealer]),
+);
+const importedVehicles: Vehicle[] = catalog.vehicles.map((vehicle) => {
+  const dealer = importedDealers.get(vehicle.dealerId);
+
+  return {
+    slug: vehicle.slug,
+    brand: vehicle.brand,
+    model: vehicle.model,
+    version: vehicle.version ?? "Versione non indicata",
+    price: vehicle.priceEuro,
+    year: vehicle.year,
+    mileage: vehicle.mileageKm,
+    fuel: vehicle.fuel,
+    transmission: vehicle.transmission ?? "Non indicato",
+    bodyType: vehicle.bodyType ?? "Non indicata",
+    exteriorColor: vehicle.exteriorColor ?? "Non indicato",
+    interiorColor: vehicle.interiorColor ?? "Non indicato",
+    power: vehicle.powerCv
+      ? `${vehicle.powerCv} CV`
+      : vehicle.powerKw
+        ? `${vehicle.powerKw} kW`
+        : "Non indicata",
+    location: vehicle.city,
+    dealer: dealer?.name ?? "Concessionario",
+    accent: "#b81104",
+    scene: "studio",
+    imageUrls: vehicle.imageUrls,
+    source: vehicle.source,
+    sourceListingId: vehicle.sourceListingId,
+    sourceUrl: vehicle.sourceUrl,
+    distanceKm: vehicle.distanceKm,
+    dealerId: vehicle.dealerId,
+    dealerPhone: dealer?.phone,
+    dealerEmail: dealer?.email,
+    dealerWebsite: dealer?.website,
+  };
+});
+
+export const hasImportedCatalog = importedVehicles.length > 0;
+export const vehicles = hasImportedCatalog ? importedVehicles : demoVehicles;
+
+const demoBrands = [
   "Ferrari",
   "Porsche",
   "Lamborghini",
@@ -685,8 +775,7 @@ export const brands = [
   "Aston Martin",
   "Mercedes-AMG",
 ];
-
-export const categories = [
+const demoCategories = [
   "Supercar",
   "Gran Turismo",
   "Luxury SUV",
@@ -694,6 +783,18 @@ export const categories = [
   "Elettriche",
   "Da collezione",
 ];
+
+export const brands = hasImportedCatalog
+  ? [...new Set(vehicles.map((vehicle) => vehicle.brand))].sort((a, b) =>
+      a.localeCompare(b, "it"),
+    )
+  : demoBrands;
+
+export const categories = hasImportedCatalog
+  ? [...new Set(vehicles.map((vehicle) => vehicle.bodyType))].sort((a, b) =>
+      a.localeCompare(b, "it"),
+    )
+  : demoCategories;
 
 export function formatPrice(value: number) {
   return new Intl.NumberFormat("it-IT", {

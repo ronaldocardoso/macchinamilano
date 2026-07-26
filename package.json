@@ -2,6 +2,7 @@
   "name": "macchina-milano",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Portale italiano di veicoli premium.",
   "engines": {
     "node": "24.x || 22.x"
@@ -17,6 +18,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "import:vehicles": "node --experimental-strip-types scripts/import-vehicles.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build"

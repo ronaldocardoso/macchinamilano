@@ -6,7 +6,7 @@ import { CarIcon, SearchIcon } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { VehicleResults } from "@/components/vehicle-results";
-import { brands, categories } from "@/lib/vehicles";
+import { brands, categories, vehicles } from "@/lib/vehicles";
 
 export const metadata: Metadata = {
   title: "Veicoli premium",
@@ -149,7 +149,7 @@ export default function VehiclesPage() {
                 className="button button--red filters__submit"
                 type="button"
               >
-                Mostra 12 veicoli
+                Mostra {vehicles.length} veicoli
               </button>
             </aside>
 

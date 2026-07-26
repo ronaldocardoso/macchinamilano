@@ -9,6 +9,24 @@ export function VehicleVisual({
   vehicle,
   compact = false,
 }: VehicleVisualProps) {
+  const imageUrl = vehicle.imageUrls?.[0];
+
+  if (imageUrl) {
+    return (
+      <div
+        aria-label={`${vehicle.brand} ${vehicle.model}`}
+        className={`vehicle-visual vehicle-visual--photo ${
+          compact ? "vehicle-visual--compact" : ""
+        }`}
+        role="img"
+        style={{ backgroundImage: `url("${imageUrl.replaceAll('"', "%22")}")` }}
+      >
+        <span className="vehicle-visual__location">{vehicle.location}</span>
+        <span className="vehicle-visual__line" />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`vehicle-visual vehicle-visual--${vehicle.scene} ${
