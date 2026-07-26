@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ArrowIcon, CarIcon, CheckIcon } from "@/components/icons";
+import { ArrowIcon, CheckIcon } from "@/components/icons";
 import { ExploreDirectory } from "@/components/explore-directory";
 import { SearchPanel } from "@/components/search-panel";
 import { SiteFooter } from "@/components/site-footer";
@@ -70,27 +70,6 @@ export default function Home() {
               {featured.map((vehicle) => (
                 <VehicleCard key={vehicle.slug} vehicle={vehicle} />
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="editorial-banner">
-          <div className="editorial-banner__grid container">
-            <div className="editorial-banner__visual" aria-hidden="true">
-              <span className="editorial-banner__road" />
-              <CarIcon />
-              <span className="editorial-banner__word">MILANO</span>
-            </div>
-            <div className="editorial-banner__copy">
-              <p className="eyebrow eyebrow--light">The Milano Drive</p>
-              <h2>La città è soltanto il punto di partenza.</h2>
-              <p>
-                Scopri itinerari, persone e automobili che raccontano un nuovo
-                modo di vivere la passione.
-              </p>
-              <Link className="button button--white" href="#magazine">
-                Entra nel magazine <ArrowIcon />
-              </Link>
             </div>
           </div>
         </section>
