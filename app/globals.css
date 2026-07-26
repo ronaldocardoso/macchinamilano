@@ -391,13 +391,13 @@ a {
   display: inline-block;
   margin: 0;
   padding: 1.15rem 1.6rem 0.95rem;
-  border: 1px solid rgb(255 255 255 / 88%);
+  border: 1px solid rgb(255 255 255 / 98%);
   border-bottom: 0;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   background: linear-gradient(
     135deg,
-    rgb(255 255 255 / 88%),
-    rgb(255 255 255 / 78%)
+    rgb(255 255 255 / 98%),
+    rgb(255 255 255 / 94%)
   );
   font-size: 0.95rem;
   font-weight: 750;
@@ -415,12 +415,12 @@ a {
   align-items: end;
   gap: 1rem;
   padding: 1.4rem;
-  border: 1px solid rgb(255 255 255 / 88%);
+  border: 1px solid rgb(255 255 255 / 98%);
   border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
   background: linear-gradient(
     135deg,
-    rgb(255 255 255 / 88%),
-    rgb(255 255 255 / 80%)
+    rgb(255 255 255 / 97%),
+    rgb(255 255 255 / 93%)
   );
   box-shadow:
     0 1.5rem 4rem rgb(17 18 22 / 16%),
