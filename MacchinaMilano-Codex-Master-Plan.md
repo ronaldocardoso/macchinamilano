@@ -13,7 +13,7 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.9
+**Versão do documento:** 1.10
 **Data de referência:** 26 de julho de 2026
 **Status de execução:** Fase 1 concluída; primeiro lote real de 100 veículos validado para publicação
 
@@ -2821,3 +2821,20 @@ aplicação Node.js já prevista neste plano e implementar:
 - busca e paginação server-side;
 - rotina de disponibilidade `MISSING → STALE → INACTIVE`;
 - backup e rollback de importação.
+
+## 47.7 Google Maps no detalhe do veículo
+
+A página individual usa o nome e o endereço normalizado da concessionária para
+mostrar um mapa interativo e gerar o link externo oficial do Google Maps.
+
+O componente aceita a variável:
+
+```text
+GOOGLE_MAPS_EMBED_API_KEY
+```
+
+Quando a chave está configurada, usa a Maps Embed API em modo `place`, idioma
+italiano e região `IT`. Sem a chave, mantém um embed Google Maps por endereço
+para não bloquear o mapa público. A chave de produção deverá ser limitada aos
+domínios `macchinamilano.com`, `www.macchinamilano.com` e ao futuro domínio
+`.it`.

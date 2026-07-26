@@ -1731,41 +1731,46 @@ a {
   text-decoration: underline;
 }
 
+.dealer-map-wrap {
+  display: grid;
+  gap: 0.65rem;
+  margin-block: 1.2rem;
+}
+
 .dealer-map {
   position: relative;
-  display: grid;
   min-height: 11rem;
-  margin-block: 1.2rem;
   overflow: hidden;
-  place-items: center;
-  background:
-    linear-gradient(
-      35deg,
-      transparent 48%,
-      rgb(1 14 128 / 7%) 48% 52%,
-      transparent 52%
-    ),
-    linear-gradient(
-      145deg,
-      transparent 48%,
-      rgb(184 17 4 / 8%) 48% 52%,
-      transparent 52%
-    ),
-    var(--stone-100);
+  border: 1px solid var(--stone-200);
+  border-radius: 0.65rem;
+  background: var(--stone-100);
 }
 
-.dealer-map > svg {
-  position: relative;
-  z-index: 2;
-  width: 2.4rem;
-  color: var(--brand-red);
-  fill: white;
+.dealer-map iframe {
+  display: block;
+  width: 100%;
+  min-height: 11rem;
+  border: 0;
 }
 
-.dealer-map strong {
-  position: absolute;
-  bottom: 1rem;
+.dealer-map__link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--brand-blue);
   font-size: 0.7rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.dealer-map__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.dealer-map__link svg {
+  width: 0.9rem;
 }
 
 .dealer-panel .button {

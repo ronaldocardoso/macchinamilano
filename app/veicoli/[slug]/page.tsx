@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { DealerMap } from "@/components/dealer-map";
 import {
   ArrowIcon,
   CheckIcon,
@@ -237,11 +238,13 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                   </strong>
                 </div>
               </div>
-              <div className="dealer-map">
-                <span className="dealer-map__grid" />
-                <MapPinIcon />
-                <strong>{vehicle.location}</strong>
-              </div>
+              <DealerMap
+                city={vehicle.location}
+                dealer={vehicle.dealer}
+                postalCode={vehicle.dealerPostalCode}
+                province={vehicle.dealerProvince}
+                street={vehicle.dealerStreet}
+              />
               {vehicle.dealerProfileUrl ? (
                 <a
                   className="button button--blue"
