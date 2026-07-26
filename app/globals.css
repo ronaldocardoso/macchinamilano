@@ -1526,8 +1526,49 @@ a {
   position: relative;
 }
 
-.detail-gallery > .vehicle-visual {
+.gallery-main {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
   border-radius: var(--radius-md);
+  background: transparent;
+  cursor: zoom-in;
+  text-align: inherit;
+}
+
+.gallery-main > .vehicle-visual {
+  border-radius: inherit;
+  transition: transform 320ms ease;
+}
+
+.gallery-main:hover > .vehicle-visual {
+  transform: scale(1.006);
+}
+
+.gallery-zoom-hint {
+  position: absolute;
+  z-index: 3;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgb(255 255 255 / 55%);
+  border-radius: 999px;
+  background: rgb(17 18 22 / 70%);
+  color: white;
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(0.8rem);
+}
+
+.gallery-zoom-hint svg {
+  width: 1rem;
 }
 
 .detail-save {
@@ -1550,14 +1591,56 @@ a {
   width: 1.2rem;
 }
 
-.gallery-thumbs {
+.gallery-control {
+  position: absolute;
+  z-index: 4;
+  top: 14.5rem;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 2.7rem;
+  height: 2.7rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 65%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 90%);
+  color: var(--ink-950);
+  box-shadow: var(--shadow-sm);
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.gallery-control:hover {
+  color: var(--brand-red);
+  transform: scale(1.06);
+}
+
+.gallery-control--previous {
+  left: 1rem;
+}
+
+.gallery-control--next {
+  right: 1rem;
+}
+
+.gallery-control svg {
+  width: 1.25rem;
+}
+
+.gallery-thumbs {
+  display: flex;
   gap: 0.7rem;
   margin-top: 0.7rem;
+  padding-bottom: 0.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-color: var(--brand-red) var(--stone-100);
+  scrollbar-width: thin;
 }
 
 .gallery-thumbs button {
+  min-width: 0;
+  flex: 0 0 calc((100% - 2.1rem) / 4);
   padding: 0;
   overflow: hidden;
   border: 2px solid transparent;
@@ -1571,6 +1654,88 @@ a {
 
 .gallery-thumbs .vehicle-visual--compact {
   min-height: 7rem;
+}
+
+.gallery-lightbox {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  padding: clamp(1rem, 4vw, 3.5rem);
+  place-items: center;
+  background: rgb(5 6 8 / 96%);
+  cursor: zoom-out;
+}
+
+.gallery-lightbox img {
+  display: block;
+  width: min(100%, 92rem);
+  height: min(86vh, 62rem);
+  object-fit: contain;
+  cursor: default;
+}
+
+.gallery-lightbox__close,
+.gallery-lightbox__control {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 10%);
+  color: white;
+  backdrop-filter: blur(0.8rem);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.gallery-lightbox__close:hover,
+.gallery-lightbox__control:hover {
+  background: var(--brand-red);
+  transform: scale(1.05);
+}
+
+.gallery-lightbox__close {
+  top: 1.25rem;
+  right: 1.25rem;
+}
+
+.gallery-lightbox__close svg,
+.gallery-lightbox__control svg {
+  width: 1.35rem;
+}
+
+.gallery-lightbox__control {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery-lightbox__control:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.gallery-lightbox__control--previous {
+  left: 1.25rem;
+}
+
+.gallery-lightbox__control--next {
+  right: 1.25rem;
+}
+
+.gallery-lightbox__count {
+  position: absolute;
+  top: 1.9rem;
+  left: 50%;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  transform: translateX(-50%);
 }
 
 .spec-section,
@@ -2566,20 +2731,56 @@ a {
     width: 100%;
   }
 
-  .detail-gallery > .vehicle-visual {
+  .gallery-main > .vehicle-visual {
     min-height: 18rem;
   }
 
   .gallery-thumbs {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
   }
 
-  .gallery-thumbs button:last-child {
-    display: none;
+  .gallery-thumbs button {
+    flex-basis: calc((100% - 1.1rem) / 3);
   }
 
   .gallery-thumbs .vehicle-visual--compact {
     min-height: 5.5rem;
+  }
+
+  .gallery-control {
+    top: 9rem;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .gallery-control--previous {
+    left: 0.65rem;
+  }
+
+  .gallery-control--next {
+    right: 0.65rem;
+  }
+
+  .gallery-zoom-hint {
+    right: 0.65rem;
+    bottom: 0.65rem;
+  }
+
+  .gallery-lightbox {
+    padding: 3.5rem 0.75rem 1rem;
+  }
+
+  .gallery-lightbox__control {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .gallery-lightbox__control--previous {
+    left: 0.6rem;
+  }
+
+  .gallery-lightbox__control--next {
+    right: 0.6rem;
   }
 
   .spec-grid,

@@ -5,16 +5,11 @@ import { notFound } from "next/navigation";
 
 import { DealerMap } from "@/components/dealer-map";
 import { DealerContacts } from "@/components/dealer-contacts";
-import {
-  ArrowIcon,
-  CheckIcon,
-  HeartIcon,
-  MapPinIcon,
-} from "@/components/icons";
+import { ArrowIcon, CheckIcon, MapPinIcon } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { VehicleCard } from "@/components/vehicle-card";
-import { VehicleVisual } from "@/components/vehicle-visual";
+import { VehicleGallery } from "@/components/vehicle-gallery";
 import {
   formatMileage,
   formatPrice,
@@ -147,34 +142,7 @@ export default async function VehiclePage({ params }: VehiclePageProps) {
                 </div>
               </div>
 
-              <div className="detail-gallery">
-                <VehicleVisual vehicle={vehicle} />
-                <button
-                  aria-label="Salva nei preferiti"
-                  className="detail-save"
-                  type="button"
-                >
-                  <HeartIcon />
-                </button>
-                <div className="gallery-thumbs">
-                  {(vehicle.imageUrls?.slice(0, 4) ?? []).map(
-                    (imageUrl, index) => (
-                      <button
-                        aria-label={`Vista ${index + 1}`}
-                        className={index === 0 ? "is-active" : ""}
-                        key={imageUrl}
-                        type="button"
-                      >
-                        <VehicleVisual
-                          compact
-                          imageUrl={imageUrl}
-                          vehicle={vehicle}
-                        />
-                      </button>
-                    ),
-                  )}
-                </div>
-              </div>
+              <VehicleGallery vehicle={vehicle} />
 
               <div className="spec-section">
                 <div className="section-heading section-heading--small">
