@@ -66,20 +66,17 @@ export default function Home() {
         <BrandVehicleShowcase
           brand="Ferrari"
           filterValue="ferrari"
-          title="Ferrari a Milano"
           vehicles={ferrariMilano}
         />
         <BrandVehicleShowcase
           brand="Lamborghini"
           filterValue="lamborghini"
-          title="Lamborghini a Milano"
           variant="muted"
           vehicles={lamborghiniMilano}
         />
         <BrandVehicleShowcase
           brand="Maserati"
           filterValue="maserati"
-          title="Maserati a Milano"
           vehicles={maseratiMilano}
         />
 

@@ -705,6 +705,10 @@ a {
   line-height: 1;
 }
 
+.brand-showcase__header h2 span {
+  color: var(--brand-red);
+}
+
 .brand-showcase__header .eyebrow {
   margin-bottom: 0.75rem;
 }
