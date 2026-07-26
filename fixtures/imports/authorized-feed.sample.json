@@ -1,0 +1,72 @@
+[
+  {
+    "source": "authorized-test-feed",
+    "listingId": "sample-ferrari-001",
+    "sourceUrl": "https://feed.example.test/sample-ferrari-001",
+    "collectedAt": "2026-07-26T12:00:00.000Z",
+    "seller": {
+      "type": "DEALER",
+      "externalId": "sample-dealer-001",
+      "name": "Concessionaria Dimostrativa Milano",
+      "vatNumber": "IT01234567890",
+      "phone": "+39 02 1234 5678",
+      "email": "info@example.test",
+      "website": "https://example.test",
+      "address": {
+        "street": "Via Dimostrativa 1",
+        "postalCode": "20121",
+        "city": "Milano",
+        "province": "MI",
+        "country": "IT"
+      }
+    },
+    "vehicle": {
+      "brand": "Ferrari",
+      "model": "296 GTB",
+      "version": "V6 Hybrid",
+      "priceEuro": 315000,
+      "year": 2025,
+      "mileageKm": 900,
+      "fuel": "Ibrida",
+      "transmission": "Automatico",
+      "bodyType": "Coupé",
+      "powerCv": 830,
+      "exteriorColor": "Rosso",
+      "imageUrls": ["https://images.example.test/sample-ferrari-001.jpg"]
+    },
+    "location": {
+      "city": "Milano",
+      "province": "MI",
+      "postalCode": "20121",
+      "latitude": 45.4642,
+      "longitude": 9.19
+    }
+  },
+  {
+    "source": "authorized-test-feed",
+    "listingId": "sample-private-001",
+    "sourceUrl": "https://feed.example.test/sample-private-001",
+    "collectedAt": "2026-07-26T12:00:00.000Z",
+    "seller": {
+      "type": "PRIVATE",
+      "name": "Venditore privato",
+      "address": {
+        "city": "Milano",
+        "country": "IT"
+      }
+    },
+    "vehicle": {
+      "brand": "Porsche",
+      "model": "911",
+      "priceEuro": 180000,
+      "year": 2024,
+      "mileageKm": 4000,
+      "fuel": "Benzina",
+      "imageUrls": ["https://images.example.test/sample-private-001.jpg"]
+    },
+    "location": {
+      "city": "Milano",
+      "distanceKm": 3
+    }
+  }
+]

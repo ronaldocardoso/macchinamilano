@@ -13,6 +13,9 @@
 # production
 /build
 
+# local import runs
+/var/imports
+
 # local environment files
 .env
 .env*.local

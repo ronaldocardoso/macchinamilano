@@ -13,9 +13,9 @@
 **Plano:** Hospedagem Hostinger com suporte a aplicações Node.js  
 **Recursos informados:** 2 CPUs, 3.072 MB de RAM, 50 GB de disco e tráfego ilimitado  
 **Idioma público:** Italiano (`it-IT`)  
-**Versão do documento:** 1.7
+**Versão do documento:** 1.8
 **Data de referência:** 26 de julho de 2026
-**Status de execução:** Fase 1 concluída e protótipo público estático validado
+**Status de execução:** Fase 1 concluída; pipeline de importação autorizado implementado
 
 ---
 
@@ -33,7 +33,8 @@ MacchinaMilano-Codex-Master-Plan.md
 evitar divergência. O Codex deve ler o arquivo integralmente antes de gerar a
 arquitetura ou escrever código.
 
-A aplicação será um portal italiano de veículos premium, especializado inicialmente em anúncios com valor igual ou superior a **€100.000**.
+A aplicação será um portal italiano de veículos premium, especializado
+inicialmente em anúncios com valor estritamente superior a **€100.000**.
 
 O catálogo inicial estimado é:
 
@@ -2645,3 +2646,145 @@ Como a publicação atual usa export estático, o catálogo interpreta essas
 queries no cliente e filtra os dados demonstrativos sem exigir um servidor
 Node.js. Quando não há estoque para uma opção, o portal exibe um estado vazio
 em italiano com caminhos para a seleção completa e para contato.
+
+---
+
+# 47. Revisão 1.8 — dados reais e importação em escala
+
+## 47.1 Decisão de origem
+
+O projeto não dependerá de scraping direto da interface pública da
+AutoScout24. A análise realizada em 26 de julho de 2026 encontrou dois
+impedimentos:
+
+- o repositório `mauropelucchi/autoscout24` é um protótipo Java de 2019,
+  construído sobre seletores e URLs antigos, MongoDB hard-coded e sem testes
+  funcionais;
+- os termos atuais da AutoScout24 proíbem expressamente a consulta automatizada
+  da base e do site por software, robot, spider ou similares, e o aviso legal
+  proíbe copiar ou armazenar anúncios sem autorização escrita.
+
+A própria AutoScout24 anuncia interfaces de integração, exportação e serviços
+web opcionais. Portanto, as fontes aceitas para produção são:
+
+1. interface ou exportação autorizada pela AutoScout24;
+2. feed enviado diretamente por concessionárias;
+3. arquivo JSON/NDJSON autorizado;
+4. cadastro manual ou importação administrativa;
+5. outro provedor com licença expressa de republicação.
+
+Qualquer novo scraper encontrado deve ser auditado, mas não altera a
+necessidade de autorização sobre os dados, textos e imagens.
+
+## 47.2 Primeiro recorte operacional
+
+O primeiro lote real deverá conter no máximo 100 veículos e aplicar:
+
+```text
+Centro                    → Milano (45.4642, 9.1900)
+Raio máximo               → 25 km
+Preço                     → estritamente superior a €100.000
+Tipo de vendedor          → somente concessionária profissional
+Imagem                    → ao menos uma imagem autorizada
+Duplicidade de veículo    → source + listingId
+```
+
+O lote só poderá ser publicado depois da revisão do relatório de importação.
+
+## 47.3 Pipeline implementado
+
+O repositório agora contém:
+
+```text
+lib/imports/vehicle-import.ts
+lib/imports/vehicle-import.test.ts
+scripts/import-vehicles.ts
+fixtures/imports/authorized-feed.sample.json
+docs/imports/vehicle-feed.md
+data/imported-catalog.json
+```
+
+O fluxo é:
+
+```text
+Feed autorizado
+      ↓
+Validação estrutural com Zod
+      ↓
+Filtros geográfico, comercial e de vendedor
+      ↓
+Deduplicação de veículos e concessionárias
+      ↓
+Relatório de aceitos e rejeitados
+      ↓
+Revisão humana
+      ↓
+Catálogo normalizado
+      ↓
+Build/publicação
+```
+
+O comando operacional inicial é:
+
+```bash
+pnpm import:vehicles \
+  --input /percorso/feed-autorizzato.json \
+  --output var/imports/lotto-001.json
+```
+
+Somente após revisar o relatório:
+
+```bash
+pnpm import:vehicles \
+  --input /percorso/feed-autorizzato.json \
+  --output var/imports/lotto-001.json \
+  --catalog-output data/imported-catalog.json
+```
+
+O portal usa os dados demonstrativos enquanto o catálogo importado está vazio.
+Quando o catálogo contém veículos, usa os veículos e concessionárias
+normalizados, incluindo fotografias autorizadas, filtros derivados do estoque,
+ordenação e paginação de 24 veículos.
+
+## 47.4 Reconciliação de concessionárias
+
+A identidade de uma loja é resolvida nesta ordem:
+
+1. Partita IVA normalizada;
+2. ID externo da fonte;
+3. domínio do website;
+4. telefone normalizado;
+5. nome + cidade + CAP.
+
+Correspondência aproximada nunca faz merge automático. Casos duvidosos devem
+ir para revisão.
+
+## 47.5 Próximo gate para dados reais
+
+Antes do lote real de 100 veículos, obter ao menos um dos seguintes:
+
+- autorização escrita da AutoScout24 para consulta e republicação;
+- acesso à interface técnica/serviço web contratado;
+- exportação licenciada;
+- feed direto e autorização de cada concessionária.
+
+O contrato deve cobrir textos, preço, dados comerciais, fotografias, frequência
+de atualização e política de remoção.
+
+## 47.6 Escala de 900 veículos e 700 concessionárias
+
+O normalizador possui teste automatizado para 900 veículos e 700
+concessionárias. Isso valida o contrato e a deduplicação em memória, mas não
+substitui a migração de infraestrutura.
+
+Antes de publicar essa escala, migrar o domínio da hospedagem estática para a
+aplicação Node.js já prevista neste plano e implementar:
+
+- banco MySQL/MariaDB com Prisma;
+- `ImportRun`, `ImportItem` e upserts idempotentes;
+- armazenamento próprio ou object storage autorizado para mídia;
+- processamento assíncrono de imagens em lotes;
+- painel de revisão, publicação, atualização e remoção;
+- busca e paginação server-side;
+- rotina de disponibilidade `MISSING → STALE → INACTIVE`;
+- backup e rollback de importação.

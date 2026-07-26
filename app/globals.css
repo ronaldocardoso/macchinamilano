@@ -770,6 +770,13 @@ a {
   min-height: 12.5rem;
 }
 
+.vehicle-visual--photo {
+  background-color: #ececea;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .vehicle-visual--city {
   background:
     linear-gradient(
@@ -1430,7 +1437,7 @@ a {
   margin-top: 3rem;
 }
 
-.pagination button,
+.pagination a,
 .pagination span {
   display: grid;
   width: 2.8rem;
@@ -1450,6 +1457,10 @@ a {
 
 .pagination svg {
   width: 1rem;
+}
+
+.pagination__previous svg {
+  transform: rotate(180deg);
 }
 
 .detail-section {
