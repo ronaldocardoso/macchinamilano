@@ -119,6 +119,12 @@ a {
   text-rendering: geometricPrecision;
 }
 
+@media (min-width: 901px) {
+  .site-announcement {
+    font-size: 0.86rem;
+  }
+}
+
 .site-header__inner {
   position: relative;
   display: flex;
