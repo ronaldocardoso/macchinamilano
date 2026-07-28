@@ -6,6 +6,9 @@ import { CarIcon, MenuIcon } from "@/components/icons";
 export function SiteHeader() {
   return (
     <header className="site-header">
+      <div className="site-announcement" role="note">
+        Auto esclusive oltre 100.000 €, selezionate a Milano e in Lombardia.
+      </div>
       <div className="site-header__inner container">
         <BrandMark />
         <nav aria-label="Navigazione principale" className="desktop-nav">

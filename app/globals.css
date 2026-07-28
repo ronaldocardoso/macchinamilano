@@ -102,6 +102,20 @@ a {
   backdrop-filter: blur(1rem);
 }
 
+.site-announcement {
+  display: grid;
+  min-height: 1.9rem;
+  padding: 0.38rem 1rem;
+  place-items: center;
+  background: var(--brand-blue);
+  color: white;
+  font-size: 0.64rem;
+  font-weight: 650;
+  letter-spacing: 0.045em;
+  line-height: 1.25;
+  text-align: center;
+}
+
 .site-header__inner {
   position: relative;
   display: flex;
@@ -333,7 +347,7 @@ a {
 
 .home-hero {
   position: relative;
-  min-height: 30rem;
+  min-height: calc(30rem - 10px);
   overflow: hidden;
   background-color: #f8f8f8;
   background-image:
@@ -375,7 +389,7 @@ a {
 .home-hero__grid {
   position: relative;
   z-index: 2;
-  min-height: 30rem;
+  min-height: calc(30rem - 10px);
   padding-block: 3.3rem 8.5rem;
 }
 
@@ -2521,7 +2535,7 @@ a {
   }
 
   .home-hero__grid {
-    min-height: 32rem;
+    min-height: calc(32rem - 10px);
     padding-block: 2.8rem 12rem;
   }
 
@@ -2532,7 +2546,7 @@ a {
   }
 
   .home-hero {
-    min-height: 32rem;
+    min-height: calc(32rem - 10px);
     background-image:
       linear-gradient(
         90deg,
@@ -2647,7 +2661,7 @@ a {
   }
 
   .home-hero {
-    min-height: 31rem;
+    min-height: calc(31rem - 10px);
     background-image:
       linear-gradient(
         180deg,
@@ -2662,7 +2676,7 @@ a {
   }
 
   .home-hero__grid {
-    min-height: 31rem;
+    min-height: calc(31rem - 10px);
     padding-block: 2.35rem 12.5rem;
   }
 
