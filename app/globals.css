@@ -2673,7 +2673,7 @@ a {
 
   .home-hero__grid {
     min-height: calc(27rem - 10px);
-    padding-block: 0.85rem 9rem;
+    padding-block: calc(0.85rem + 10px) 9rem;
   }
 
   .home-hero h1 {
@@ -2683,7 +2683,7 @@ a {
 
   .search-panel-wrap {
     width: min(92vw, 86rem);
-    margin-top: -7.25rem;
+    margin-top: calc(-7.25rem - 20px);
   }
 
   .search-panel-title {
