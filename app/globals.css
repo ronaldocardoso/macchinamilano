@@ -109,7 +109,7 @@ a {
   place-items: center;
   background: var(--brand-blue);
   color: white;
-  font-size: 0.64rem;
+  font-size: 0.74rem;
   font-weight: 650;
   letter-spacing: 0.045em;
   line-height: 1.25;
@@ -362,18 +362,6 @@ a {
   background-repeat: no-repeat;
   background-size: auto 100%;
   color: var(--ink-950);
-}
-
-.home-hero::before {
-  position: absolute;
-  inset: auto 0 0;
-  height: 0.4rem;
-  content: "";
-  background: linear-gradient(
-    90deg,
-    var(--brand-blue) 0 26%,
-    var(--brand-red) 26% 100%
-  );
 }
 
 .home-hero::after {
