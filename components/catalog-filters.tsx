@@ -62,14 +62,18 @@ export function CatalogFilters() {
 
       <button
         aria-label="Chiudi i filtri"
-        className={`filters-backdrop${isOpen ? "filters-backdrop--open" : ""}`}
+        className={
+          isOpen
+            ? "filters-backdrop filters-backdrop--open"
+            : "filters-backdrop"
+        }
         onClick={closeFilters}
         tabIndex={isOpen ? 0 : -1}
         type="button"
       />
 
       <aside
-        className={`filters${isOpen ? "filters--open" : ""}`}
+        className={isOpen ? "filters filters--open" : "filters"}
         id="catalog-filters"
       >
         <form>
