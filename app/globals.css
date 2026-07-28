@@ -2673,7 +2673,7 @@ a {
 
   .home-hero__grid {
     min-height: calc(27rem - 10px);
-    padding-block: 2.35rem 9rem;
+    padding-block: 0.85rem 9rem;
   }
 
   .home-hero h1 {
