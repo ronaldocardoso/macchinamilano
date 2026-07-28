@@ -2681,7 +2681,7 @@ a {
     top: 0;
     bottom: 0;
     left: 0;
-    width: min(90vw, 24rem);
+    width: min(94vw, 26rem);
     max-height: 100dvh;
     padding: 0 1.2rem 1.5rem;
     overflow-y: auto;
@@ -2745,7 +2745,29 @@ a {
   }
 
   .filters fieldset {
-    padding-block: 1.5rem;
+    display: block;
+    padding-block: 1.1rem;
+  }
+
+  .filters legend {
+    margin-bottom: 0.7rem;
+  }
+
+  .filters .filter-search {
+    margin-top: 0.8rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .filters .filter-row {
+    gap: 0.65rem;
+  }
+
+  .filters .check-row + .check-row {
+    margin-top: 0.65rem;
+  }
+
+  .filters .filter-chips {
+    gap: 0.5rem;
   }
 
   .filters__submit {
