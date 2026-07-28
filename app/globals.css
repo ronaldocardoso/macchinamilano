@@ -2652,7 +2652,7 @@ a {
   }
 
   .home-hero {
-    min-height: calc(31rem - 10px);
+    min-height: calc(27rem - 10px);
     background-color: transparent;
     background-image:
       linear-gradient(
@@ -2663,7 +2663,7 @@ a {
         transparent 76%
       ),
       url("/images/bg-macchina-milano.webp");
-    background-position: center calc(100% - 30px);
+    background-position: center calc(100% - 70px);
     background-size: auto 57%;
   }
 
@@ -2672,8 +2672,8 @@ a {
   }
 
   .home-hero__grid {
-    min-height: calc(31rem - 10px);
-    padding-block: 2.35rem 12.5rem;
+    min-height: calc(27rem - 10px);
+    padding-block: 2.35rem 9rem;
   }
 
   .home-hero h1 {
@@ -2683,7 +2683,7 @@ a {
 
   .search-panel-wrap {
     width: min(92vw, 86rem);
-    margin-top: -4.8rem;
+    margin-top: -6rem;
   }
 
   .search-panel-title {
