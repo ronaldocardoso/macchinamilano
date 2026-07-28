@@ -14,8 +14,9 @@ autenticazione, pannello o catalogo dinamico.
 | Artefatto         | `out/`                                     |
 | Destinazione      | `domains/macchinamilano.com/public_html/`  |
 | Trasporto         | SSH, porta 65002                           |
-| URL canonico      | `https://macchinamilano.com`               |
-| Health check      | `https://macchinamilano.com/api/health`    |
+| URL canonico      | `https://macchinamilano.it`                |
+| Redirect legado   | `https://macchinamilano.com` → `.it`       |
+| Health check      | `https://macchinamilano.it/api/health`     |
 | Rollback iniziale | `deploy-backups/20260723-before-codex/`    |
 
 Prima di ogni sincronizzazione, creare un backup fuori da `public_html`. Non
@@ -51,7 +52,7 @@ Configurare nell'hPanel:
 ```dotenv
 NODE_ENV="production"
 APP_NAME="Macchina Milano"
-APP_URL="https://macchinamilano.com"
+APP_URL="https://macchinamilano.it"
 APP_LOCALE="it-IT"
 APP_TIMEZONE="Europe/Rome"
 APP_VERSION="0.1.0"

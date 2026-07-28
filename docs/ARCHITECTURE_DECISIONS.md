@@ -51,7 +51,9 @@ hPanel o ambiente di produzione. Il deploy effettivo appartiene alla Fase 8.
 
 A marca oficial com extensão `.it` será preservada sem alterações. Enquanto o
 domínio `.it` não estiver adquirido, com DNS e HTTPS ativos,
-`https://macchinamilano.com` continuará sendo o endereço canônico de produção.
+`https://macchinamilano.it` é o endereço canônico de produção.
+`https://macchinamilano.com` permanece ativo exclusivamente com redirecionamento
+permanente 301 para o domínio `.it`, preservando caminho e parâmetros.
 Depois da virada aprovada, o `.it` assumirá como canonical e os domínios `.com`
 deverão redirecionar para ele, preservando caminho e query string.
 

@@ -5,7 +5,7 @@ const environmentSchema = z.object({
     .enum(["development", "test", "production"])
     .default("development"),
   APP_NAME: z.string().trim().min(1).default("Macchina Milano"),
-  APP_URL: z.url().default("https://macchinamilano.com"),
+  APP_URL: z.url().default("https://macchinamilano.it"),
   APP_LOCALE: z.literal("it-IT").default("it-IT"),
   APP_TIMEZONE: z.literal("Europe/Rome").default("Europe/Rome"),
   APP_VERSION: z.string().trim().min(1).default("0.1.0"),
