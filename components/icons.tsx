@@ -69,6 +69,24 @@ export function MenuIcon(props: IconProps) {
   );
 }
 
+export function SlidersIcon(props: IconProps) {
+  return (
+    <svg aria-hidden="true" {...base} {...props}>
+      <path d="M4 7h5M15 7h5M4 17h9M17 17h3" />
+      <circle cx="12" cy="7" r="3" />
+      <circle cx="15" cy="17" r="2" />
+    </svg>
+  );
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <svg aria-hidden="true" {...base} {...props}>
+      <path d="m6 6 12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
 export function CheckIcon(props: IconProps) {
   return (
     <svg aria-hidden="true" {...base} {...props}>
