@@ -25,8 +25,8 @@ export function SiteFooter() {
           <div>
             <h3>Macchina Milano</h3>
             <Link href="/#magazine">Magazine</Link>
-            <Link href="/#contatti">Per i concessionari</Link>
-            <Link href="/#contatti">Contatti</Link>
+            <Link href="/contatti/#modulo">Per i concessionari</Link>
+            <Link href="/contatti/">Contatti</Link>
           </div>
           <div>
             <h3>Assistenza</h3>

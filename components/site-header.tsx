@@ -15,12 +15,12 @@ export function SiteHeader() {
           <Link href="/veicoli">Veicoli</Link>
           <Link href="/#contatti">Servizi</Link>
           <Link href="/#magazine">Magazine</Link>
-          <Link href="/#contatti">Contatti</Link>
+          <Link href="/contatti/">Contatti</Link>
         </nav>
         <div className="site-header__actions">
           <Link
             className="button button--red site-header__publish desktop-only"
-            href="/#contatti"
+            href="/contatti/#modulo"
           >
             <CarIcon />
             Pubblica un veicolo
@@ -33,8 +33,8 @@ export function SiteHeader() {
               <Link href="/veicoli">Veicoli</Link>
               <Link href="/#contatti">Servizi</Link>
               <Link href="/#magazine">Magazine</Link>
-              <Link href="/#contatti">Pubblica un veicolo</Link>
-              <Link href="/#contatti">Contatti</Link>
+              <Link href="/contatti/#modulo">Pubblica un veicolo</Link>
+              <Link href="/contatti/">Contatti</Link>
             </nav>
           </details>
         </div>

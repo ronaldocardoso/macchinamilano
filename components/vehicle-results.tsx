@@ -166,7 +166,7 @@ export function VehicleResults() {
             <Link className="button button--blue" href="/veicoli">
               Vedi tutti i veicoli
             </Link>
-            <Link className="text-link" href="/#contatti">
+            <Link className="text-link" href="/contatti/">
               Contattaci <ArrowIcon />
             </Link>
           </div>
