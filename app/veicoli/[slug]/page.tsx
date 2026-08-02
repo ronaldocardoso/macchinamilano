@@ -37,9 +37,29 @@ export async function generateMetadata({
     return {};
   }
 
+  const title = `${vehicle.brand} ${vehicle.model}`;
+  const description = `${vehicle.brand} ${vehicle.model} ${vehicle.version}, ${vehicle.year ?? "nuovo"}, ${vehicle.mileage === undefined ? "chilometraggio non indicato" : formatMileage(vehicle.mileage)}. Macchina Milano.`;
+  const canonical = `/veicoli/${vehicle.slug}/`;
+
   return {
-    title: `${vehicle.brand} ${vehicle.model}`,
-    description: `${vehicle.brand} ${vehicle.model} ${vehicle.version}, ${vehicle.year ?? "nuovo"}, ${vehicle.mileage === undefined ? "chilometraggio non indicato" : formatMileage(vehicle.mileage)}. Macchina Milano.`,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      url: canonical,
+      title: `${title} | Macchina Milano`,
+      description,
+      images: vehicle.imageUrls?.[0]
+        ? [
+            {
+              url: vehicle.imageUrls[0],
+              alt: title,
+            },
+          ]
+        : undefined,
+    },
   };
 }
 

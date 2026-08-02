@@ -11,6 +11,15 @@ export const metadata: Metadata = {
   title: "Veicoli premium",
   description:
     "Esplora la selezione Macchina Milano di veicoli premium da Milano e dalla regione.",
+  alternates: {
+    canonical: "/veicoli/",
+  },
+  openGraph: {
+    url: "/veicoli/",
+    title: "Veicoli premium | Macchina Milano",
+    description:
+      "Esplora la selezione Macchina Milano di veicoli premium da Milano e dalla regione.",
+  },
 };
 
 export default function VehiclesPage() {
