@@ -3370,7 +3370,7 @@ a {
   }
 
   .detail-section {
-    padding-top: 1.25rem;
+    padding-block-start: 1.25rem;
   }
 
   .detail-quick-facts {
