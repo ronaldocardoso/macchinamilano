@@ -2360,12 +2360,12 @@ a {
   background-position:
     center,
     center,
-    right clamp(2rem, 8vw, 9rem) center;
+    right clamp(2rem, 8vw, 9rem) top -0.75rem;
   background-repeat: no-repeat;
   background-size:
     cover,
     cover,
-    auto 118%;
+    auto 92%;
 }
 
 .contact-hero::after {
