@@ -3455,7 +3455,11 @@ a {
   }
 
   .contact-hero__content {
-    padding-block: 1.25rem 16rem;
+    padding-block: 0.75rem 16rem;
+  }
+
+  .contact-hero__content > .eyebrow {
+    display: none;
   }
 
   .contact-hero__content h1 {
