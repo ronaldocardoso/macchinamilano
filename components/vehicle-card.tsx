@@ -72,6 +72,12 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
           </div>
         </div>
       </div>
+      <Link
+        aria-hidden="true"
+        className="vehicle-card__touch-link"
+        href={`/veicoli/${vehicle.slug}`}
+        tabIndex={-1}
+      />
     </article>
   );
 }

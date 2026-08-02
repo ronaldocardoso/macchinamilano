@@ -746,6 +746,10 @@ a {
   display: block;
 }
 
+.vehicle-card__touch-link {
+  display: none;
+}
+
 .vehicle-card__tag {
   position: absolute;
   z-index: 3;
@@ -2947,6 +2951,24 @@ a {
 
   .catalog-layout {
     grid-template-columns: 1fr;
+  }
+
+  .vehicle-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .vehicle-card:hover .vehicle-visual__car {
+    transform: none;
+  }
+
+  .vehicle-card__touch-link {
+    position: absolute;
+    z-index: 10;
+    inset: 0;
+    display: block;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .catalog-filter-trigger {
