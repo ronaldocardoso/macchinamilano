@@ -27,12 +27,18 @@ const httpUrl = z
   );
 
 export const sellerTypeSchema = z.enum(["DEALER", "PRIVATE"]);
+export const vehicleAvailabilitySchema = z.enum([
+  "AVAILABLE",
+  "SOLD",
+  "UNAVAILABLE",
+]);
 
 export const rawVehicleCandidateSchema = z.object({
   source: z.string().trim().min(1),
   listingId: z.string().trim().min(1),
   sourceUrl: httpUrl,
   collectedAt: z.iso.datetime(),
+  availability: vehicleAvailabilitySchema.optional(),
   seller: z.object({
     type: sellerTypeSchema,
     externalId: optionalText,
@@ -183,6 +189,7 @@ export type NormalizedVehicle = {
 
 export type ImportRejectionCode =
   | "INVALID_RECORD"
+  | "SOLD_OR_UNAVAILABLE"
   | "PRIVATE_SELLER"
   | "PRICE_NOT_ABOVE_MINIMUM"
   | "DISTANCE_UNAVAILABLE"
@@ -573,6 +580,19 @@ export function processVehicleImport(
     }
 
     listingKeys.add(listingKey);
+
+    if (
+      candidate.availability === "SOLD" ||
+      candidate.availability === "UNAVAILABLE"
+    ) {
+      rejections.push({
+        index,
+        listingId: candidate.listingId,
+        code: "SOLD_OR_UNAVAILABLE",
+        message: "Sold or unavailable listings are removed from the catalog.",
+      });
+      return;
+    }
 
     if (policy.dealerOnly && candidate.seller.type !== "DEALER") {
       rejections.push({

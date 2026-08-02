@@ -15,7 +15,7 @@
 **Idioma público:** Italiano (`it-IT`)  
 **Versão do documento:** 1.10
 **Data de referência:** 26 de julho de 2026
-**Status de execução:** Fase 1 concluída; primeiro lote real de 100 veículos validado para publicação
+**Status de execução:** Fase 1 concluída; catálogo real ampliado e validado com 500 veículos
 
 ---
 
@@ -2821,6 +2821,52 @@ aplicação Node.js já prevista neste plano e implementar:
 - busca e paginação server-side;
 - rotina de disponibilidade `MISSING → STALE → INACTIVE`;
 - backup e rollback de importação.
+
+## 47.6.1 Regra global de disponibilidade
+
+O catálogo público trabalha com snapshots completos e autoritativos. Um
+veículo deve ser removido quando a fonte o marcar como vendido ou indisponível,
+quando a página do anúncio não for mais encontrada, ou quando ele estiver
+ausente de uma atualização completa da mesma pesquisa autorizada.
+
+A ausência nunca deve ser aplicada a partir de lote parcial, paginação
+interrompida antes de cobrir o limite publicado ou execução com erro. A
+publicação do novo catálogo ocorre somente depois da coleta de todas as páginas
+necessárias para preencher o limite publicado — ou de toda a fonte quando ela
+se esgota antes —, validação, deduplicação e backup do catálogo anterior. Para
+a operação atual, a coleta é dividida em lotes revisáveis de 100 veículos e
+consolidada antes da substituição pública.
+
+## 47.6.2 Ampliação validada para 500 veículos
+
+Em 2 de agosto de 2026, o catálogo autorizado foi atualizado em cinco lotes
+revisáveis de 100 veículos. A pesquisa Piloterr/AutoScout24.it passou a incluir
+explicitamente `custtype=D`, garantindo somente concessionárias profissionais,
+além dos filtros já aplicados de Milano, raio de 25 km e preço superior a
+€100.000.
+
+O snapshot publicado foi preenchido pelas páginas necessárias para alcançar o
+limite operacional de 500 veículos aceitos:
+
+```text
+Registros únicos avaliados  → 532
+Veículos aceitos            → 500
+Registros rejeitados        → 32
+Fora do raio de 25 km       → 23
+Registros incompletos       → 3
+Excedentes do limite        → 6
+Concessionárias únicas      → 95
+Preço mínimo                → €101.650
+Preço máximo                → €6.900.000
+Maior distância             → 25 km
+Fotografias referenciadas   → 7.607
+Anúncios antigos removidos  → 16
+```
+
+Os 16 anúncios presentes no catálogo anterior e ausentes do novo snapshot do
+perímetro publicado foram considerados vendidos ou não encontrados conforme a
+regra global definida para o portal. O catálogo anterior foi preservado em
+backup antes da reconciliação.
 
 ## 47.7 Google Maps no detalhe do veículo
 

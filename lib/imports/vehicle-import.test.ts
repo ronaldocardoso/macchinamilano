@@ -135,6 +135,23 @@ describe("vehicle import pipeline", () => {
     ]);
   });
 
+  it("removes vehicles explicitly marked as sold or unavailable", () => {
+    const report = processVehicleImport([
+      candidate({ listingId: "sold", availability: "SOLD" }),
+      candidate({ listingId: "unavailable", availability: "UNAVAILABLE" }),
+      candidate({ listingId: "available", availability: "AVAILABLE" }),
+    ]);
+
+    expect(report.summary).toMatchObject({
+      accepted: 1,
+      rejected: 2,
+    });
+    expect(report.rejections.map(({ code }) => code)).toEqual([
+      "SOLD_OR_UNAVAILABLE",
+      "SOLD_OR_UNAVAILABLE",
+    ]);
+  });
+
   it("rejects records that cannot be placed inside the radius", () => {
     const report = processVehicleImport([
       candidate({

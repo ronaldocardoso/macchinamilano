@@ -10,6 +10,7 @@ describe("Piloterr AutoScout24 adapter", () => {
       results: [
         {
           id: "listing-001",
+          available_now: true,
           url: "https://www.autoscout24.it/annunci/listing-001",
           image:
             "https://prod.pictures.autoscout24.net/listing-images/a.jpg/250x188.webp",
@@ -105,6 +106,22 @@ describe("Piloterr AutoScout24 adapter", () => {
     expect(report.contactSummary.whatsapp).toMatchObject({
       declared: 1,
       verified: 0,
+    });
+  });
+
+  it("maps an explicitly unavailable listing to the global removal rule", () => {
+    const records = adaptPiloterrAutoScout24Export({
+      results: [
+        {
+          id: "listing-unavailable",
+          url: "https://www.autoscout24.it/annunci/listing-unavailable",
+          available_now: false,
+        },
+      ],
+    });
+
+    expect(records[0]).toMatchObject({
+      availability: "UNAVAILABLE",
     });
   });
 });

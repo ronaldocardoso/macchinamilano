@@ -52,6 +52,7 @@ pnpm import:autoscout24 \
   --input var/imports/piloterr/autoscout24-milano.raw.json \
   --output var/imports/piloterr/autoscout24-milano.report.json \
   --catalog-output data/imported-catalog.json \
+  --authoritative-snapshot \
   --limit 100 \
   --radius 25 \
   --min-price 100000
@@ -60,6 +61,15 @@ pnpm import:autoscout24 \
 L'export deve provenire dalla ricerca italiana con centro CAP `20121`, raggio
 `25 km`, `pricefrom=100001` e viene comunque ricontrollato dal pipeline per
 prezzo, distanza e tipo di venditore.
+
+`--authoritative-snapshot` dichiara che tutte le pagine necessarie a coprire il
+limite pubblicato, oppure tutte le pagine disponibili quando la fonte si
+esaurisce prima, sono state raccolte e validate. Solo in questa modalità il
+catalogo pubblico può essere sostituito: gli annunci esplicitamente venduti o
+non disponibili vengono rifiutati e quelli presenti nel catalogo precedente
+ma assenti dal nuovo snapshot completo del perimetro pubblicato vengono
+considerati venduti e rimossi. Un lotto parziale o una raccolta interrotta non
+deve mai essere usato con questo flag.
 
 Quando `data/imported-catalog.json` contiene veicoli, il sito utilizza il
 catalogo importato al posto dei dati dimostrativi. Per la pubblicazione attuale

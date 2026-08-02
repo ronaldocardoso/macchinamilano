@@ -132,6 +132,12 @@ function adaptResult(
     listingId,
     sourceUrl: absoluteAutoScoutUrl(result.url),
     collectedAt,
+    availability:
+      result.available_now === false
+        ? "UNAVAILABLE"
+        : result.available_now === true
+          ? "AVAILABLE"
+          : undefined,
     seller: {
       type: text(seller.type) === "Dealer" ? "DEALER" : "PRIVATE",
       externalId: text(seller.id),
