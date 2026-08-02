@@ -3433,7 +3433,7 @@ a {
   }
 
   .contact-hero {
-    min-height: 32rem;
+    min-height: 30.5rem;
     background-image:
       linear-gradient(
         180deg,
@@ -3447,7 +3447,7 @@ a {
     background-position:
       center,
       center,
-      right -3.5rem bottom;
+      right -3.5rem bottom 1.5rem;
     background-size:
       cover,
       cover,
@@ -3455,7 +3455,7 @@ a {
   }
 
   .contact-hero__content {
-    padding-block: 2.75rem 17rem;
+    padding-block: 1.25rem 16rem;
   }
 
   .contact-hero__content h1 {
@@ -3471,7 +3471,7 @@ a {
   }
 
   .contact-form-section {
-    margin-top: -5.5rem;
+    margin-top: -7rem;
     padding-bottom: 4.5rem;
   }
 
