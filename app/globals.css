@@ -3447,7 +3447,7 @@ a {
     background-position:
       center,
       center,
-      center bottom;
+      right -3.5rem bottom;
     background-size:
       cover,
       cover,
@@ -3464,7 +3464,7 @@ a {
   }
 
   .contact-hero__content > p:last-child {
-    max-width: 20rem;
+    max-width: 17rem;
     margin-top: 1rem;
     font-size: 0.82rem;
     line-height: 1.55;
