@@ -3369,6 +3369,10 @@ a {
     margin-bottom: 1rem;
   }
 
+  .detail-section {
+    padding-top: 1.25rem;
+  }
+
   .detail-quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
