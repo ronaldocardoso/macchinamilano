@@ -32,7 +32,9 @@ function ExploreGroup({
         <h2 id={`${id}-title`}>
           {title} <span>{accent}</span>
         </h2>
-        <Link href={allHref}>{allLabel}</Link>
+        <Link href={allHref} prefetch={false}>
+          {allLabel}
+        </Link>
       </header>
       <div className="explore-options">
         {options.map((option) => (
@@ -42,6 +44,7 @@ function ExploreGroup({
               query: { [queryKey]: option.value },
             }}
             key={option.value}
+            prefetch={false}
           >
             <span className="explore-options__media">
               <Image

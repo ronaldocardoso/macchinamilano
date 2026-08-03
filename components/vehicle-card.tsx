@@ -22,6 +22,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         aria-label={`Scopri ${vehicle.brand} ${vehicle.model}`}
         className="vehicle-card__visual-link"
         href={`/veicoli/${vehicle.slug}`}
+        prefetch={false}
       >
         <VehicleVisual compact vehicle={vehicle} />
         {label && (
@@ -42,7 +43,9 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
           <div>
             <p>{vehicle.brand}</p>
             <h3>
-              <Link href={`/veicoli/${vehicle.slug}`}>{vehicle.model}</Link>
+              <Link href={`/veicoli/${vehicle.slug}`} prefetch={false}>
+                {vehicle.model}
+              </Link>
             </h3>
           </div>
           <button
@@ -76,6 +79,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         aria-hidden="true"
         className="vehicle-card__touch-link"
         href={`/veicoli/${vehicle.slug}`}
+        prefetch={false}
         tabIndex={-1}
       />
     </article>
