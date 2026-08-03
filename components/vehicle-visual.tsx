@@ -4,12 +4,14 @@ type VehicleVisualProps = {
   vehicle: Vehicle;
   compact?: boolean;
   imageUrl?: string;
+  priority?: boolean;
 };
 
 export function VehicleVisual({
   vehicle,
   compact = false,
   imageUrl: selectedImageUrl,
+  priority = false,
 }: VehicleVisualProps) {
   const imageUrl = selectedImageUrl ?? vehicle.imageUrls?.[0];
 
@@ -21,8 +23,18 @@ export function VehicleVisual({
           compact ? "vehicle-visual--compact" : ""
         }`}
         role="img"
-        style={{ backgroundImage: `url("${imageUrl.replaceAll('"', "%22")}")` }}
       >
+        {/* External listing photos stay unoptimized, but native image loading lets
+            the browser defer cards and thumbnails that are outside the viewport. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          className="vehicle-visual__photo"
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
+          loading={priority ? "eager" : "lazy"}
+          src={imageUrl}
+        />
         <span className="vehicle-visual__location">{vehicle.location}</span>
         <span className="vehicle-visual__line" />
       </div>

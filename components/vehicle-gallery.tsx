@@ -155,7 +155,7 @@ export function VehicleGallery({ vehicle }: VehicleGalleryProps) {
         onClick={() => setZoomOpen(true)}
         type="button"
       >
-        <VehicleVisual imageUrl={activeImage} vehicle={vehicle} />
+        <VehicleVisual imageUrl={activeImage} priority vehicle={vehicle} />
         <span className="gallery-zoom-hint">
           <ExpandIcon />
           Ingrandisci
@@ -266,6 +266,7 @@ export function VehicleGallery({ vehicle }: VehicleGalleryProps) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt={`${vehicleName}, foto ${activeIndex + 1} di ${imageCount}`}
+            decoding="async"
             onClick={(event) => event.stopPropagation()}
             src={activeImage}
           />
