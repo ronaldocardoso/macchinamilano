@@ -29,6 +29,7 @@ const brandLogos: Record<string, string> = {
   mclaren: "/explore/mclaren.png",
   "mercedes-benz": "/explore/mercedes-benz.png",
   porsche: "/explore/porsche.png",
+  "rolls-royce": "/explore/rolls-royce.webp",
 };
 
 function normalize(value: string) {
@@ -260,9 +261,9 @@ export function CatalogFilters() {
                         <Image
                           alt=""
                           className="filter-brand-logo"
-                          height={30}
+                          height={42}
                           src={logo}
-                          width={64}
+                          width={96}
                         />
                       )}
                       {brand}

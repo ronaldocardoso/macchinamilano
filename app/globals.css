@@ -1181,16 +1181,26 @@ a {
 }
 
 .catalog-hero {
-  background: var(--brand-red);
+  background-color: var(--brand-red);
+  background-image:
+    linear-gradient(
+      90deg,
+      rgb(184 17 4 / 96%) 0%,
+      rgb(184 17 4 / 90%) 48%,
+      rgb(184 17 4 / 72%) 100%
+    ),
+    url("/images/milano-skyline-catalog.webp");
+  background-position: center;
+  background-size: cover;
   color: white;
 }
 
 .catalog-hero__grid {
   display: grid;
-  min-height: 18rem;
+  min-height: 15.5rem;
   grid-template-columns: 1fr;
   align-items: end;
-  padding-block: 3rem;
+  padding-block: 2.3rem;
 }
 
 .catalog-hero h1 {
@@ -1214,11 +1224,13 @@ a {
 }
 
 .filters {
-  position: sticky;
-  top: 1rem;
-  max-height: calc(100vh - 2rem);
+  position: relative;
+  height: calc(100dvh - 2rem);
+  max-height: calc(100dvh - 2rem);
   padding: 1.3rem;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   border: 1px solid var(--stone-200);
   border-radius: var(--radius-md);
   background: white;
@@ -1372,16 +1384,17 @@ a {
 }
 
 .filter-chips--brands label span {
-  min-height: 3.65rem;
+  min-height: 4.25rem;
   align-content: center;
-  gap: 0.35rem;
+  gap: 0.45rem;
+  font-size: 0.64rem;
 }
 
 .filter-brand-logo {
   display: block;
   width: auto;
-  max-width: 3.5rem;
-  height: 1.25rem;
+  max-width: 5rem;
+  height: 1.75rem;
   padding: 0.12rem 0.25rem;
   border-radius: 0.25rem;
   background: white;
@@ -3036,6 +3049,7 @@ a {
     bottom: 0;
     left: 0;
     width: min(94vw, 26rem);
+    height: 100dvh;
     max-height: 100dvh;
     padding: 0 1.2rem 1.5rem;
     overflow-y: auto;
@@ -3360,8 +3374,8 @@ a {
   }
 
   .catalog-hero__grid {
-    min-height: 15rem;
-    padding-block: 2.35rem;
+    min-height: 12.5rem;
+    padding-block: 1.85rem;
   }
 
   .catalog-hero h1 {
