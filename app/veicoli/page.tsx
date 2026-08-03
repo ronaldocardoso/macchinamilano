@@ -39,10 +39,6 @@ export default function VehiclesPage() {
               <p className="eyebrow eyebrow--light">La selezione</p>
               <h1>Trova la tua prossima auto straordinaria.</h1>
             </div>
-            <p>
-              Veicoli premium scelti da Milano e dalla regione. Confronta le
-              caratteristiche e contatta direttamente il concessionario.
-            </p>
           </div>
         </section>
 
