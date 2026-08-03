@@ -1216,7 +1216,9 @@ a {
 .filters {
   position: sticky;
   top: 1rem;
+  max-height: calc(100vh - 2rem);
   padding: 1.3rem;
+  overflow-y: auto;
   border: 1px solid var(--stone-200);
   border-radius: var(--radius-md);
   background: white;
@@ -1367,6 +1369,23 @@ a {
   border-color: var(--brand-red);
   background: var(--brand-red);
   color: white;
+}
+
+.filter-chips--brands label span {
+  min-height: 3.65rem;
+  align-content: center;
+  gap: 0.35rem;
+}
+
+.filter-brand-logo {
+  display: block;
+  width: auto;
+  max-width: 3.5rem;
+  height: 1.25rem;
+  padding: 0.12rem 0.25rem;
+  border-radius: 0.25rem;
+  background: white;
+  object-fit: contain;
 }
 
 .filter-chips--categories label span {

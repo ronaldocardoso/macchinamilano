@@ -759,6 +759,66 @@ type ImportedVehicle = {
   description?: string;
 };
 
+function normalizeDescriptor(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .trim()
+    .toLocaleLowerCase("it-IT");
+}
+
+export function inferVehicleBodyType(vehicle: {
+  brand: string;
+  model: string;
+  version?: string;
+  bodyType?: string;
+}) {
+  if (vehicle.bodyType?.trim()) {
+    return vehicle.bodyType.trim();
+  }
+
+  const brand = normalizeDescriptor(vehicle.brand);
+  const model = normalizeDescriptor(vehicle.model);
+  const descriptor = normalizeDescriptor(
+    `${vehicle.brand} ${vehicle.model} ${vehicle.version ?? ""}`,
+  );
+
+  if (
+    /\b(cabrio|cabriolet|convertible|spider|spyder|roadster|volante|speedster|targa|gtc|azure|california|portofino|elva|cobra)\b/.test(
+      descriptor,
+    ) ||
+    brand === "morgan" ||
+    /^sl(?:\s|$)/.test(model)
+  ) {
+    return "Cabrio";
+  }
+
+  if (
+    /\b(avant|touring|wagon|shooting brake|sport turismo|cross turismo|gtc4)\b/.test(
+      descriptor,
+    ) ||
+    model === "rs6"
+  ) {
+    return "Station wagon";
+  }
+
+  if (
+    /\b(dbx|rs q8|x6 m|xm|escalade|urus|defender|range rover|eletre|gle|gls|cayenne|bentayga|cullinan|purosangue)\b/.test(
+      descriptor,
+    ) ||
+    /^g(?:\s|$)/.test(model)
+  ) {
+    return "SUV";
+  }
+
+  if (/\b(flying spur|ghost|panamera|rs3)\b/.test(descriptor)) {
+    return "Berlina";
+  }
+
+  return "Coupé";
+}
+
 const catalog = importedCatalog as {
   dealers: ImportedDealer[];
   vehicles: ImportedVehicle[];
@@ -779,7 +839,7 @@ const importedVehicles: Vehicle[] = catalog.vehicles.map((vehicle, index) => {
     mileage: vehicle.mileageKm,
     fuel: vehicle.fuel,
     transmission: vehicle.transmission ?? "Non indicato",
-    bodyType: vehicle.bodyType ?? "Non indicata",
+    bodyType: inferVehicleBodyType(vehicle),
     condition: vehicle.condition,
     exteriorColor: vehicle.exteriorColor ?? "Non indicato",
     interiorColor: vehicle.interiorColor ?? "Non indicato",
@@ -848,6 +908,55 @@ export const categories = hasImportedCatalog
       a.localeCompare(b, "it"),
     )
   : demoCategories;
+
+export const catalogYears = [
+  ...new Set(
+    vehicles
+      .map((vehicle) => vehicle.year)
+      .filter((year): year is number => typeof year === "number"),
+  ),
+].sort((first, second) => second - first);
+
+export function matchesFuelCategory(vehicleFuel: string, category: string) {
+  const fuel = normalizeDescriptor(vehicleFuel);
+  const rawFuel = vehicleFuel.toLocaleLowerCase("it-IT");
+  const normalizedCategory = normalizeDescriptor(category);
+
+  if (normalizedCategory === "ibrida") {
+    return /[/+]/.test(rawFuel) || fuel.includes("ibrid");
+  }
+
+  if (normalizedCategory === "elettrica") {
+    return fuel === "elettrica";
+  }
+
+  if (normalizedCategory === "diesel") {
+    return fuel.split(" ").includes("diesel");
+  }
+
+  if (normalizedCategory === "benzina") {
+    return fuel === "benzina";
+  }
+
+  return fuel.includes(normalizedCategory);
+}
+
+export const fuelCategories = [
+  "Benzina",
+  "Diesel",
+  "Ibrida",
+  "Elettrica",
+].filter((category) =>
+  vehicles.some((vehicle) => matchesFuelCategory(vehicle.fuel, category)),
+);
+
+export const conditions = [
+  ...new Set(
+    vehicles
+      .map((vehicle) => vehicle.condition?.trim())
+      .filter((condition): condition is string => Boolean(condition)),
+  ),
+].sort((first, second) => first.localeCompare(second, "it"));
 
 export function formatPrice(value: number) {
   return new Intl.NumberFormat("it-IT", {

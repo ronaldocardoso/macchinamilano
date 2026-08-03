@@ -1,4 +1,4 @@
-import type { Vehicle } from "@/lib/vehicles";
+import { matchesFuelCategory, type Vehicle } from "./vehicles";
 
 export type ExploreOption = {
   label: string;
@@ -92,35 +92,87 @@ const bodyAliases: Record<string, string[]> = {
 
 export function filterCatalogVehicles(
   vehicles: Vehicle[],
-  filters: { brand?: string; body?: string; model?: string },
+  filters: {
+    brand?: string;
+    brands?: string[];
+    body?: string;
+    bodies?: string[];
+    model?: string;
+    conditions?: string[];
+    fuels?: string[];
+    minimumPrice?: number;
+    maximumPrice?: number;
+    minimumYear?: number;
+    maximumYear?: number;
+  },
 ) {
-  const brandTerms = filters.brand
-    ? (brandAliases[filters.brand] ?? [normalize(filters.brand)])
-    : [];
-  const bodyTerms = filters.body
-    ? (bodyAliases[filters.body] ?? [normalize(filters.body)])
-    : [];
+  const selectedBrands = filters.brands?.length
+    ? filters.brands
+    : filters.brand
+      ? [filters.brand]
+      : [];
+  const selectedBodies = filters.bodies?.length
+    ? filters.bodies
+    : filters.body
+      ? [filters.body]
+      : [];
+  const brandTermGroups = selectedBrands.map((brand) => {
+    const normalizedBrand = normalize(brand);
+    return brandAliases[normalizedBrand] ?? [normalizedBrand];
+  });
+  const bodyTermGroups = selectedBodies.map((body) => {
+    const normalizedBody = normalize(body);
+    return bodyAliases[normalizedBody] ?? [normalizedBody];
+  });
   const modelTerm = filters.model ? normalize(filters.model) : "";
+  const conditionTerms = (filters.conditions ?? []).map(normalize);
 
   return vehicles.filter((vehicle) => {
     const vehicleBrand = normalize(vehicle.brand);
     const vehicleBody = normalize(vehicle.bodyType);
-    const vehicleModel = normalize(vehicle.model);
+    const vehicleDescription = normalize(
+      `${vehicle.brand} ${vehicle.model} ${vehicle.version}`,
+    );
+    const vehicleCondition = normalize(vehicle.condition ?? "");
 
     return (
-      (!brandTerms.length ||
-        brandTerms.some((term) => vehicleBrand.includes(term))) &&
-      (!bodyTerms.length ||
-        bodyTerms.some((term) => vehicleBody.includes(term))) &&
-      (!modelTerm || vehicleModel.includes(modelTerm))
+      (!brandTermGroups.length ||
+        brandTermGroups.some((terms) =>
+          terms.some((term) => vehicleBrand.includes(term)),
+        )) &&
+      (!bodyTermGroups.length ||
+        bodyTermGroups.some((terms) =>
+          terms.some((term) => vehicleBody.includes(term)),
+        )) &&
+      (!modelTerm || vehicleDescription.includes(modelTerm)) &&
+      (!conditionTerms.length ||
+        conditionTerms.some((term) => vehicleCondition === term)) &&
+      (!(filters.fuels ?? []).length ||
+        filters.fuels?.some((fuel) =>
+          matchesFuelCategory(vehicle.fuel, fuel),
+        )) &&
+      (filters.minimumPrice === undefined ||
+        vehicle.price >= filters.minimumPrice) &&
+      (filters.maximumPrice === undefined ||
+        vehicle.price <= filters.maximumPrice) &&
+      (filters.minimumYear === undefined ||
+        (vehicle.year !== undefined && vehicle.year >= filters.minimumYear)) &&
+      (filters.maximumYear === undefined ||
+        (vehicle.year !== undefined && vehicle.year <= filters.maximumYear))
     );
   });
 }
 
 export function getExploreFilterLabel(value?: string) {
   if (!value) return undefined;
+  const normalizedValue = normalize(value);
   return (
-    [...exploreBrands, ...bodyStyles].find((option) => option.value === value)
-      ?.label ?? additionalFilterLabels[value]
+    [...exploreBrands, ...bodyStyles].find(
+      (option) =>
+        normalize(option.value) === normalizedValue ||
+        normalize(option.label) === normalizedValue,
+    )?.label ??
+    additionalFilterLabels[value] ??
+    value
   );
 }

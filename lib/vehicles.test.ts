@@ -1,6 +1,16 @@
 import { describe, expect, it } from "vitest";
 
-import { getVehicleLabel, vehicles, type Vehicle } from "./vehicles";
+import { filterCatalogVehicles } from "./explore-options";
+import {
+  catalogYears,
+  categories,
+  fuelCategories,
+  getVehicleLabel,
+  inferVehicleBodyType,
+  matchesFuelCategory,
+  vehicles,
+  type Vehicle,
+} from "./vehicles";
 
 describe("Milano brand showcases", () => {
   it.each(["Ferrari", "Lamborghini", "Maserati"])(
@@ -36,5 +46,58 @@ describe("Milano brand showcases", () => {
     expect(getVehicleLabel({ ...combustion, armored: true } as Vehicle)).toBe(
       "Blindato",
     );
+  });
+
+  it("builds the year range from every registered vehicle", () => {
+    const availableYears = vehicles
+      .map((vehicle) => vehicle.year)
+      .filter((year): year is number => typeof year === "number");
+
+    expect(catalogYears[0]).toBe(Math.max(...availableYears));
+    expect(catalogYears.at(-1)).toBe(Math.min(...availableYears));
+    expect(catalogYears).toContain(1968);
+  });
+
+  it("exposes Diesel and matches diesel hybrid vehicles", () => {
+    expect(fuelCategories).toContain("Diesel");
+    expect(matchesFuelCategory("Diesel", "Diesel")).toBe(true);
+    expect(matchesFuelCategory("Elettrica/Diesel", "Diesel")).toBe(true);
+  });
+
+  it("infers useful body categories when the source omits body type", () => {
+    expect(
+      inferVehicleBodyType({
+        brand: "Lamborghini",
+        model: "Urus",
+      }),
+    ).toBe("SUV");
+    expect(
+      inferVehicleBodyType({
+        brand: "Ferrari",
+        model: "SF90 Spider",
+      }),
+    ).toBe("Cabrio");
+    expect(categories).toEqual(
+      expect.arrayContaining(["Berlina", "Cabrio", "Coupé", "SUV"]),
+    );
+    expect(categories).not.toContain("Non indicata");
+  });
+
+  it("applies the catalog fuel, body and year filters", () => {
+    const filtered = filterCatalogVehicles(vehicles, {
+      bodies: ["SUV"],
+      fuels: ["Diesel"],
+      minimumYear: 2020,
+    });
+
+    expect(filtered.length).toBeGreaterThan(0);
+    expect(
+      filtered.every(
+        (vehicle) =>
+          vehicle.bodyType === "SUV" &&
+          matchesFuelCategory(vehicle.fuel, "Diesel") &&
+          (vehicle.year ?? 0) >= 2020,
+      ),
+    ).toBe(true);
   });
 });

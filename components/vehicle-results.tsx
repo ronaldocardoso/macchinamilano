@@ -15,14 +15,28 @@ export function VehicleResults() {
   const pageSize = 24;
   const router = useRouter();
   const searchParams = useSearchParams();
-  const brand = searchParams.get("marca") ?? undefined;
-  const body = searchParams.get("carrozzeria") ?? undefined;
+  const selectedBrands = searchParams.getAll("marca").filter(Boolean);
+  const selectedBodies = searchParams.getAll("carrozzeria").filter(Boolean);
+  const selectedConditions = searchParams.getAll("condizione").filter(Boolean);
+  const selectedFuels = searchParams.getAll("alimentazione").filter(Boolean);
   const model = searchParams.get("modello") ?? undefined;
+  const numberParam = (name: string) => {
+    const value = searchParams.get(name);
+    if (!value) return undefined;
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  };
   const order = searchParams.get("ordine") ?? "featured";
   const filteredVehicles = filterCatalogVehicles(vehicles, {
-    brand,
-    body,
+    brands: selectedBrands,
+    bodies: selectedBodies,
     model,
+    conditions: selectedConditions,
+    fuels: selectedFuels,
+    minimumPrice: numberParam("prezzo_da"),
+    maximumPrice: numberParam("prezzo_a"),
+    minimumYear: numberParam("anno_da"),
+    maximumYear: numberParam("anno_a"),
   });
   const sortedVehicles = [...filteredVehicles].sort((first, second) => {
     if (order === "recent") {
@@ -79,10 +93,29 @@ export function VehicleResults() {
     const query = params.toString();
     return query ? `/veicoli?${query}` : "/veicoli";
   }
+  const brand = selectedBrands[0];
+  const body = selectedBodies[0];
+  const appliedFilterCount = [
+    ...selectedBrands,
+    ...selectedBodies,
+    ...selectedConditions,
+    ...selectedFuels,
+    model,
+    searchParams.get("prezzo_da") === "100000"
+      ? undefined
+      : searchParams.get("prezzo_da"),
+    searchParams.get("prezzo_a"),
+    searchParams.get("anno_da"),
+    searchParams.get("anno_a"),
+  ].filter(Boolean).length;
   const filterLabel =
-    getExploreFilterLabel(brand) ??
-    getExploreFilterLabel(body) ??
-    (model ? model : undefined);
+    appliedFilterCount > 1
+      ? `${appliedFilterCount} filtri attivi`
+      : (getExploreFilterLabel(brand) ??
+        getExploreFilterLabel(body) ??
+        (model ? model : undefined) ??
+        selectedFuels[0] ??
+        selectedConditions[0]);
 
   return (
     <div className="catalog-results">

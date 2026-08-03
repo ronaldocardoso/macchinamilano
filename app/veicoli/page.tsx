@@ -44,7 +44,15 @@ export default function VehiclesPage() {
 
         <section className="catalog-section">
           <div className="catalog-layout container">
-            <CatalogFilters />
+            <Suspense
+              fallback={
+                <div className="filters catalog-filters--loading">
+                  Caricamento filtri…
+                </div>
+              }
+            >
+              <CatalogFilters />
+            </Suspense>
 
             <Suspense
               fallback={
