@@ -14,13 +14,17 @@ export const exploreBrands: ExploreOption[] = [
     value: "mercedes-benz",
     image: "/explore/mercedes-benz.png",
   },
-  { label: "Jaguar", value: "jaguar", image: "/explore/jaguar.webp" },
+  {
+    label: "Maserati",
+    value: "maserati",
+    image: "/explore/maserati.png",
+  },
   { label: "Porsche", value: "porsche", image: "/explore/porsche.png" },
   { label: "Ferrari", value: "ferrari", image: "/explore/ferrari.webp" },
   {
-    label: "Rolls-Royce",
-    value: "rolls-royce",
-    image: "/explore/rolls-royce.webp",
+    label: "Lamborghini",
+    value: "lamborghini",
+    image: "/explore/lamborghini.webp",
   },
   { label: "McLaren", value: "mclaren", image: "/explore/mclaren.png" },
 ];
