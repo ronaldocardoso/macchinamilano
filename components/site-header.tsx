@@ -12,6 +12,7 @@ export function SiteHeader() {
       <div className="site-header__inner container">
         <BrandMark />
         <nav aria-label="Navigazione principale" className="desktop-nav">
+          <Link href="/">Home</Link>
           <Link href="/veicoli">Veicoli</Link>
           <Link href="/#contatti">Servizi</Link>
           <Link href="/#magazine">Magazine</Link>
@@ -30,6 +31,7 @@ export function SiteHeader() {
               <MenuIcon />
             </summary>
             <nav aria-label="Navigazione mobile">
+              <Link href="/">Home</Link>
               <Link href="/veicoli">Veicoli</Link>
               <Link href="/#contatti">Servizi</Link>
               <Link href="/#magazine">Magazine</Link>
