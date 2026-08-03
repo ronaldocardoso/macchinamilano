@@ -3,10 +3,12 @@ import Link from "next/link";
 import { BrandVehicleShowcase } from "@/components/brand-vehicle-showcase";
 import { ArrowIcon } from "@/components/icons";
 import { ExploreDirectory } from "@/components/explore-directory";
+import { MagazineCard } from "@/components/magazine-card";
 import { SearchPanel } from "@/components/search-panel";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { VehicleCard } from "@/components/vehicle-card";
+import { magazineArticles } from "@/lib/magazine";
 import { vehicles } from "@/lib/vehicles";
 
 const featured = vehicles.filter((vehicle) => vehicle.featured);
@@ -105,36 +107,18 @@ export default function Home() {
                 <p className="eyebrow">Storie in movimento</p>
                 <h2>Dal magazine</h2>
               </div>
-              <Link className="text-link" href="#magazine">
+              <Link className="text-link" href="/magazine/">
                 Tutte le storie <ArrowIcon />
               </Link>
             </div>
-            <div className="story-grid">
-              <article className="story-card story-card--red">
-                <span>Design</span>
-                <h3>
-                  La linea italiana che trasforma un&apos;auto in un&apos;icona.
-                </h3>
-                <Link href="#magazine">
-                  Leggi la storia <ArrowIcon />
-                </Link>
-              </article>
-              <article className="story-card story-card--blue">
-                <span>Itinerari</span>
-                <h3>Da Milano al lago: una strada da guidare senza fretta.</h3>
-                <Link href="#magazine">
-                  Scopri l&apos;itinerario <ArrowIcon />
-                </Link>
-              </article>
-              <article className="story-card story-card--paper">
-                <span>Collezionismo</span>
-                <h3>
-                  Quali dettagli definiscono davvero un esemplare speciale?
-                </h3>
-                <Link href="#magazine">
-                  Approfondisci <ArrowIcon />
-                </Link>
-              </article>
+            <div className="magazine-grid magazine-grid--home">
+              {magazineArticles.map((article, index) => (
+                <MagazineCard
+                  article={article}
+                  index={index}
+                  key={article.slug}
+                />
+              ))}
             </div>
           </div>
         </section>

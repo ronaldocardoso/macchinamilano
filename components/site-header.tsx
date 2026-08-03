@@ -14,7 +14,7 @@ export function SiteHeader() {
         <nav aria-label="Navigazione principale" className="desktop-nav">
           <Link href="/veicoli">Veicoli</Link>
           <Link href="/#contatti">Servizi</Link>
-          <Link href="/#magazine">Magazine</Link>
+          <Link href="/magazine/">Magazine</Link>
           <Link href="/contatti/">Contatti</Link>
         </nav>
         <div className="site-header__actions">
@@ -32,7 +32,7 @@ export function SiteHeader() {
             <nav aria-label="Navigazione mobile">
               <Link href="/veicoli">Veicoli</Link>
               <Link href="/#contatti">Servizi</Link>
-              <Link href="/#magazine">Magazine</Link>
+              <Link href="/magazine/">Magazine</Link>
               <Link href="/contatti/#modulo">Pubblica un veicolo</Link>
               <Link href="/contatti/">Contatti</Link>
             </nav>
